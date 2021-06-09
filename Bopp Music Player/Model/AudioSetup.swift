@@ -11,17 +11,14 @@ import AVFoundation
 import MediaPlayer
 
 
+
+
 class AudioSetup: ObservableObject {
     
     //public var ifPlaying : Bool = false
     
     //public var audioPlayer: AVAudioPlayer? = nil
     
-    var playValue: TimeInterval = 0.0
-    
-    public var playerDuration: TimeInterval = 0
-    
-    var timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     
     public var position : Int = 0
     
@@ -31,131 +28,7 @@ class AudioSetup: ObservableObject {
     
     var player = MusicPlayerViewModel()
     
-    func playSound(SongPosition:Int) -> Int{
-        
-        //set up player
-        //let song = songs[landmarks[SongPosition].id - 1]
-        
-        print(SongPosition, "From Play Sound Inside Audio Class")
-        
-     
-        let urlString = Bundle.main.path(forResource: landmarks[SongPosition].trackName, ofType: "mp3")
-        
-        position = SongPosition
-        
-        let fileUrl = NSURL(fileURLWithPath: urlString!)
-        
-        do {
-         
-
-           // player.audioPlayer?.stop()
-            
-           // try player.audioPlayer = AVAudioPlayer(contentsOf:fileUrl as URL)
-            
-            print("Testing Url", urlString ,":::::::::OUTPUT")
-            
-            //playerDuration = player.audioPlayer?.duration ?? 0
-            
-            if player.isPlaying == false {
-        
-                play()
-                
-                print(player.isPlaying, " Player Now Playing")
-                
-                player.isPlaying = true
-            }
-            
-            else {
-        
-                play()
-              // stop()
-                           
-                print("Music stopped because another instance playing")
-                
-            }
-        
-    
-        }
-        catch {
-            print("error occurred")
-        
-        }
-       
-    
-        
-        return SongPosition
-         
-     
-    }
-    
-    func playSoundInMiniView(){
-        
-        let urlString = Bundle.main.path(forResource: landmarks[position + 1].trackName, ofType: "mp3")
-        
-        let fileUrl = NSURL(fileURLWithPath: urlString!)
-        
-        print(position + 1)
-        
-        do {
-            
-            player.isPlaying = false
-         
-            //player.audioPlayer?.stop()
-            
-           // try audioPlayer = AVAudioPlayer(contentsOf:fileUrl as URL)
-            
-            print("Testing Url", urlString ,":::::::::OUTPUT")
-            
-            //playerDuration = player.audioPlayer?.duration ?? 0
-            
-            if player.isPlaying == false {
-        
-            //    audioPlayer?.play()
-                
-                print(player.isPlaying, " Player Now Playing")
-                
-                player.isPlaying = true
-            }
-            
-            else {
-        
-             //   audioPlayer?.play()
-              // stop()
-                           
-                print("Music stopped because another instance playing")
-                
-            }
-        
-    
-        }
-        catch {
-            print("error occurred")
-        
-        }
-       
-    
-        
-        
-    }
-    
-    func play(){
-        
-    //   if player.audioPlayer?.isPlaying == false{
-        
-     //   player.audioPlayer?.prepareToPlay()
-     ///
-      //  player.audioPlayer?.play()
-        //   }
-    }
-    
-    func stop(){
-        
-      //  if player.audioPlayer?.isPlaying == true{
-             
-      //      player.audioPlayer?.stop()
-      //   }
-    }
-    
+    public var ValuePlay : TimeInterval = 0.0
     
     func didTapNextButton(){
         
@@ -201,8 +74,15 @@ class AudioPlayer {
     
     var MPlayer = MusicPlayerViewModel()
     
+    var audio = AudioSetup()
+    
+  var playerDuration: TimeInterval = 0
+    
+   var timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
+
     //var players = MusicPlayerViewModel()
    static let sharedInstance = AudioPlayer()
+    
     
     class func destroy() {
         sharedInstance.player = nil
@@ -211,7 +91,7 @@ class AudioPlayer {
     
     func playSong(){
         
-        if Position.sharedInstance.position < landmarks.count - 1 && Position.sharedInstance.position > -1{
+        if Position.sharedInstance.position <= landmarks.count - 1 && Position.sharedInstance.position >= 0{
             
             print(Position.sharedInstance.position)
     
@@ -227,12 +107,24 @@ class AudioPlayer {
     
     do {
         
-    try player = AVAudioPlayer(contentsOf:fileUrl as URL)
+        _ = try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        
+        try AVAudioSession.sharedInstance().setMode(.default)
+        try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+
+        
+    try player = AVAudioPlayer(contentsOf:fileUrl as URL)
+
         player?.play()
         
+        playerDuration = player?.duration ?? 0
+        
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
+        
         MPlayer.isPlaying = true
-      
+        
     
     }
     
@@ -253,4 +145,5 @@ class AudioPlayer {
     deinit {
            print("deinit singleton")
        }
+    
 }

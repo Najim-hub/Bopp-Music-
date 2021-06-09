@@ -28,6 +28,8 @@ struct Miniplayer: View {
     
     @State var volume : CGFloat = 0
     
+    @State private var soundLevel: Float = AVAudioSession.sharedInstance().outputVolume
+    
     
     var body: some View {
         
@@ -81,13 +83,24 @@ struct Miniplayer: View {
                        
                       
                         HStack{
-                           
+                            
+                            VStack{
                             Text(landmarks[Position.sharedInstance.position].name)
-                          .font(.title3)
-                        .foregroundColor(.primary)
-                          .fontWeight(.bold)
-                         .frame(width: 270, height: 100, alignment: .leading)
-                                .padding(.top, 55)
+                                .font(.title3)
+                            .foregroundColor(.primary)
+                              .fontWeight(.bold)
+                             .frame(width: 270, height: 20, alignment: .leading)
+                             .padding(.top, 55)
+                                
+                                Text(landmarks[Position.sharedInstance.position].artistName)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .fontWeight(.bold)
+                                .frame(width: 270, height: 20, alignment: .leading)
+                                //.padding(.top, 55)
+                            }
+                            
+                            
                             Spacer(minLength: 0)
                              
                             
@@ -105,10 +118,29 @@ struct Miniplayer: View {
                         // Audio time String...
                         
                         //Spacer(minLength: 0)
-                        HStack(spacing: 15){
+           HStack(spacing: 15){
                             
-                            Slider(value: $volume)
+           Slider(value: $player.playValue, in: TimeInterval(0.0)...AudioPlayer.sharedInstance.playerDuration, onEditingChanged: { _ in
+                                changeSliderValue()
+                            })
                             .accentColor(.yellow)
+                            .onReceive(AudioPlayer.sharedInstance.timer) { _ in
+                                      if player.isPlaying {
+                                        print(AudioPlayer.sharedInstance.playerDuration,"Player Duration")
+                                            if let currentTime =  AudioPlayer.sharedInstance.player?.currentTime {
+                                                player.playValue = currentTime
+                                                    print(currentTime , "in Slider")
+                                                    if currentTime == TimeInterval(0.0) {
+                                                       player.isPlaying = false
+                                                    }}}
+                                            else {
+                                                player.isPlaying = false
+                                                AudioPlayer.sharedInstance.timer.upstream.connect().cancel()
+                                            }
+                                        
+                                  }
+           
+                            
                                 
                             
                         }.padding(20)
@@ -122,7 +154,7 @@ struct Miniplayer: View {
                             
                             Button(action: {
                                 
-                                if Position.sharedInstance.position <= landmarks.count - 1 && Position.sharedInstance.position != 0 {
+                            if Position.sharedInstance.position <= landmarks.count - 1 && Position.sharedInstance.position != 0 {
                                 
                                 print(Position.sharedInstance.position)
                                 
@@ -233,7 +265,11 @@ struct Miniplayer: View {
                         
                         Image(systemName: "speaker.fill")
                         
-                        Slider(value: $volume)
+                        Slider(value: $soundLevel, in: 0...1,step: 0.0625, onEditingChanged: { data in
+                            
+                            MPVolumeView.setVolume(self.soundLevel)
+                   
+                        })
                             .accentColor(.gray)
                         Image(systemName: "speaker.wave.2.fill")
                     }
@@ -340,12 +376,35 @@ struct Miniplayer: View {
         }
         return 1
     }
+    
+    func changeSliderValue() {
+        
+        if AudioPlayer.sharedInstance.player?.isPlaying == true {
+            
+            //print(AudioPlayer.sharedInstance.player?.currentTime, "current Slider Class")
+            
+            AudioPlayer.sharedInstance.player?.currentTime = player.playValue
+            
+            print(player.playValue, "Change Slider Class")
+        }
+        
+        if AudioPlayer.sharedInstance.player?.isPlaying == false {
+            //player?.play()
+            player.isPlaying = true
+         
+            AudioPlayer.sharedInstance.player?.currentTime = player.playValue
+            
+            print(player.playValue, "Change Slider Class as false")
+        }
+    }
 }
 
 struct MiniPlayer_Previews: PreviewProvider {
     static var previews: some View {
         Home()
     }
+    
+    
 }
 
 
@@ -484,6 +543,8 @@ struct VideoControls: View {
         .frame(width: 390, height: 55, alignment: .center)
         
     }
+    
+    
 
 }
 

@@ -38,28 +38,36 @@ struct Home: View {
                             
                             player.positions = landmark.id - 1
                             
-                           
                             //audio.playSound(SongPosition: player.position)
                             
                             Position.sharedInstance.position = landmark.id - 1
                             
                             
-                            //AudioPlayer.sharedInstance.player?.play()
                             
                             AudioPlayer.sharedInstance.playSong()
                           
-                            
-                            //print(player.position, "IN HOME View")
                           }
                         
                     }
                     Button(action: {
                         
-                        //audio.stop()
+                        player.showPlayer = true
+                        
+                        print("I was Tapped")
+                        
+                        player.isPlaying = true
+                        
+                        player.positions = landmark.id - 1
+                        
+                        //audio.playSound(SongPosition: player.position)
+                        
+                        Position.sharedInstance.position = landmark.id - 1
+                        
+                        AudioPlayer.sharedInstance.playSong()
                             
                     }, label: {
                         
-                            Image(systemName: "play.fill")
+                            Image(systemName: "")
                                 .font(.largeTitle)
                                 .foregroundColor(.white)
                             

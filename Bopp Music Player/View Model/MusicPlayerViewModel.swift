@@ -27,9 +27,13 @@ class MusicPlayerViewModel: ObservableObject {
     @Published var AudioSong: [Landmark] = []
     
     @Published var isPlaying = false
-
-     
+    
+   
+    @Published var playValue: TimeInterval = 0.01
+    
+    
 }
+
 
 class Position {
     
@@ -43,4 +47,15 @@ class Position {
         
     }
     
+}
+
+extension MPVolumeView {
+    static func setVolume(_ volume: Float) -> Void {
+        let volumeView = MPVolumeView()
+        let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+            slider?.value = volume
+        }
+    }
 }
