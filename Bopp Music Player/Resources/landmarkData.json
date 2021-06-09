@@ -1,0 +1,45 @@
+[
+    {
+        "id": 1,
+        "name": "ATM",
+        "albumName": "KOD",
+        "artistName": "J.Cole",
+        "trackName": "ATM",
+        "imageName": "Atm"
+    },
+    {
+        "id": 2,
+        "name": "Icy",
+        "albumName": "Under Pressure",
+        "artistName": "Logic",
+        "trackName": "Icy",
+        "imageName": "Logic"
+    },
+    {
+        
+                              
+        "id": 3,
+        "name": "Nikes",
+        "albumName": "Blond",
+        "artistName": "Frank Ocean",
+        "trackName": "Nikes",
+        "imageName": "Frank Ocean"
+    },
+    {
+        "id": 4,
+        "name": "GONE,GONE THANK YOU",
+        "albumName": "IGOR",
+        "artistName": "Tyler, The Creator",
+        "trackName": "Gone",
+        "imageName": "Igor"
+    },
+    {
+        
+        "id": 5,
+        "name": "Ski",
+        "albumName": "Slime Language",
+        "artistName": "Young Thug",
+        "trackName": "Ski",
+        "imageName": "Slime"
+    }
+]

@@ -11,6 +11,22 @@
 		ED15AF9E266CD2D10023A5C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AF9D266CD2D10023A5C3 /* ContentView.swift */; };
 		ED15AFA0266CD2D30023A5C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED15AF9F266CD2D30023A5C3 /* Assets.xcassets */; };
 		ED15AFA3266CD2D30023A5C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED15AFA2266CD2D30023A5C3 /* Preview Assets.xcassets */; };
+		ED15AFB0266CD3660023A5C3 /* MusicPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFAF266CD3660023A5C3 /* MusicPlayerViewModel.swift */; };
+		ED15AFB4266CD4A30023A5C3 /* landmarkData.json in Resources */ = {isa = PBXBuildFile; fileRef = ED15AFB3266CD4A30023A5C3 /* landmarkData.json */; };
+		ED15AFB7266CD4D40023A5C3 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFB6266CD4D40023A5C3 /* ModelData.swift */; };
+		ED15AFB9266CD4E40023A5C3 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFB8266CD4E40023A5C3 /* Landmark.swift */; };
+		ED15AFBB266CD51E0023A5C3 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFBA266CD51E0023A5C3 /* Home.swift */; };
+		ED15AFBD266CD5930023A5C3 /* MusicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFBC266CD5930023A5C3 /* MusicListView.swift */; };
+		ED15AFBF266CD78D0023A5C3 /* LandmarkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFBE266CD78D0023A5C3 /* LandmarkRow.swift */; };
+		ED15AFC3266CDBB60023A5C3 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFC2266CDBB60023A5C3 /* BlurView.swift */; };
+		ED15AFC5266CDE430023A5C3 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFC4266CDE430023A5C3 /* VideoPlayerView.swift */; };
+		ED15AFCC266CE1B90023A5C3 /* Miniplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */; };
+		ED15AFD2266D0E540023A5C3 /* ATM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED15AFD1266D0E540023A5C3 /* ATM.mp3 */; };
+		EDDD6E7A266EB85B000F9DA5 /* Nikes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E77266EB85B000F9DA5 /* Nikes.mp3 */; };
+		EDDD6E7B266EB85B000F9DA5 /* Icy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E78266EB85B000F9DA5 /* Icy.mp3 */; };
+		EDDD6E7C266EB85B000F9DA5 /* Ski.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E79266EB85B000F9DA5 /* Ski.mp3 */; };
+		EDDD6E7E266EB85F000F9DA5 /* Gone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E7D266EB85F000F9DA5 /* Gone.mp3 */; };
+		EDDD6E80266EBAFB000F9DA5 /* AudioSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +36,22 @@
 		ED15AF9F266CD2D30023A5C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED15AFA2266CD2D30023A5C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ED15AFA4266CD2D30023A5C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED15AFAF266CD3660023A5C3 /* MusicPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewModel.swift; sourceTree = "<group>"; };
+		ED15AFB3266CD4A30023A5C3 /* landmarkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarkData.json; sourceTree = "<group>"; };
+		ED15AFB6266CD4D40023A5C3 /* ModelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		ED15AFB8266CD4E40023A5C3 /* Landmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
+		ED15AFBA266CD51E0023A5C3 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		ED15AFBC266CD5930023A5C3 /* MusicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListView.swift; sourceTree = "<group>"; };
+		ED15AFBE266CD78D0023A5C3 /* LandmarkRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkRow.swift; sourceTree = "<group>"; };
+		ED15AFC2266CDBB60023A5C3 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		ED15AFC4266CDE430023A5C3 /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Miniplayer.swift; path = "Bopp Music Player/View Model/Miniplayer.swift"; sourceTree = SOURCE_ROOT; };
+		ED15AFD1266D0E540023A5C3 /* ATM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ATM.mp3; sourceTree = "<group>"; };
+		EDDD6E77266EB85B000F9DA5 /* Nikes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Nikes.mp3; sourceTree = "<group>"; };
+		EDDD6E78266EB85B000F9DA5 /* Icy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Icy.mp3; sourceTree = "<group>"; };
+		EDDD6E79266EB85B000F9DA5 /* Ski.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ski.mp3; sourceTree = "<group>"; };
+		EDDD6E7D266EB85F000F9DA5 /* Gone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Gone.mp3; sourceTree = "<group>"; };
+		EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSetup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +84,12 @@
 		ED15AF9A266CD2D10023A5C3 /* Bopp Music Player */ = {
 			isa = PBXGroup;
 			children = (
+				ED15AFD3266D17770023A5C3 /* Files */,
+				ED15AFC8266CDF2B0023A5C3 /* Audio */,
+				ED15AFB2266CD4A30023A5C3 /* Resources */,
+				ED15AFAA266CD2E90023A5C3 /* View Model */,
+				ED15AFB5266CD4BF0023A5C3 /* Model */,
+				ED15AFB1266CD46C0023A5C3 /* View */,
 				ED15AF9B266CD2D10023A5C3 /* Bopp_Music_PlayerApp.swift */,
 				ED15AF9D266CD2D10023A5C3 /* ContentView.swift */,
 				ED15AF9F266CD2D30023A5C3 /* Assets.xcassets */,
@@ -67,6 +105,64 @@
 				ED15AFA2266CD2D30023A5C3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ED15AFAA266CD2E90023A5C3 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED15AFAF266CD3660023A5C3 /* MusicPlayerViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		ED15AFB1266CD46C0023A5C3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED15AFBA266CD51E0023A5C3 /* Home.swift */,
+				ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */,
+				ED15AFBC266CD5930023A5C3 /* MusicListView.swift */,
+				ED15AFBE266CD78D0023A5C3 /* LandmarkRow.swift */,
+				ED15AFC2266CDBB60023A5C3 /* BlurView.swift */,
+				ED15AFC4266CDE430023A5C3 /* VideoPlayerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED15AFB2266CD4A30023A5C3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ED15AFB3266CD4A30023A5C3 /* landmarkData.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		ED15AFB5266CD4BF0023A5C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED15AFB8266CD4E40023A5C3 /* Landmark.swift */,
+				ED15AFB6266CD4D40023A5C3 /* ModelData.swift */,
+				EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ED15AFC8266CDF2B0023A5C3 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				EDDD6E78266EB85B000F9DA5 /* Icy.mp3 */,
+				EDDD6E77266EB85B000F9DA5 /* Nikes.mp3 */,
+				EDDD6E79266EB85B000F9DA5 /* Ski.mp3 */,
+				ED15AFD1266D0E540023A5C3 /* ATM.mp3 */,
+				EDDD6E7D266EB85F000F9DA5 /* Gone.mp3 */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		ED15AFD3266D17770023A5C3 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,8 +222,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDDD6E7B266EB85B000F9DA5 /* Icy.mp3 in Resources */,
+				EDDD6E7C266EB85B000F9DA5 /* Ski.mp3 in Resources */,
 				ED15AFA3266CD2D30023A5C3 /* Preview Assets.xcassets in Resources */,
 				ED15AFA0266CD2D30023A5C3 /* Assets.xcassets in Resources */,
+				EDDD6E7A266EB85B000F9DA5 /* Nikes.mp3 in Resources */,
+				ED15AFB4266CD4A30023A5C3 /* landmarkData.json in Resources */,
+				ED15AFD2266D0E540023A5C3 /* ATM.mp3 in Resources */,
+				EDDD6E7E266EB85F000F9DA5 /* Gone.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +241,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED15AF9E266CD2D10023A5C3 /* ContentView.swift in Sources */,
+				ED15AFB7266CD4D40023A5C3 /* ModelData.swift in Sources */,
+				ED15AFB0266CD3660023A5C3 /* MusicPlayerViewModel.swift in Sources */,
+				ED15AFC5266CDE430023A5C3 /* VideoPlayerView.swift in Sources */,
 				ED15AF9C266CD2D10023A5C3 /* Bopp_Music_PlayerApp.swift in Sources */,
+				ED15AFBB266CD51E0023A5C3 /* Home.swift in Sources */,
+				ED15AFBD266CD5930023A5C3 /* MusicListView.swift in Sources */,
+				ED15AFC3266CDBB60023A5C3 /* BlurView.swift in Sources */,
+				ED15AFCC266CE1B90023A5C3 /* Miniplayer.swift in Sources */,
+				ED15AFBF266CD78D0023A5C3 /* LandmarkRow.swift in Sources */,
+				EDDD6E80266EBAFB000F9DA5 /* AudioSetup.swift in Sources */,
+				ED15AFB9266CD4E40023A5C3 /* Landmark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +381,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Bopp Music Player/Preview Content\"";
+				DEVELOPMENT_TEAM = 8YBV925VBW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Bopp Music Player/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -290,6 +403,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Bopp Music Player/Preview Content\"";
+				DEVELOPMENT_TEAM = 8YBV925VBW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Bopp Music Player/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
