@@ -210,6 +210,10 @@ class AudioPlayer {
     
     
     func playSong(){
+        
+        if Position.sharedInstance.position < landmarks.count - 1 && Position.sharedInstance.position > -1{
+            
+            print(Position.sharedInstance.position)
     
     let urlString = Bundle.main.path(forResource: landmarks[Position.sharedInstance.position].trackName, ofType: "mp3")
     
@@ -236,6 +240,7 @@ class AudioPlayer {
         print("error occurred")
     
     }
+        }
    }
     
     private init() {

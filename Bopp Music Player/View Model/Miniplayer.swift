@@ -49,7 +49,7 @@ struct Miniplayer: View {
                 //Spacer(minLength: 0)
                 HStack {
                     
-                    Image(landmarks[ player.positions ].imageName)
+                    Image(landmarks[player.positions].imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                         //.frame(width: expand ? height : 55, height: expand ? height : 55)
@@ -58,7 +58,7 @@ struct Miniplayer: View {
                         // .padding(.top, 45)
                     .frame(width: player.isMiniPlayer ? 67 : 390, height: player.isMiniPlayer ? 55 : 365)
                     //.padding(.init(top: 45, leading: 35, bottom: 25, trailing: 35))
-                    .padding(.trailing, 17)
+                    //.padding(.trailing, 17)
                         .clipShape(Circle())
                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
                                    .shadow(radius: 7)
@@ -70,7 +70,7 @@ struct Miniplayer: View {
             .background(
             
                 // Controls...
-                VideoContorls()
+                VideoControls()
             )
             
             
@@ -122,11 +122,13 @@ struct Miniplayer: View {
                             
                             Button(action: {
                                 
+                                if Position.sharedInstance.position <= landmarks.count - 1 && Position.sharedInstance.position != 0 {
+                                
                                 print(Position.sharedInstance.position)
                                 
                                 player.positions =  player.positions - 1
                                 
-                                print("tapped next button")
+                                print("tapped back button")
                               
                                 Position.sharedInstance.position =  Position.sharedInstance.position - 1
                                 
@@ -135,6 +137,11 @@ struct Miniplayer: View {
                                 AudioPlayer.sharedInstance.playSong()
                                 
                                 player.isPlaying = true
+                                }
+                                
+                                else{
+                                    
+                                }
                                 
                             
                                 
@@ -159,8 +166,6 @@ struct Miniplayer: View {
                                 
                                 else{
                                     AudioPlayer.sharedInstance.player?.play()
-                                    
-                                 
                                     
                                     player.isPlaying = true
                                   
@@ -190,6 +195,10 @@ struct Miniplayer: View {
                             
                             Button(action: {
                                 
+                                if Position.sharedInstance.position < landmarks.count - 1   {
+                                    
+                                    print(landmarks.count, "Json file length")
+                                
                                 print(Position.sharedInstance.position)
                                 
                                 player.positions =  player.positions + 1
@@ -204,8 +213,12 @@ struct Miniplayer: View {
                                 
                                 player.isPlaying = true
                               
-                                //AudioPlayer.sharedInstance.player?.play()
+                                }
                                 
+                                else{
+                                    player.positions = Position.sharedInstance.position
+                                }
+                                //AudioPlayer.sharedInstance.player?.play()
                                 
                                 
                             }, label: {
@@ -336,7 +349,7 @@ struct MiniPlayer_Previews: PreviewProvider {
 }
 
 
-struct VideoContorls: View {
+struct VideoControls: View {
     
     @EnvironmentObject var player: MusicPlayerViewModel
     
