@@ -72,6 +72,7 @@ struct Miniplayer: View {
                 
                 }.padding()
             }
+            .padding(.bottom, 27)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(
             
@@ -319,13 +320,21 @@ struct Miniplayer: View {
                     }
                     .padding()
                     
-                    HStack(spacing: 22){} .padding(.bottom,390)
+                    HStack(spacing: 22){
+                
+                       AirplayView()
+                        .frame(width: 50, height: 50)
+                        
+                        
+                    }.padding(.leading, 22)
+                    .padding(.bottom,390)
                   
+                      
                         
                     }
-                    .padding()// this will give strech effect...
+                   .padding()// this will give strech effect...
                    .frame(height:  0)
-                   .opacity( 1 )
+                   .opacity(1)
                  // expanding to full screen when clicked...
                  .frame(maxHeight: true ? .infinity : 90)
                  .onAppear(perform: {
@@ -378,10 +387,11 @@ struct Miniplayer: View {
             
             if !player.isMiniPlayer{
         UITabBarController.tabBar.layer.zPosition = -1
+                
             }
             
             else{
-            UITabBarController.tabBar.layer.zPosition = -0
+         UITabBarController.tabBar.layer.zPosition = -0
             }
         }
        
@@ -467,6 +477,8 @@ struct Miniplayer: View {
             print(player.playValue, "Change Slider Class as false")
         }
     }
+    
+  
     
     func transToMinSec(time: Float) -> String
     {

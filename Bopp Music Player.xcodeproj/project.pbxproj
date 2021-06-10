@@ -28,6 +28,7 @@
 		EDBF70EF267186BA00CF2D97 /* AppKitIntrospectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70E8267186BA00CF2D97 /* AppKitIntrospectionView.swift */; };
 		EDBF70F0267186BA00CF2D97 /* UIKitIntrospectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70EA267186BA00CF2D97 /* UIKitIntrospectionView.swift */; };
 		EDBF70F2267186BA00CF2D97 /* Introspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70EC267186BA00CF2D97 /* Introspect.swift */; };
+		EDBF70F4267247F300CF2D97 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70F3267247F200CF2D97 /* AirPlayView.swift */; };
 		EDDD6E7A266EB85B000F9DA5 /* Nikes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E77266EB85B000F9DA5 /* Nikes.mp3 */; };
 		EDDD6E7B266EB85B000F9DA5 /* Icy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E78266EB85B000F9DA5 /* Icy.mp3 */; };
 		EDDD6E7C266EB85B000F9DA5 /* Ski.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E79266EB85B000F9DA5 /* Ski.mp3 */; };
@@ -60,6 +61,7 @@
 		EDBF70E9267186BA00CF2D97 /* Introspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Introspect.h; sourceTree = "<group>"; };
 		EDBF70EA267186BA00CF2D97 /* UIKitIntrospectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitIntrospectionView.swift; sourceTree = "<group>"; };
 		EDBF70EC267186BA00CF2D97 /* Introspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introspect.swift; sourceTree = "<group>"; };
+		EDBF70F3267247F200CF2D97 /* AirPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPlayView.swift; sourceTree = "<group>"; };
 		EDDD6E77266EB85B000F9DA5 /* Nikes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Nikes.mp3; sourceTree = "<group>"; };
 		EDDD6E78266EB85B000F9DA5 /* Icy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Icy.mp3; sourceTree = "<group>"; };
 		EDDD6E79266EB85B000F9DA5 /* Ski.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ski.mp3; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				ED15AFB8266CD4E40023A5C3 /* Landmark.swift */,
 				ED15AFB6266CD4D40023A5C3 /* ModelData.swift */,
 				EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */,
+				EDBF70F3267247F200CF2D97 /* AirPlayView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				ED15AFC3266CDBB60023A5C3 /* BlurView.swift in Sources */,
 				EDBF70ED267186BA00CF2D97 /* ViewExtensions.swift in Sources */,
 				ED15AFCC266CE1B90023A5C3 /* Miniplayer.swift in Sources */,
+				EDBF70F4267247F300CF2D97 /* AirPlayView.swift in Sources */,
 				EDBF70E42671818A00CF2D97 /* TabBar.swift in Sources */,
 				ED15AFBF266CD78D0023A5C3 /* LandmarkRow.swift in Sources */,
 				EDBF70EF267186BA00CF2D97 /* AppKitIntrospectionView.swift in Sources */,

@@ -106,6 +106,8 @@ class AudioSetup: ObservableObject {
             
                 AudioPlayer.sharedInstance.player?.play()
                 
+                AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
+                
                 //player.isPlaying.toggle()
                 
                 //isPlaying = true
@@ -117,6 +119,8 @@ class AudioSetup: ObservableObject {
         // Add handler for Pause Command
         commandCenter.pauseCommand.addTarget { [unowned self] event in
             if AudioPlayer.sharedInstance.player?.rate == 1.0 {
+                
+                AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
                 
                 /*
                 self.audioPlayer?.pause()
