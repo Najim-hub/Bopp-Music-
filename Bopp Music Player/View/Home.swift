@@ -28,15 +28,10 @@ struct Home: View {
                  
                 HStack(spacing: 15){
                     
-                    
-             
                 LandmarkRow(landmark: landmark)
                     .padding(.horizontal)
                     .onTapGesture {
                         withAnimation{
-                            
-                           
-                            Miniplayer()
                             
                             player.showPlayer = true
                             
@@ -52,13 +47,13 @@ struct Home: View {
                             
                             AudioPlayer.sharedInstance.playSong()
                             
-                            //AudioPlayer.sharedInstance.audioRouteChanged(note: notificationCenter)
-                           //AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
                             
-                          
+                            
                         }
                         
                     }
+                    
+                    
                     
                     
                     Button(action: {
@@ -94,8 +89,10 @@ struct Home: View {
                     
                 
                     
-                }.navigationTitle("Songs")
-               
+                }
+                .offset(y: player.isMiniPlayer ? -125 : 0)
+                .navigationTitle("Songs")
+                
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 print("Im back!!")
@@ -107,15 +104,12 @@ struct Home: View {
             
             if player.showPlayer {
                 Miniplayer()
-                    
-                // Move From Bottom...
-                    .transition(.move(edge: .bottom))
+                .transition(.move(edge: .bottom))
                     .offset(y: player.offset)
                     .gesture(DragGesture().updating($gestureOffset, body: { (value, state, _) in
                         
                         state = value.translation.height
                         
-                       
                        
                         print("WE GOING UP OR DOWN?")
                     })
@@ -150,7 +144,8 @@ struct Home: View {
                 player.offset = 0
                 
                 // Closing View...
-                if value.translation.height > UIScreen.main.bounds.height / 3{
+          if value.translation.height > UIScreen.main.bounds.height / 3
+                {
                     
                     player.isMiniPlayer = true
                     

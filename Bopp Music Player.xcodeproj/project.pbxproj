@@ -29,6 +29,15 @@
 		EDBF70F0267186BA00CF2D97 /* UIKitIntrospectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70EA267186BA00CF2D97 /* UIKitIntrospectionView.swift */; };
 		EDBF70F2267186BA00CF2D97 /* Introspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70EC267186BA00CF2D97 /* Introspect.swift */; };
 		EDBF70F4267247F300CF2D97 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70F3267247F200CF2D97 /* AirPlayView.swift */; };
+		EDBF70FF26727A6800CF2D97 /* 7am.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDBF70F626727A6700CF2D97 /* 7am.mp3 */; };
+		EDBF710026727A6800CF2D97 /* She Knows.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDBF70F726727A6700CF2D97 /* She Knows.mp3 */; };
+		EDBF710126727A6800CF2D97 /* Lil Uzi Vert vs. the World.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDBF70F826727A6700CF2D97 /* Lil Uzi Vert vs. the World.mp3 */; };
+		EDBF710226727A6800CF2D97 /* No Role Modelz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDBF70F926727A6700CF2D97 /* No Role Modelz.mp3 */; };
+		EDBF710326727A6800CF2D97 /* Ysl.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDBF70FA26727A6700CF2D97 /* Ysl.mp3 */; };
+		EDBF710426727A6800CF2D97 /* Light.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDBF70FB26727A6700CF2D97 /* Light.mp3 */; };
+		EDBF710526727A6800CF2D97 /* Old Town Road.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDBF70FC26727A6700CF2D97 /* Old Town Road.mp3 */; };
+		EDBF710626727A6800CF2D97 /* xo tour llif3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDBF70FD26727A6700CF2D97 /* xo tour llif3.mp3 */; };
+		EDBF710726727A6800CF2D97 /* G.O.M.D..mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDBF70FE26727A6700CF2D97 /* G.O.M.D..mp3 */; };
 		EDDD6E7A266EB85B000F9DA5 /* Nikes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E77266EB85B000F9DA5 /* Nikes.mp3 */; };
 		EDDD6E7B266EB85B000F9DA5 /* Icy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E78266EB85B000F9DA5 /* Icy.mp3 */; };
 		EDDD6E7C266EB85B000F9DA5 /* Ski.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDD6E79266EB85B000F9DA5 /* Ski.mp3 */; };
@@ -62,6 +71,15 @@
 		EDBF70EA267186BA00CF2D97 /* UIKitIntrospectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitIntrospectionView.swift; sourceTree = "<group>"; };
 		EDBF70EC267186BA00CF2D97 /* Introspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introspect.swift; sourceTree = "<group>"; };
 		EDBF70F3267247F200CF2D97 /* AirPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPlayView.swift; sourceTree = "<group>"; };
+		EDBF70F626727A6700CF2D97 /* 7am.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 7am.mp3; sourceTree = "<group>"; };
+		EDBF70F726727A6700CF2D97 /* She Knows.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "She Knows.mp3"; sourceTree = "<group>"; };
+		EDBF70F826727A6700CF2D97 /* Lil Uzi Vert vs. the World.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Lil Uzi Vert vs. the World.mp3"; sourceTree = "<group>"; };
+		EDBF70F926727A6700CF2D97 /* No Role Modelz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "No Role Modelz.mp3"; sourceTree = "<group>"; };
+		EDBF70FA26727A6700CF2D97 /* Ysl.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ysl.mp3; sourceTree = "<group>"; };
+		EDBF70FB26727A6700CF2D97 /* Light.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Light.mp3; sourceTree = "<group>"; };
+		EDBF70FC26727A6700CF2D97 /* Old Town Road.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Old Town Road.mp3"; sourceTree = "<group>"; };
+		EDBF70FD26727A6700CF2D97 /* xo tour llif3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "xo tour llif3.mp3"; sourceTree = "<group>"; };
+		EDBF70FE26727A6700CF2D97 /* G.O.M.D..mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = G.O.M.D..mp3; sourceTree = "<group>"; };
 		EDDD6E77266EB85B000F9DA5 /* Nikes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Nikes.mp3; sourceTree = "<group>"; };
 		EDDD6E78266EB85B000F9DA5 /* Icy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Icy.mp3; sourceTree = "<group>"; };
 		EDDD6E79266EB85B000F9DA5 /* Ski.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ski.mp3; sourceTree = "<group>"; };
@@ -167,6 +185,15 @@
 		ED15AFC8266CDF2B0023A5C3 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				EDBF70F626727A6700CF2D97 /* 7am.mp3 */,
+				EDBF70F726727A6700CF2D97 /* She Knows.mp3 */,
+				EDBF70F826727A6700CF2D97 /* Lil Uzi Vert vs. the World.mp3 */,
+				EDBF70F926727A6700CF2D97 /* No Role Modelz.mp3 */,
+				EDBF70FA26727A6700CF2D97 /* Ysl.mp3 */,
+				EDBF70FB26727A6700CF2D97 /* Light.mp3 */,
+				EDBF70FC26727A6700CF2D97 /* Old Town Road.mp3 */,
+				EDBF70FD26727A6700CF2D97 /* xo tour llif3.mp3 */,
+				EDBF70FE26727A6700CF2D97 /* G.O.M.D..mp3 */,
 				EDDD6E78266EB85B000F9DA5 /* Icy.mp3 */,
 				EDDD6E77266EB85B000F9DA5 /* Nikes.mp3 */,
 				EDDD6E79266EB85B000F9DA5 /* Ski.mp3 */,
@@ -253,14 +280,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDBF70FF26727A6800CF2D97 /* 7am.mp3 in Resources */,
 				EDDD6E7B266EB85B000F9DA5 /* Icy.mp3 in Resources */,
+				EDBF710226727A6800CF2D97 /* No Role Modelz.mp3 in Resources */,
+				EDBF710426727A6800CF2D97 /* Light.mp3 in Resources */,
 				EDDD6E7C266EB85B000F9DA5 /* Ski.mp3 in Resources */,
 				ED15AFA3266CD2D30023A5C3 /* Preview Assets.xcassets in Resources */,
 				ED15AFA0266CD2D30023A5C3 /* Assets.xcassets in Resources */,
+				EDBF710526727A6800CF2D97 /* Old Town Road.mp3 in Resources */,
 				EDDD6E7A266EB85B000F9DA5 /* Nikes.mp3 in Resources */,
 				ED15AFB4266CD4A30023A5C3 /* landmarkData.json in Resources */,
+				EDBF710726727A6800CF2D97 /* G.O.M.D..mp3 in Resources */,
+				EDBF710626727A6800CF2D97 /* xo tour llif3.mp3 in Resources */,
+				EDBF710326727A6800CF2D97 /* Ysl.mp3 in Resources */,
+				EDBF710126727A6800CF2D97 /* Lil Uzi Vert vs. the World.mp3 in Resources */,
 				ED15AFD2266D0E540023A5C3 /* ATM.mp3 in Resources */,
 				EDDD6E7E266EB85F000F9DA5 /* Gone.mp3 in Resources */,
+				EDBF710026727A6800CF2D97 /* She Knows.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

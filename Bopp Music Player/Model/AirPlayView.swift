@@ -29,10 +29,11 @@ struct AirplayView: UIViewRepresentable {
         
         routePickerView.backgroundColor = UIColor.clear
         
-        routePickerView.activeTintColor = UIColor.yellow
+        routePickerView.activeTintColor = UIColor.init(red: 0.996, green: 0.976, blue: 0.439, alpha: 1)
         
         routePickerView.tintColor = UIColor.black
         
+
         return routePickerView
         
     }

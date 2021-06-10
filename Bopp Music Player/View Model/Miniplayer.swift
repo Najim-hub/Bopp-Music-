@@ -72,7 +72,7 @@ struct Miniplayer: View {
                 
                 }.padding()
             }
-            .padding(.bottom, 27)
+            //.padding(.bottom, 35)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(
             
@@ -117,7 +117,7 @@ struct Miniplayer: View {
                             }.padding(.top, 55)
                       
                     }
-                    .padding(.top,30)
+                    .padding(.top,90)
                     
                         
                         // Audio time String...
@@ -244,21 +244,22 @@ struct Miniplayer: View {
                                 
                                 {
                                     Image(systemName: "pause.fill")
-                                        .font(.largeTitle)
+                                        .font(.system(size: 60, weight: .bold))
                                         .foregroundColor(.primary)
+                                        
                                 }
                                 
                                 else{
                                     
                                     Image(systemName: "play.fill")
-                                        .font(.largeTitle)
+                                        .font(.system(size: 60, weight: .bold))
                                         .foregroundColor(.primary)
                                     
                                 }
                                     
                                 }
                             )
-                            .padding(20)
+                            .padding(10)
                             .padding(.bottom,5)
                             
                             Button(action: {
@@ -295,8 +296,10 @@ struct Miniplayer: View {
                                     .foregroundColor(.primary)
                             })
                             
-                        }
-                          
+                        }.frame(width: 80, height: 40, alignment: .center)
+                        .padding(.bottom, 50)
+                        .padding(.trailing, 15)
+                        
                     HStack(spacing: 15){
                         
                         Image(systemName: "speaker.fill")
@@ -307,9 +310,7 @@ struct Miniplayer: View {
                             MPVolumeView.setVolume(self.player.soundLevel)
                             
                             let volumeView = MPVolumeView(frame: CGRect.zero)
-                            //view.addSubview(volumeView)
-                            
-                            
+                         
                           
                         })
                             .accentColor(.gray)
@@ -326,7 +327,7 @@ struct Miniplayer: View {
                         .frame(width: 50, height: 50)
                         
                         
-                    }.padding(.leading, 22)
+                    }.padding(.leading, 29)
                     .padding(.bottom,390)
                   
                       
@@ -387,11 +388,14 @@ struct Miniplayer: View {
             
             if !player.isMiniPlayer{
         UITabBarController.tabBar.layer.zPosition = -1
+        UITabBarController.tabBar.isUserInteractionEnabled = false;
+        //UITabBarController.tabBar.barTintColor = UIColor.clear
                 
             }
             
             else{
          UITabBarController.tabBar.layer.zPosition = -0
+         UITabBarController.tabBar.isUserInteractionEnabled = true;
             }
         }
        

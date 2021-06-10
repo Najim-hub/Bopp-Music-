@@ -41,5 +41,72 @@
         "artistName": "Young Thug",
         "trackName": "Ski",
         "imageName": "Slime"
+    },
+    
+    {
+        "id": 6,
+        "name": "7am",
+        "albumName": "Luv is Rage",
+        "artistName": "Lil Uzi Vert",
+        "trackName": "7am",
+        "imageName": "Luv is Rage"
+    },
+    {
+        "id": 7,
+        "name": "She Knows",
+        "albumName": "Born Sinner",
+        "artistName": "J.Cole",
+        "trackName": "She Knows",
+        "imageName": "Born Sinner"
+    },
+    {
+        "id": 8,
+        "name": "Lil Uzi Vert vs. the World",
+        "albumName": "Lil Uzi Vert vs. the World",
+        "artistName": "Lil Uzi Vert",
+        "trackName": "Lil Uzi Vert vs. the World",
+        "imageName": "Lil Uzi Vert vs. the World"
+    },
+    {
+        "id": 9,
+        "name": "Ysl",
+        "albumName": "Luv Is Rage 1.5 ",
+        "artistName": "Lil Uzi Vert",
+        "trackName": "Ysl",
+        "imageName": "Luv Is Rage 1.5"
     }
+    ,
+    {
+        "id": 10,
+        "name": "Light",
+        "albumName": "Neovaii",
+        "artistName": "Neovaii",
+        "trackName": "Light",
+        "imageName": "Neovaii"
+    },
+    {
+        "id": 11,
+        "name": "Old Town Road",
+        "albumName": "Old Town Road",
+        "artistName": "Lil Nas X .ft Billy Ray Cyrus",
+        "trackName": "Old Town Road",
+        "imageName": "Old Town Road"
+    },
+    {
+        "id": 12,
+        "name": "XO Tour Llif3",
+        "albumName": "Luv Is Rage 1.5",
+        "artistName": "Lil Uzi Vert",
+        "trackName": "xo tour llif3",
+        "imageName": "Luv Is Rage 1.5"
+    },{
+        "id": 13,
+        "name": "G.O.M.D.",
+        "albumName": "Forest Hills Drive",
+        "artistName": "J.Cole",
+        "trackName": "G.O.M.D.",
+        "imageName": "Forest Hills Drive"
+    }
+    
+    
 ]
