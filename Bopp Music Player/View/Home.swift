@@ -15,6 +15,9 @@ struct Home: View {
     
     @ObservedObject var audio = AudioSetup()
     
+    @State var states : Bool = false
+
+    
     var body: some View {
         
         ZStack(alignment: .bottom, content: {
@@ -24,11 +27,16 @@ struct Home: View {
                 List(landmarks, id: \.name) { landmark in
                  
                 HStack(spacing: 15){
+                    
+                    
              
                 LandmarkRow(landmark: landmark)
                     .padding(.horizontal)
                     .onTapGesture {
                         withAnimation{
+                            
+                           
+                            Miniplayer()
                             
                             player.showPlayer = true
                             
@@ -42,13 +50,17 @@ struct Home: View {
                             
                             Position.sharedInstance.position = landmark.id - 1
                             
-                            
-                            
                             AudioPlayer.sharedInstance.playSong()
+                            
+                            //AudioPlayer.sharedInstance.audioRouteChanged(note: notificationCenter)
+                           //AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
+                            
                           
-                          }
+                        }
                         
                     }
+                    
+                    
                     Button(action: {
                         
                         player.showPlayer = true
@@ -64,6 +76,8 @@ struct Home: View {
                         Position.sharedInstance.position = landmark.id - 1
                         
                         AudioPlayer.sharedInstance.playSong()
+                        
+                 
                             
                     }, label: {
                         
@@ -71,18 +85,29 @@ struct Home: View {
                                 .font(.largeTitle)
                                 .foregroundColor(.white)
                             
-                        }
+                    }
                     )
                 
                 }
+                
+                
+                    
+                
                     
                 }.navigationTitle("Songs")
                
             }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                print("Im back!!")
+                
+         
+            }
             
             
-            if player.showPlayer{
+            
+            if player.showPlayer {
                 Miniplayer()
+                    
                 // Move From Bottom...
                     .transition(.move(edge: .bottom))
                     .offset(y: player.offset)
@@ -91,12 +116,18 @@ struct Home: View {
                         state = value.translation.height
                         
                        
+                       
                         print("WE GOING UP OR DOWN?")
                     })
-                    .onEnded(onEnd(value:)))
+                    .onEnded(onEnd(value:)
+                    
+                    
+                    ))
             }
-            }).onChange(of: gestureOffset, perform: { value in
+            })
+        .onChange(of: gestureOffset, perform: { value in
         onChanged()
+            
     })
         .environmentObject(player)
         
@@ -127,9 +158,11 @@ struct Home: View {
                 }
                 else{
                     player.isMiniPlayer = false
-                }
+                    
+                 
             }
         }
+    }
     }
 
 struct Home_Previews: PreviewProvider {

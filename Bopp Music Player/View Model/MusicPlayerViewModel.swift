@@ -29,7 +29,9 @@ class MusicPlayerViewModel: ObservableObject {
     @Published var isPlaying = false
     
    
-    @Published var playValue: TimeInterval = 0.01
+    @Published var playValue: TimeInterval = 0.0001
+    
+    @Published var soundLevel: Float = AVAudioSession.sharedInstance().outputVolume
     
     
 }
@@ -56,6 +58,10 @@ extension MPVolumeView {
 
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
             slider?.value = volume
-        }
+         }
+        
+        
     }
+    
+       
 }
