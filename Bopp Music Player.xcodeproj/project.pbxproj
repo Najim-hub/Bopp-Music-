@@ -22,6 +22,8 @@
 		ED15AFC5266CDE430023A5C3 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFC4266CDE430023A5C3 /* VideoPlayerView.swift */; };
 		ED15AFCC266CE1B90023A5C3 /* Miniplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */; };
 		ED15AFD2266D0E540023A5C3 /* ATM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED15AFD1266D0E540023A5C3 /* ATM.mp3 */; };
+		ED2B10482678CD8100CDF162 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED2B10472678CD8100CDF162 /* GoogleService-Info.plist */; };
+		ED2EC6562673075C00AA0CED /* HapticFeedBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2EC6552673075C00AA0CED /* HapticFeedBack.swift */; };
 		EDBF70E42671818A00CF2D97 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70E32671818A00CF2D97 /* TabBar.swift */; };
 		EDBF70ED267186BA00CF2D97 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70E6267186BA00CF2D97 /* ViewExtensions.swift */; };
 		EDBF70EE267186BA00CF2D97 /* UIKitIntrospectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70E7267186BA00CF2D97 /* UIKitIntrospectionViewController.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		87EBA1CD493ADAD238096BAD /* Pods-Bopp Music Player.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bopp Music Player.release.xcconfig"; path = "Target Support Files/Pods-Bopp Music Player/Pods-Bopp Music Player.release.xcconfig"; sourceTree = "<group>"; };
+		8A4660E5E080BB2EF59B923B /* Pods-Bopp Music Player.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bopp Music Player.debug.xcconfig"; path = "Target Support Files/Pods-Bopp Music Player/Pods-Bopp Music Player.debug.xcconfig"; sourceTree = "<group>"; };
 		ED15AF98266CD2D10023A5C3 /* Bopp Music Player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bopp Music Player.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED15AF9B266CD2D10023A5C3 /* Bopp_Music_PlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bopp_Music_PlayerApp.swift; sourceTree = "<group>"; };
 		ED15AF9D266CD2D10023A5C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 		ED15AFC4266CDE430023A5C3 /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Miniplayer.swift; path = "Bopp Music Player/View Model/Miniplayer.swift"; sourceTree = SOURCE_ROOT; };
 		ED15AFD1266D0E540023A5C3 /* ATM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ATM.mp3; sourceTree = "<group>"; };
+		ED2B10472678CD8100CDF162 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		ED2EC6552673075C00AA0CED /* HapticFeedBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedBack.swift; sourceTree = "<group>"; };
 		EDBF70E32671818A00CF2D97 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		EDBF70E6267186BA00CF2D97 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		EDBF70E7267186BA00CF2D97 /* UIKitIntrospectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitIntrospectionViewController.swift; sourceTree = "<group>"; };
@@ -98,11 +104,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40A010B1F821F770CEEF82E2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A4660E5E080BB2EF59B923B /* Pods-Bopp Music Player.debug.xcconfig */,
+				87EBA1CD493ADAD238096BAD /* Pods-Bopp Music Player.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		ED15AF8F266CD2D10023A5C3 = {
 			isa = PBXGroup;
 			children = (
 				ED15AF9A266CD2D10023A5C3 /* Bopp Music Player */,
 				ED15AF99266CD2D10023A5C3 /* Products */,
+				40A010B1F821F770CEEF82E2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,12 +133,14 @@
 		ED15AF9A266CD2D10023A5C3 /* Bopp Music Player */ = {
 			isa = PBXGroup;
 			children = (
+				ED2B10472678CD8100CDF162 /* GoogleService-Info.plist */,
 				EDBF70E5267186BA00CF2D97 /* Introspect */,
 				ED15AFD3266D17770023A5C3 /* Files */,
 				ED15AFC8266CDF2B0023A5C3 /* Audio */,
 				ED15AFB2266CD4A30023A5C3 /* Resources */,
 				ED15AFAA266CD2E90023A5C3 /* View Model */,
 				ED15AFB5266CD4BF0023A5C3 /* Model */,
+				ED2EC6542673073300AA0CED /* Haptic */,
 				ED15AFB1266CD46C0023A5C3 /* View */,
 				ED15AF9B266CD2D10023A5C3 /* Bopp_Music_PlayerApp.swift */,
 				ED15AF9D266CD2D10023A5C3 /* ContentView.swift */,
@@ -174,10 +192,10 @@
 		ED15AFB5266CD4BF0023A5C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EDBF70F3267247F200CF2D97 /* AirPlayView.swift */,
 				ED15AFB8266CD4E40023A5C3 /* Landmark.swift */,
 				ED15AFB6266CD4D40023A5C3 /* ModelData.swift */,
 				EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */,
-				EDBF70F3267247F200CF2D97 /* AirPlayView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -210,6 +228,14 @@
 			path = Files;
 			sourceTree = "<group>";
 		};
+		ED2EC6542673073300AA0CED /* Haptic */ = {
+			isa = PBXGroup;
+			children = (
+				ED2EC6552673075C00AA0CED /* HapticFeedBack.swift */,
+			);
+			path = Haptic;
+			sourceTree = "<group>";
+		};
 		EDBF70E5267186BA00CF2D97 /* Introspect */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +256,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED15AFA7266CD2D30023A5C3 /* Build configuration list for PBXNativeTarget "Bopp Music Player" */;
 			buildPhases = (
+				3826BF88997904BE9F120D6E /* [CP] Check Pods Manifest.lock */,
 				ED15AF94266CD2D10023A5C3 /* Sources */,
 				ED15AF95266CD2D10023A5C3 /* Frameworks */,
 				ED15AF96266CD2D10023A5C3 /* Resources */,
@@ -291,6 +318,7 @@
 				EDDD6E7A266EB85B000F9DA5 /* Nikes.mp3 in Resources */,
 				ED15AFB4266CD4A30023A5C3 /* landmarkData.json in Resources */,
 				EDBF710726727A6800CF2D97 /* G.O.M.D..mp3 in Resources */,
+				ED2B10482678CD8100CDF162 /* GoogleService-Info.plist in Resources */,
 				EDBF710626727A6800CF2D97 /* xo tour llif3.mp3 in Resources */,
 				EDBF710326727A6800CF2D97 /* Ysl.mp3 in Resources */,
 				EDBF710126727A6800CF2D97 /* Lil Uzi Vert vs. the World.mp3 in Resources */,
@@ -301,6 +329,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3826BF88997904BE9F120D6E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Bopp Music Player-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		ED15AF94266CD2D10023A5C3 /* Sources */ = {
@@ -324,6 +377,7 @@
 				EDBF70E42671818A00CF2D97 /* TabBar.swift in Sources */,
 				ED15AFBF266CD78D0023A5C3 /* LandmarkRow.swift in Sources */,
 				EDBF70EF267186BA00CF2D97 /* AppKitIntrospectionView.swift in Sources */,
+				ED2EC6562673075C00AA0CED /* HapticFeedBack.swift in Sources */,
 				EDDD6E80266EBAFB000F9DA5 /* AudioSetup.swift in Sources */,
 				ED15AFB9266CD4E40023A5C3 /* Landmark.swift in Sources */,
 			);
@@ -450,6 +504,7 @@
 		};
 		ED15AFA8266CD2D30023A5C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A4660E5E080BB2EF59B923B /* Pods-Bopp Music Player.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -472,6 +527,7 @@
 		};
 		ED15AFA9266CD2D30023A5C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87EBA1CD493ADAD238096BAD /* Pods-Bopp Music Player.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

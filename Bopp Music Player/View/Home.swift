@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AVFoundation
+import MediaPlayer
 
 struct Home: View {
     
@@ -13,10 +15,14 @@ struct Home: View {
   
     @GestureState var gestureOffset: CGFloat = 0
     
+    @ObservedObject var playController = playControl.sharedInstance
+    
     @ObservedObject var audio = AudioSetup()
     
     @State var states : Bool = false
 
+
+    
     
     var body: some View {
         
@@ -24,51 +30,48 @@ struct Home: View {
           
             NavigationView {
                 
-                List(landmarks, id: \.name) { landmark in
-                 
+               // List(landmarks, id: \.name) { landmark in
+                
+                List{
+//let array = Array(landmarks).sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+                    
+                ForEach(landmarks, id: \.id) { landmark in
+                
                 HStack(spacing: 15){
                     
-                LandmarkRow(landmark: landmark)
+                    LandmarkRow(landmark: landmark)
                     .padding(.horizontal)
                     .onTapGesture {
                         withAnimation{
                             
-                            player.showPlayer = true
+                            playController.showPlayer = true
                             
                             print("I was Tapped")
                             
-                            player.isPlaying = true
+                            playController.isPlaying = true
                             
-                            player.positions = landmark.id - 1
-                            
-                            //audio.playSound(SongPosition: player.position)
-                            
-                            Position.sharedInstance.position = landmark.id - 1
+                            playController.position = landmark.id - 1
                             
                             AudioPlayer.sharedInstance.playSong()
                             
-                            
-                            
-                        }
+                            HapticFeedBack.shared.hit(0.3)
                         
-                    }
-                    
-                    
-                    
+                            }
+                        }
                     
                     Button(action: {
                         
-                        player.showPlayer = true
+                        HapticFeedBack.shared.hit(0.3)
+                    
+                        playController.showPlayer = true
                         
                         print("I was Tapped")
                         
-                        player.isPlaying = true
+                        playController.isPlaying = true
                         
                         player.positions = landmark.id - 1
                         
-                        //audio.playSound(SongPosition: player.position)
-                        
-                        Position.sharedInstance.position = landmark.id - 1
+                        playController.position = landmark.id - 1
                         
                         AudioPlayer.sharedInstance.playSong()
                         
@@ -82,28 +85,48 @@ struct Home: View {
                             
                     }
                     )
-                
-                }
-                
-                
+                    
+                    
+                    Spacer()
+                    
+                    Button(action: {}) {
+                        
+                        Image(systemName: "ellipsis")
+                            .font(.title2)
+                            .foregroundColor(.primary)
+                    }.frame(width: 50, height: 50, alignment: .trailing)
+                    .offset(x: 5)
                     
                 
-                    
                 }
-                .offset(y: player.isMiniPlayer ? -125 : 0)
-                .navigationTitle("Songs")
+                 
+                }
+                }
+                .offset(y: playController.isMini ? -100 : 0)
+                
+                .navigationBarTitle(Text("Songs"), displayMode: .automatic)
+           
                 
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                print("Im back!!")
+             
+               player.soundLevel =  AVAudioSession.sharedInstance().outputVolume
                 
+                
+                AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
+                
+                playController.playValue = AudioPlayer.sharedInstance.player?.currentTime ?? 0
+                
+      
+                print(playController.playValue, "You Back??!!")
          
             }
             
             
-            
-            if player.showPlayer {
+            /*
+            if playControl.sharedInstance.showPlayer {
                 Miniplayer()
+                    .zIndex(2.0)
                 .transition(.move(edge: .bottom))
                     .offset(y: player.offset)
                     .gesture(DragGesture().updating($gestureOffset, body: { (value, state, _) in
@@ -111,48 +134,51 @@ struct Home: View {
                         state = value.translation.height
                         
                        
-                        print("WE GOING UP OR DOWN?")
+                       
                     })
                     .onEnded(onEnd(value:)
                     
                     
                     ))
-            }
+            }*/
             })
         .onChange(of: gestureOffset, perform: { value in
         onChanged()
             
-    })
-        .environmentObject(player)
+    }
+ 
+ )
+        //.environmentObject(player)
         
         
 }
     
+    
     func onChanged(){
         
-        if gestureOffset > 0 && !player.isMiniPlayer && player.offset + 180 <= player.height{
+        if gestureOffset > 0 && !playController.isMini && playController.offset + 180 <= playController.height{
         
-            player.offset = gestureOffset
+            playController.offset = gestureOffset
         }
     }
     
     func onEnd(value: DragGesture.Value){
         withAnimation(.default){
 
-            if !player.isMiniPlayer{
+            if !playController.isMini{
                 
-                player.offset = 0
+                playController.offset = 0
                 
                 // Closing View...
           if value.translation.height > UIScreen.main.bounds.height / 3
                 {
                     
-                    player.isMiniPlayer = true
+            playController.isMini = true
                     
-                    print("WE SUPPOSSED TO END")
+                    
                 }
                 else{
-                    player.isMiniPlayer = false
+                    playController.isMini = false
                     
                  
             }

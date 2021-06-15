@@ -15,8 +15,11 @@ struct Miniplayer: View {
     // ScreenHeight..
     @EnvironmentObject var player: MusicPlayerViewModel
     
+    @GestureState var gestureOffset: CGFloat = 0
+    
     var expand: Bool = false
     
+    @ObservedObject var playController = playControl.sharedInstance
     
     var height = UIScreen.main.bounds.height / 3
     
@@ -46,31 +49,28 @@ struct Miniplayer: View {
             
             Capsule()
                 .fill(Color.gray)
-                .frame(width: player.isMiniPlayer ? 0 : 45, height: player.isMiniPlayer ? 0 : 4)
+                .frame(width:  playController.isMini ? 0 : 45, height:  playController.isMini ? 0 : 4)
                 .opacity(1)
-                .padding(.bottom, 15)
-                //.padding(.vertical, 30)*/
+                
             
             HStack(spacing: 16){
                 
                 HStack {
                     
-                    Image(landmarks[player.positions].imageName)
+                    Image(landmarks[playController.position].imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                        //.frame(width: expand ? height : 55, height: expand ? height : 55)
-                        .cornerRadius(5)
-                        //.frame(width: 350, height: 350, alignment: .top)
-                        // .padding(.top, 45)
-                    .frame(width: player.isMiniPlayer ? 67 : 390, height: player.isMiniPlayer ? 55 : 365)
-                    //.padding(.init(top: 45, leading: 35, bottom: 25, trailing: 35))
-                    //.padding(.trailing, 17)
-                        .clipShape(Circle())
+                        
+                    .cornerRadius(5)
+                       
+                    .frame(width: playController.isMini ? 67 : 390, height: playController.isMini ? 55 : 365)
+                 
+                    .clipShape(Circle())
                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
                                    .shadow(radius: 7)
-               // Spacer(minLength: 0)
-                
-                }.padding()
+            
+                }.padding(.top, playController.isMini ? 0 : 15)
+                .padding()
             }
             //.padding(.bottom, 35)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -90,14 +90,14 @@ struct Miniplayer: View {
                         HStack{
                             
                             VStack{
-                            Text(landmarks[Position.sharedInstance.position].name)
+                            Text(landmarks[playController.position].name)
                                 .font(.title3)
                             .foregroundColor(.primary)
                               .fontWeight(.bold)
                              .frame(width: 270, height: 20, alignment: .leading)
                              .padding(.top, 55)
                                 
-                                Text(landmarks[Position.sharedInstance.position].artistName)
+                                Text(landmarks[playController.position].artistName)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .fontWeight(.bold)
@@ -125,31 +125,29 @@ struct Miniplayer: View {
                         //Spacer(minLength: 0)
            HStack(spacing: 15){
                             
-           Slider(value: $player.playValue, in: TimeInterval(0.0)...AudioPlayer.sharedInstance.playerDuration, onEditingChanged: { _ in
+            Slider(value: $playController.playValue
+                , in: TimeInterval(0.0)...AudioPlayer.sharedInstance.playerDuration, onEditingChanged: { _ in
                                 changeSliderValue()
            })
            .accentColor(.yellow)
           
             .introspectSlider { UISlider in
                 UISlider.setThumbImage(UIImage(systemName: "circle.fill"), for: .normal)
-            }
-           
-                            .onReceive(AudioPlayer.sharedInstance.timer) { _ in
-                                      if player.isPlaying {
-                                        print(AudioPlayer.sharedInstance.playerDuration,"Player Duration")
-                                            if let currentTime =  AudioPlayer.sharedInstance.player?.currentTime {
-                                                player.playValue = currentTime 
-                                                    print(currentTime , "in Slider")
-                                                    if currentTime == TimeInterval(0.0) {
-                                                       player.isPlaying = false
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        print(currentTime , "FALSE!!!")
+            }.onReceive(AudioPlayer.sharedInstance.timer) { _ in
+                if playController.isPlaying {
+                   //print(AudioPlayer.sharedInstance.playerDuration,"Player Duration")
+                     if let currentTime =  AudioPlayer.sharedInstance.player?.currentTime {
+                        
+           playController.playValue = currentTime
+                        
+          
+                        
+             if currentTime == TimeInterval(0.0) {
+                playController.isPlaying = false
+               
                                                     }}}
                                             else {
-                                                player.isPlaying = false
+                                                playController.isPlaying = false
                                                 AudioPlayer.sharedInstance.timer.upstream.connect().cancel()
                                             }
                                         
@@ -163,10 +161,10 @@ struct Miniplayer: View {
                       }.padding(20)
                         
                         HStack(spacing: 280){
-                            Text(String(transToMinSec(time: Float( player.playValue)) ))
+                            Text(String(transToMinSec(time: Float(playController.playValue)) ))
                             .font(.system(size: 15))
                             
-                            Text("-" + String(transToMinSec(time: Float(AudioPlayer.sharedInstance.playerDuration -  player.playValue))))
+                            Text("-" + String(transToMinSec(time: Float(AudioPlayer.sharedInstance.playerDuration -  playController.playValue))))
                                 .font(.system(size: 15))
                             
                         }
@@ -176,21 +174,26 @@ struct Miniplayer: View {
                             
                             Button(action: {
                                 
-                            if Position.sharedInstance.position <= landmarks.count - 1 && Position.sharedInstance.position != 0 {
+                                HapticFeedBack.shared.hit(0.3)
                                 
-                                print(Position.sharedInstance.position)
+                                playController.playValue = 0.0
+                            
                                 
-                                player.positions =  player.positions - 1
+                            if playController.position <= landmarks.count - 1 && playController.position != 0 {
                                 
-                                print("tapped back button")
+                                //print(Position.sharedInstance.position)
+                                
+                                //player.positions =  player.positions - 1
+                                
+                               // print("tapped back button")
                               
-                                Position.sharedInstance.position =  Position.sharedInstance.position - 1
+                                playController.position =  playController.position - 1
                                 
-                                print(Position.sharedInstance.position, "New position")
+                                //print(Position.sharedInstance.position, "New position")
                                 
                                 AudioPlayer.sharedInstance.playSong()
                                 
-                                player.isPlaying = true
+                                playController.isPlaying = true
                                 }
                                 
                                 else{
@@ -210,26 +213,27 @@ struct Miniplayer: View {
                             
                             Button(action:
                                 {
+                                    
+                                    HapticFeedBack.shared.hit(0.3)
                                 
+                                   
                                 
                                 if AudioPlayer.sharedInstance.player?.isPlaying == true{
                                     AudioPlayer.sharedInstance.player?.pause()
                                    
-                                    player.isPlaying = false
+                                    playControl.sharedInstance.isPlaying = false
                                     
                                     AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
                                     
                                     audio.setupRemoteTransportControls()
                                     
-                                    
-                                    
-                                }
+                                                                    }
                                 
                                 else
                                   {
                                     AudioPlayer.sharedInstance.player?.play()
                                     
-                                    player.isPlaying = true
+                                    playController.isPlaying = true
                                     
                                     AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
                                     
@@ -258,34 +262,42 @@ struct Miniplayer: View {
                                 }
                                     
                                 }
-                            )
+                            ).onTapGesture {
+                               
+                            }
+                           
                             .padding(10)
                             .padding(.bottom,5)
                             
                             Button(action: {
                                 
-                                if Position.sharedInstance.position < landmarks.count - 1   {
+                                HapticFeedBack.shared.hit(0.3)
+                                
+                                playController.playValue = 0.0
+                            
+                                
+                                if playController.position < landmarks.count - 1   {
                                     
-                                    print(landmarks.count, "Json file length")
+                                //    print(landmarks.count, "Json file length")
                                 
-                                print(Position.sharedInstance.position)
+                              //  print(Position.sharedInstance.position)
                                 
-                                player.positions =  player.positions + 1
+                                    //playController.position =  playController.position + 1
                                 
-                                print("tapped next button")
+                               // print("tapped next button")
                               
-                                Position.sharedInstance.position =  Position.sharedInstance.position + 1
+                                    playController.position =  playController.position + 1
                                 
-                                print(Position.sharedInstance.position, "New position")
+                             //   print(Position.sharedInstance.position, "New position")
                                 
                                 AudioPlayer.sharedInstance.playSong()
                                 
-                                player.isPlaying = true
+                                    playController.isPlaying = true
                               
                                 }
                                 
                                 else{
-                                    player.positions = Position.sharedInstance.position
+                                    playController.position = playController.position
                                 }
                                 //AudioPlayer.sharedInstance.player?.play()
                                 
@@ -304,12 +316,12 @@ struct Miniplayer: View {
                         
                         Image(systemName: "speaker.fill")
                         
-                        Slider(value: $player.soundLevel, in: 0...1,step: 0.0625, onEditingChanged: { data in
+                        Slider(value: $playController.soundLevel, in: 0...1,step: 0.0625, onEditingChanged: { data in
                     
                             
-                            MPVolumeView.setVolume(self.player.soundLevel)
+                            MPVolumeView.setVolume(self.playController.soundLevel)
                             
-                            let volumeView = MPVolumeView(frame: CGRect.zero)
+                            _ = MPVolumeView(frame: CGRect.zero)
                          
                           
                         })
@@ -327,7 +339,7 @@ struct Miniplayer: View {
                         .frame(width: 50, height: 50)
                         
                         
-                    }.padding(.leading, 29)
+                    }
                     .padding(.bottom,390)
                   
                       
@@ -339,72 +351,52 @@ struct Miniplayer: View {
                  // expanding to full screen when clicked...
                  .frame(maxHeight: true ? .infinity : 90)
                  .onAppear(perform: {
-                    player.height = reader.frame(in: .global).height + 250
+                    playController.height = reader.frame(in: .global).height + 250
                 })
                 }
-        } .padding(.init(top: 265, leading: 15, bottom: 0, trailing: 15))
+        } .padding(.init(top: 265, leading: 15, bottom: 40, trailing: 15))
             //.frame(width: 20, height: 20, alignment: .center)
             //.padding(.top, 350)
         //.background(Color.yellow)
-        .opacity(player.isMiniPlayer ? 0 : getOpacity())
-        .frame(height: player.isMiniPlayer ? 0 : nil)
+        .opacity(/*player.isMiniPlayer*/ playController.isMini ? 0 : getOpacity())
+        .frame(height: /*player.isMiniPlayer*/ playController.isMini ? 0 : nil)
        
-       }.background(
+        }
         
-        
-        
+        .background(
         
         VStack(spacing: 0){
             
             BlurView()
             
-            Divider()
+            //Divider()
         }
-        //.introspectTabBarController { (UITabBarController) in
-             //   UITabBarController.tabBar.isHidden = true
-           // }
+       // .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         .ignoresSafeArea(.all, edges: .all)
         .onTapGesture {
             withAnimation{
                 
-                print("YOU CALLED?")
+                playController.width = UIScreen.main.bounds.width
                 
-                player.width = UIScreen.main.bounds.width
-                
-                player.isMiniPlayer.toggle()
-                
+                playController.isMini.toggle()
                 
             }}
-            
+     
         
+            
+    
         
        /* .introspectTabBarController { (UITabBarController) in
             UITabBarController.tabBar.isHidden = !player.isMiniPlayer
         }*/
         
        )
-        .introspectTabBarController { (UITabBarController) in
-        //UITabBarController.tabBar.isHidden = !player.isMiniPlayer
-            
-            if !player.isMiniPlayer{
-        UITabBarController.tabBar.layer.zPosition = -1
-        UITabBarController.tabBar.isUserInteractionEnabled = false;
-        //UITabBarController.tabBar.barTintColor = UIColor.clear
-                
-            }
-            
-            else{
-         UITabBarController.tabBar.layer.zPosition = -0
-         UITabBarController.tabBar.isUserInteractionEnabled = true;
-            }
-        }
-       
+        
         
         .background(
-        Image(landmarks[Position.sharedInstance.position].imageName)
+        Image(landmarks[playController.position].imageName)
                    .resizable()
-                   //.edgesIgnoringSafeArea(.all)
-                   //.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                 
        )
     
         
@@ -421,7 +413,7 @@ struct Miniplayer: View {
     
     func getFrame()->CGFloat{
         
-        let progress = player.offset / (player.height - 100)
+        let progress = playController.offset / (playController.height - 100)
         
         if (1 - progress) <= 1.0{
          
@@ -437,14 +429,14 @@ struct Miniplayer: View {
                     // Stopping At 150...
                     if videoWidth >= 150{
                     
-                        player.width = videoWidth
+                        playController.width = videoWidth
                     }
                 }
                 return 70
             }
             // Preview WIll Have Animation Problems...
             DispatchQueue.main.async {
-                player.width = UIScreen.main.bounds.width
+                playController.width = UIScreen.main.bounds.width
             }
             
             return videoHeight
@@ -454,7 +446,7 @@ struct Miniplayer: View {
     
     func getOpacity()->Double{
         
-        let progress = player.offset / (player.height)
+        let progress = playController.offset / (playController.height)
         if progress <= 1{
             return Double(1 - progress)
         }
@@ -467,18 +459,18 @@ struct Miniplayer: View {
             
             //print(AudioPlayer.sharedInstance.player?.currentTime, "current Slider Class")
             
-            AudioPlayer.sharedInstance.player?.currentTime = player.playValue
+            AudioPlayer.sharedInstance.player?.currentTime = playControl.sharedInstance.playValue
             
-            print(player.playValue, "Change Slider Class")
+         //   print(player.playValue, "Change Slider Class")
         }
         
         if AudioPlayer.sharedInstance.player?.isPlaying == false {
             //player?.play()
-            player.isPlaying = true
+            playController.isPlaying = true
          
-            AudioPlayer.sharedInstance.player?.currentTime = player.playValue
+            AudioPlayer.sharedInstance.player?.currentTime = playController.playValue
             
-            print(player.playValue, "Change Slider Class as false")
+           // print(player.playValue, "Change Slider Class as false")
         }
     }
     
@@ -526,6 +518,7 @@ struct VideoControls: View {
     
     @ObservedObject var audio = AudioSetup()
     
+    @ObservedObject var playController = playControl.sharedInstance
     
     
     var body: some View{
@@ -579,13 +572,13 @@ struct VideoControls: View {
             
             //if expand{Spacer(minLength: 0)}
             
-            Image("pic")
+            Image("")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width:  55, height:  55)
                 .cornerRadius(15)
             
-            Text(landmarks[Position.sharedInstance.position].name)
+            Text(landmarks[playController.position].name)
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
@@ -594,10 +587,13 @@ struct VideoControls: View {
             Spacer(minLength: 0)
           
                 Button(action: {
+                    
+                    HapticFeedBack.shared.hit(0.3)
+                
                     if AudioPlayer.sharedInstance.player?.isPlaying == true{
                         AudioPlayer.sharedInstance.player?.pause()
                        
-                        player.isPlaying = false
+                        playController.isPlaying = false
                         
                     }
                     
@@ -606,7 +602,7 @@ struct VideoControls: View {
                         
                      
                         
-                        player.isPlaying = true
+                        playController.isPlaying = true
                       
                     }
                     
@@ -628,19 +624,39 @@ struct VideoControls: View {
                 })
                 
                 Button(action: {
-                    print(Position.sharedInstance.position)
                     
-                    player.positions =  player.positions + 1
                     
-                    print("tapped next button")
+                    HapticFeedBack.shared.hit(0.3)
+                    
+                    playController.playValue = 0.0
+                
+                    
+                    if playController.position < landmarks.count - 1   {
+                        
+                    //    print(landmarks.count, "Json file length")
+                    
+                  //  print(Position.sharedInstance.position)
+                    
+                        //playController.position =  playController.position + 1
+                    
+                   // print("tapped next button")
                   
-                    Position.sharedInstance.position =  Position.sharedInstance.position + 1
+                        playController.position =  playController.position + 1
                     
-                    print(Position.sharedInstance.position, "New position")
+                 //   print(Position.sharedInstance.position, "New position")
                     
                     AudioPlayer.sharedInstance.playSong()
                     
-                    player.isPlaying = true
+                        playController.isPlaying = true
+                  
+                    }
+                    
+                    else{
+                        playController.position = playController.position
+                    }
+                    //AudioPlayer.sharedInstance.player?.play()
+                    
+                    
                   
                     
                 }, label: {

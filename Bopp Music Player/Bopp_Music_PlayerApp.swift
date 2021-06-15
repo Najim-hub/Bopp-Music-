@@ -7,8 +7,11 @@
 
 import SwiftUI
 
+
 @main
 struct Bopp_Music_PlayerApp: App {
+    
+
     var body: some Scene {
         WindowGroup {
             ContentView()

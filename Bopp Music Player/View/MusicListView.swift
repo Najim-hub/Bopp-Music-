@@ -32,9 +32,6 @@ struct MusicListView: View {
             }
             .navigationTitle("Songs")
             
-            
-            
-            //Miniplayer(animation: animation, expand: $expand, isPlaying: false, isPlayingExt: false, SongImage: "", Artist: "", SongName: "")
         }
         
     }

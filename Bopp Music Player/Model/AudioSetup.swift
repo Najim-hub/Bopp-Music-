@@ -19,6 +19,11 @@ class AudioSetup: ObservableObject {
     
     var playerDuration: TimeInterval = 0
     
+    //@ObservedObject var playController = playControl.sharedInstance
+    
+    var playController = playControl.sharedInstance
+    
+    
     //var timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     
     // Define Now Playing Info
@@ -34,7 +39,7 @@ class AudioSetup: ObservableObject {
     
     //public var ValuePlay : TimeInterval = 0.0
     
-    @objc func volumeChanged(_ notification: NSNotification) {
+    func volumeChanged(_ notification: NSNotification) {
        if let volume = notification.userInfo!["AVSystemController_AudioVolumeNotificationParameter"] as? Float {
            print("volume: \(volume)")
        }
@@ -42,14 +47,12 @@ class AudioSetup: ObservableObject {
     
     func didTapNextButton(){
         
-       // var Position  = Position
         var Position = (position - 1) + 1
         
         print(Position, "in Next Button")
         
         print(landmarks.count, "Land Mark size")
         
-       // player.audioPlayer?.stop()
          
          if Position < landmarks.count {
              
@@ -58,12 +61,6 @@ class AudioSetup: ObservableObject {
              
             print(Position, "Adding one to Position")
            
-         
-            //audioPlayer?.stop()
-            
-            //playSound(SongPosition: Position)
-            
-            //audioPlayer?.play()
                 
              print(Position,"Next Song")
             
@@ -79,9 +76,9 @@ class AudioSetup: ObservableObject {
       
         AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
         
-        nowPlayingInfo[MPMediaItemPropertyTitle] = landmarks[Position.sharedInstance.position].trackName
+        nowPlayingInfo[MPMediaItemPropertyTitle] = landmarks[playController.position].trackName
 
-        if let image = UIImage(named: landmarks[Position.sharedInstance.position].imageName) {
+        if let image = UIImage(named: landmarks[playController.position].imageName) {
             nowPlayingInfo[MPMediaItemPropertyArtwork] =
                 MPMediaItemArtwork(boundsSize: image.size) { size in
                     return image
@@ -107,10 +104,7 @@ class AudioSetup: ObservableObject {
                 AudioPlayer.sharedInstance.player?.play()
                 
                 AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
-                
-                //player.isPlaying.toggle()
-                
-                //isPlaying = true
+             
                 
             }
             return .commandFailed
@@ -122,16 +116,8 @@ class AudioSetup: ObservableObject {
                 
                 AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
                 
-                /*
-                self.audioPlayer?.pause()
- */
                 AudioPlayer.sharedInstance.player?.pause()
-                
-                //player.isPlaying = false
-                
-                //isPlaying = false
-                
-                //layer.isPlaying.toggle()
+               
                 
                 return .success
             }
@@ -146,7 +132,11 @@ class AudioSetup: ObservableObject {
 
 class AudioPlayer:  NSObject, AVAudioPlayerDelegate {
     
+    
     var player: AVAudioPlayer? = AVAudioPlayer()
+    
+    var playController = playControl.sharedInstance
+    
     
     var MPlayer = MusicPlayerViewModel()
     
@@ -161,8 +151,38 @@ class AudioPlayer:  NSObject, AVAudioPlayerDelegate {
     // Define Now Playing Info
     var nowPlayingInfo = [String : Any]()
     
+    
+    
     //var players = MusicPlayerViewModel()
    static let sharedInstance = AudioPlayer()
+    
+func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if flag {
+            
+            AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
+            
+            playControl.sharedInstance.playValue = AudioPlayer.sharedInstance.player?.currentTime ?? 0.1
+             
+            if playController.position < landmarks.count - 1   {
+                
+            MPlayer.positions =  MPlayer.positions + 1
+      
+                playController.position =  playController.position + 1
+           
+            AudioPlayer.sharedInstance.playSong()
+            
+            playControl.sharedInstance.isPlaying = true
+          
+            }
+            
+            else{
+                playController.position = playController.position
+            }
+            
+        } else {
+            // did not finish successfully
+        }
+    }
     
     func audioRouteChanged(note: Notification) {
       if let userInfo = note.userInfo {
@@ -175,21 +195,18 @@ class AudioPlayer:  NSObject, AVAudioPlayerDelegate {
       }
     }
     
-    @objc func playerDidFinishPlaying(sender: Notification) {
-        print("SONG ENDED")
-    }
     
     
     func playSong(){
         
-        if Position.sharedInstance.position <= landmarks.count - 1 && Position.sharedInstance.position >= 0{
+        if playController.position <= landmarks.count - 1 && playController.position >= 0{
             
             
-         print(Position.sharedInstance.position)
+         print(playController.position)
     
-    let urlString = Bundle.main.path(forResource: landmarks[Position.sharedInstance.position].trackName, ofType: "mp3")
+    let urlString = Bundle.main.path(forResource: landmarks[playController.position].trackName, ofType: "mp3")
     
-    print(Position.sharedInstance.position, "Within position")
+    print(playController.position, "Within position")
         
     let fileUrl = NSURL(fileURLWithPath: urlString!)
         
@@ -210,18 +227,18 @@ class AudioPlayer:  NSObject, AVAudioPlayerDelegate {
         
        
         
-        playerDuration = player?.duration ?? 0
+        playerDuration = player?.duration ?? 0.1
         
         //print("SONG time: ", player?.currentTime as Any )
         
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
         
-        MPlayer.isPlaying = true
+        playControl.sharedInstance.isPlaying = true
         
         player?.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying(sender:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player)
-       
+    
+
     }
     catch {
         print("error occurred")

@@ -27,15 +27,6 @@ struct LandmarkRow: View {
                 .foregroundColor(.secondary)
             }
             
-            Spacer()
-            
-            Button(action: {print ("Clicked")}) {
-                
-                Image(systemName: "ellipsis")
-                    .font(.title2)
-                    .foregroundColor(.primary)
-            }.frame(width: 50, height: 50, alignment: .trailing)
-            
             
            
         }
