@@ -6,9 +6,15 @@ Storage for model data.
 */
 
 import Foundation
+import Firebase
 
 var landmarks: [Landmark] = load("landmarkData.json")
 
+func loadSongs(){
+
+    //Firestore.firestore().collection("album")
+    
+}
 
 func load<T: Decodable>(_ filename: String) -> T {
     

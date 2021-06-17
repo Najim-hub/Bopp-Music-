@@ -97,7 +97,7 @@ class AudioSetup: ObservableObject {
         
         
         // Add handler for Play Command
-        commandCenter.playCommand.addTarget { [unowned self] event in
+        commandCenter.playCommand.addTarget { [] event in
             
             if AudioPlayer.sharedInstance.player?.isPlaying == false {
             

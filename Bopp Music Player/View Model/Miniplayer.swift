@@ -46,7 +46,6 @@ struct Miniplayer: View {
         
         VStack(){
             // Video Player...
-            
             Capsule()
                 .fill(Color.gray)
                 .frame(width:  playController.isMini ? 0 : 45, height:  playController.isMini ? 0 : 4)

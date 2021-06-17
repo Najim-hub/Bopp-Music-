@@ -21,13 +21,7 @@ struct TabBar: View {
     
     @Namespace var animation
     
-    //@EnvironmentObject var player: MusicPlayerViewModel
-    
     @StateObject var player = MusicPlayerViewModel()
-    
-    
-    //@ObservedObject var audiosettings = audioSettings()
-    
     
     var body: some View {
     
@@ -39,7 +33,7 @@ struct TabBar: View {
             TabView(selection: $current){
                 
                 
-                Text("Wallet")
+                ConnectWallet()
                     .tag(0)
                     .tabItem {
                         
@@ -101,12 +95,6 @@ struct TabBar: View {
                             print("calling")
                         }
                     })
-                   /* .gesture(DragGesture().updating($gestureOffset, body: { (value, state, _) in
-                        
-                        state = value.translation.height
-                        
-                       print("This working?")
-                    })*/
                     .onEnded(onEnd(value:))
                     )
             }

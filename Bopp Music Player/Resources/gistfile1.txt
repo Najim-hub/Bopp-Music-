@@ -1,0 +1,35 @@
+[
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "_name",
+                "type": "string"
+            }
+        ],
+        "name": "howManyKittensCalled",
+        "outputs": [
+            {
+                "name": "_num",
+                "type": "uint64"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_name",
+                "type": "string"
+            }
+        ],
+        "name": "createKitten",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
