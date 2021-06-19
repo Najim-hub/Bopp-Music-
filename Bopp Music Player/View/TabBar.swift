@@ -10,7 +10,7 @@ import SwiftUI
 struct TabBar: View {
     // Selected Tab Index...
     // Default is third...
-    @State var current = 2
+    @State var current = 3
     
     // Miniplayer Properties...
     @State var expand = false
@@ -21,7 +21,13 @@ struct TabBar: View {
     
     @Namespace var animation
     
+    //@EnvironmentObject var player: MusicPlayerViewModel
+    
     @StateObject var player = MusicPlayerViewModel()
+    
+    
+    //@ObservedObject var audiosettings = audioSettings()
+    
     
     var body: some View {
     
@@ -33,8 +39,8 @@ struct TabBar: View {
             TabView(selection: $current){
                 
                 
-                ConnectWallet()
-                    .tag(0)
+                Text("Wallet")
+                    .tag(1)
                     .tabItem {
                         
                         Image(systemName: "coloncurrencysign.circle.fill")
@@ -43,8 +49,8 @@ struct TabBar: View {
                         
                     }
                 
-                Text("MarketPlace")
-                    .tag(1)
+                Coming()
+                    .tag(2)
                     .tabItem {
                         
                         Image(systemName: "purchased")
@@ -54,7 +60,7 @@ struct TabBar: View {
                     }
                 
                  Home()
-                    .tag(2)
+                    .tag(3)
                     .tabItem {
                         
                         Image(systemName: "music.note")
@@ -88,7 +94,8 @@ struct TabBar: View {
                      //.zIndex(2.0)
                     .transition(.move(edge: .bottom))
                     .offset(y: playController.offset)
-                    .simultaneousGesture(DragGesture().updating($gestureOffset, body: { value, state, transaction in
+                    
+                    .gesture(DragGesture().updating($gestureOffset, body: { value, state, transaction in
                         if value.translation.height > 0 {
                             state = value.translation.height
                             

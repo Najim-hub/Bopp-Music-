@@ -7,23 +7,19 @@
 
 import SwiftUI
 import UIKit
-import TrustSDK
 import Firebase
-
-
 
 @main
 struct Bopp_Music_PlayerApp: App {
     
+   var data = MusicData()
+    
     init(){
        
-        TrustSDK.initialize(with: TrustSDK.Configuration(scheme: "trustsdk"))
-          
         FirebaseApp.configure()
         
-        func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-          return TrustSDK.application(app, open: url, options: options)
-        }
+        //data.loadSongs()
+        
     }
     
 

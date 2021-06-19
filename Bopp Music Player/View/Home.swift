@@ -17,11 +17,17 @@ struct Home: View {
     
     @ObservedObject var playController = playControl.sharedInstance
     
+    @ObservedObject var songList = loadInfo.sharedInstance
+    
     @ObservedObject var audio = AudioSetup()
     
     @State var states : Bool = false
+    
+    @ObservedObject var Avplayer = AudioPlayer.sharedInstance
 
-
+    var data = MusicData()
+     
+    @State var value: Float = 0
     
     
     var body: some View {
@@ -29,13 +35,10 @@ struct Home: View {
         ZStack(alignment: .bottom, content: {
           
             NavigationView {
-                
-               // List(landmarks, id: \.name) { landmark in
-                
+ 
                 List{
-//let array = Array(landmarks).sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
-                    
-                ForEach(landmarks, id: \.id) { landmark in
+
+    ForEach(songList.songs, id: \.id) { landmark in
                 
                 HStack(spacing: 15){
                     
@@ -52,8 +55,17 @@ struct Home: View {
                             
                             playController.position = landmark.id - 1
                             
-                            AudioPlayer.sharedInstance.playSong()
+                            if Avplayer.player!.rate > 0 {
                             
+                                Avplayer.player?.rate = 0
+                                
+                                Avplayer.playSong()
+                            
+                            }
+                            
+                            else{
+                                Avplayer.playSong()
+                            }
                             HapticFeedBack.shared.hit(0.3)
                         
                             }
@@ -61,19 +73,26 @@ struct Home: View {
                     
                     Button(action: {
                         
-                        HapticFeedBack.shared.hit(0.3)
-                    
                         playController.showPlayer = true
                         
                         print("I was Tapped")
                         
                         playController.isPlaying = true
                         
-                        player.positions = landmark.id - 1
-                        
                         playController.position = landmark.id - 1
                         
-                        AudioPlayer.sharedInstance.playSong()
+                        if Avplayer.player!.rate > 0 {
+                        
+                            Avplayer.player?.rate = 0
+                            
+                            Avplayer.playSong()
+                        
+                        }
+                        
+                        else{
+                            Avplayer.playSong()
+                        }
+                        HapticFeedBack.shared.hit(0.3)
                         
                  
                             
@@ -115,10 +134,12 @@ struct Home: View {
                 
                 AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
                 
-                playController.playValue = AudioPlayer.sharedInstance.player?.currentTime ?? 0
+                //value = Float(CMTimeGetSeconds((Avplayer.player?.currentItem?.currentTime())!))
+                
+               // playController.playValue = TimeInterval(value)
                 
       
-                print(playController.playValue, "You Back??!!")
+               // print(playController.playValue, "You Back??!!")
          
             }
             
@@ -142,6 +163,12 @@ struct Home: View {
                     ))
             }*/
             })
+        .onAppear(perform: {
+            
+           print("Shared instance size in home view")
+           print(loadInfo.sharedInstance.songs.count)
+        }
+        )
         .onChange(of: gestureOffset, perform: { value in
         onChanged()
             
@@ -189,6 +216,7 @@ struct Home: View {
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()
+            .padding(.all)
     }
 }
 }
