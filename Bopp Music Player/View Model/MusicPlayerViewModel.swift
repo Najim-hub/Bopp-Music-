@@ -117,11 +117,7 @@ class playControl: ObservableObject{
     
     static let sharedInstance = playControl()
     
-    init() {
-        
-        
-        
-    }
+    init() {}
     
     
 }

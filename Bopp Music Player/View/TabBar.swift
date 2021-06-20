@@ -68,6 +68,17 @@ struct TabBar: View {
                         Text("Music")
                     }
                 
+                Logout()
+                    .tag(4)
+                    .tabItem {
+                       Image(systemName: "person.crop.circle")
+                        
+                        Text("User")
+                        
+                    }
+                
+                
+                
                 
                
             }

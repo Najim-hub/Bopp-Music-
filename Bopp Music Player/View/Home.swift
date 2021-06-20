@@ -11,6 +11,8 @@ import MediaPlayer
 
 struct Home: View {
     
+  
+    
     @StateObject var player = MusicPlayerViewModel()
   
     @GestureState var gestureOffset: CGFloat = 0
@@ -29,6 +31,8 @@ struct Home: View {
      
     @State var value: Float = 0
     
+    @AppStorage("Name") var Name = ""
+    //Text("Hello, \(Name)" )
     
     var body: some View {
         

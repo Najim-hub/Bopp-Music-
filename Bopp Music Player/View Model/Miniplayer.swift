@@ -1,9 +1,5 @@
 //
-//  Miniplayer.swift
-//  AppleMusic
-//
-//  Created by Balaji on 16/11/20.
-//
+//created by Najim Mohammed
 
 import SwiftUI
 import AVFoundation
@@ -20,13 +16,7 @@ struct Miniplayer: View {
     // ScreenHeight..
     @EnvironmentObject var player: MusicPlayerViewModel
     
-    var timeNow = currentTime.sharedInstance
-    @State var timeObserverToken: Any?
     @GestureState var gestureOffset: CGFloat = 0
-    
-    var expand: Bool = false
-    
-    @State var seeking: Bool = false
     
     @ObservedObject var playController = playControl.sharedInstance
     
@@ -34,13 +24,11 @@ struct Miniplayer: View {
     
     @ObservedObject var audio = AudioSetup()
     
-    //@ObservedObject var adjust = AudioSetup()
-    
     @ObservedObject var songList = loadInfo.sharedInstance
     
     @ObservedObject var Avplayer = AudioPlayer.sharedInstance
     
-    //@State var seekPos : Float = AudioSetup().playValue
+    @AppStorage("log_status") var log_Status = false
     
     var home = Home()
     // Volume Slider...
@@ -53,11 +41,14 @@ struct Miniplayer: View {
     // Define Now Playing Info
     var nowPlayingInfo = [String : Any]()
     
-    
     @ObservedObject var val = playVal.sharedInstance
     
     var body: some View {
         
+        if log_Status{
+    
+        ZStack{
+          
    
         VStack(){
             // Video Player...
@@ -114,7 +105,7 @@ struct Miniplayer: View {
                                 .foregroundColor(.secondary)
                                 .fontWeight(.bold)
                                 .frame(width: 270, height: 20, alignment: .leading)
-                                //.padding(.top, 55)
+                                
                             }
                             
                             
@@ -138,41 +129,38 @@ struct Miniplayer: View {
              
              self.audio.changeSliderValue()
              
-         print("Seeking")
+             
+             
     
             })
            .onReceive(AudioPlayer.sharedInstance.timer) { _ in
                     if self.Avplayer.player!.rate > 0 {
                           
-                self.val.playValue = Float( CMTimeGetSeconds(self.Avplayer.player!.currentTime()))
+                self.val.playValue = Float(CMTimeGetSeconds(self.Avplayer.player!.currentTime()))
+                    
+                        self.startPoint = UnitPoint(x: 1, y: -CGFloat(val.playValue))
+                        self.endPoint = UnitPoint(x: 0, y: CGFloat(val.playValue))
                             
                        }
                                        }
            .accentColor(.yellow)
           .introspectSlider { UISlider in
-            UISlider.setThumbImage(UIImage(systemName: "circle.fill"), for: .normal)
+             UISlider.setThumbImage(UIImage(systemName: "circle.fill"), for: .normal)
             UISlider.isContinuous = true
-          
-          
-           }
-           .onTapGesture {
-               withAnimation{
-                
-               //Avplayer.player?.pause()
-                
-               } }
-                      }.padding(20)
+              
+          }
+         
+     }.padding(20)
                         
-                        HStack(spacing: 280){
+                HStack(spacing: 280){
                             
-                            Text(String(transToMinSec(time: Float(val.playValue)) ))
+                    Text(String(transToMinSec(time: Float(val.playValue))))
                             .font(.system(size: 15))
                             
-                            Text("-" + String(transToMinSec(time: AudioPlayer.sharedInstance.floatTime - Float(val.playValue))))
+                    Text("-" + String(transToMinSec(time: AudioPlayer.sharedInstance.floatTime - Float(val.playValue))))
                                 .font(.system(size: 15))
                             
                         }
-                        
                         // Main Play Button...
                         HStack(spacing: 15){
                             
@@ -185,22 +173,15 @@ struct Miniplayer: View {
                                 
                                 Avplayer.player?.rate = 0
                                
-                                //Avplayer.player?.pause()
+                                val.playValue = 0
                                 
                                 playController.position =  playController.position - 1
-                                
                                 
                                 
                                 Avplayer.playSong()
                                 
                                 playController.isPlaying = true
                                 }
-                                
-                                else{
-                                    
-                                }
-                                
-                            
                                 
                             }) {
                                 
@@ -214,11 +195,9 @@ struct Miniplayer: View {
                             Button(action:
                                 {
                                     
-                                    HapticFeedBack.shared.hit(0.3)
+                              HapticFeedBack.shared.hit(0.3)
                                 
-                                   
-                                
-                               if Avplayer.player!.rate > 0{
+                           if Avplayer.player!.rate > 0{
                                 
                                  Avplayer.player?.pause()
                                    
@@ -230,7 +209,7 @@ struct Miniplayer: View {
                                     
                                                                     }
                                 
-                                else if Avplayer.player!.rate == 0
+                               else
                                   {
                                     Avplayer.player?.play()
                                     
@@ -238,14 +217,12 @@ struct Miniplayer: View {
                                     
                                     Avplayer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
                                     
-                                    
-                                    
-                                   }
+                                  }
                                 
                                     
                             }, label: {
                                 
-                                if  Avplayer.player!.rate > 0 //&& audio.setupRemoteTransportControls()
+                                if  playController.isPlaying == true//&& audio.setupRemoteTransportControls()
                                 {
                                     Image(systemName: "pause.fill")
                                         .font(.system(size: 60, weight: .bold))
@@ -253,7 +230,7 @@ struct Miniplayer: View {
                                         
                                 }
                                 
-                                else if Avplayer.player!.rate  == 0{
+                                else{
                                     
                                     Image(systemName: "play.fill")
                                         .font(.system(size: 60, weight: .bold))
@@ -273,8 +250,7 @@ struct Miniplayer: View {
                                 
                                 HapticFeedBack.shared.hit(0.3)
                                 
-                                //seekPos = 0
-                            
+                                val.playValue = 0
                                 
                                 if playController.position < songList.songs.count - 1   {
                                     
@@ -319,10 +295,7 @@ struct Miniplayer: View {
                           
                         })
                             .accentColor(.gray)
-                        
-                        
-                        
-                        Image(systemName: "speaker.wave.2.fill")
+                       Image(systemName: "speaker.wave.2.fill")
                     }
                     .padding()
                     
@@ -334,10 +307,7 @@ struct Miniplayer: View {
                         
                     }
                     .padding(.bottom,390)
-                  
-                      
-                        
-                    }
+                   }
                    .padding()// this will give strech effect...
                    .frame(height:  0)
                    .opacity(1)
@@ -360,13 +330,13 @@ struct Miniplayer: View {
             BlurView()
             
         }
+        
            
         .ignoresSafeArea(.all, edges: .all)
         .onTapGesture {
             withAnimation (.easeInOut(duration: 0.3)){
                 
-                self.startPoint = UnitPoint(x: 1, y: -1)
-                self.endPoint = UnitPoint(x: 0, y: 1)
+             
                 
                 playController.width = UIScreen.main.bounds.width
                 
@@ -385,8 +355,18 @@ struct Miniplayer: View {
        )
     
         
+            }
+            
         
+            
+           
+            
+            
+        }
         
+        else{
+            Login()
+        }
     }
     
     // Getting Frame And Opacity While Dragging
@@ -442,35 +422,21 @@ struct Miniplayer: View {
         }
         return 1
     }
-    
-    func changeSliderValue() {
-        
-     
-        
-        /*
-        if AudioPlayer.sharedInstance.player?.isPlaying == false {
-            //player?.play()
-            playController.isPlaying = true
-         
-            AudioPlayer.sharedInstance.player?.currentTime = playController.playValue
-            
-           // print(player.playValue, "Change Slider Class as false")
-        }*/
-    }
-    
   
     
     func transToMinSec(time: Float) -> String
     {
-        let allTime: Int = Int(time)
+       
+        if log_Status{
+      
+       let allTime = Int(time)
+          
         //var hours = 0
         var minutes = 0
         var seconds = 0
         //var hoursText = ""
         var minutesText = ""
         var secondsText = ""
-        
-       
         
         minutes = allTime % 3600 / 60
         minutesText = minutes > 9 ? "\(minutes)" : "\(minutes)"
@@ -480,11 +446,15 @@ struct Miniplayer: View {
         
         return "\(minutesText):\(secondsText)"
 
+    
+        }
+        else{
+            return "Log in"
+        }
+        
     }
     
-
 }
-
 
 
 struct MiniPlayer_Previews: PreviewProvider {
@@ -506,6 +476,7 @@ struct VideoControls: View {
     
     @ObservedObject var playController = playControl.sharedInstance
     
+    @ObservedObject var Avplayer = AudioPlayer.sharedInstance
     
     var body: some View{
        
@@ -547,20 +518,25 @@ struct VideoControls: View {
                     
                     
                 }, label: {
-                    if  playController.isPlaying == true //&& //audio.setupRemoteTransportControls()
-                    {
-                        Image(systemName: "pause.fill")
-                            .font(.title)
-                            .foregroundColor(.primary)
-                    }
                     
-                    else {
-                        
-                        Image(systemName: "play.fill")
-                            .font(.title)
-                            .foregroundColor(.primary)
-                        
-                    }
+                  //&& //audio.setupRemoteTransportControls()
+                            
+                             if Avplayer.player!.rate  > 0  {
+                                Image(systemName: "pause.fill")
+                                    .font(.title)
+                                    .foregroundColor(.primary)
+                                    
+                            }
+                            
+                            else if Avplayer.player!.rate  == 0{
+                                
+                                Image(systemName: "play.fill")
+                                    .font(.title)
+                                    .foregroundColor(.primary)
+                                
+                            }
+                    
+                    
                 })
                 
                 Button(action: {

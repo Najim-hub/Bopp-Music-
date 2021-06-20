@@ -6,21 +6,28 @@
 //
 
 import SwiftUI
-
+import CryptoKit
+import FirebaseAuth
+import AuthenticationServices
 
 struct ContentView: View {
     
     @EnvironmentObject var player: MusicPlayerViewModel
     
     var data = MusicData()
-     
+
     
+    @AppStorage("log_status") var log_Status = false
     var body: some View {
-     //Home()
-       TabBar()
-        .onAppear(){ perform: do {
-            //data.loadSongs()
+  
+        ZStack{
+            if log_Status{
+               TabBar()
             }
+            else{
+                Login()
+            }
+            
         }
     }
 }

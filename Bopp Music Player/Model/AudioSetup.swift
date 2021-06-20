@@ -130,14 +130,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
                     self.player?.currentItem?.preferredPeakBitRate = 0
                    // self.player?.automaticallyWaitsToMinimizeStalling = false;
                     //print(self.player?.currentItem?.preferredPeakBitRate)
-                    
-               if #available(iOS 15.0, *)
-                    {
-            
-                 self.player?.currentItem?.preferredPeakBitRateForExpensiveNetworks = 64
-                    } else {
-                        // Fallback on earlier versions
-                    }
+           
                     
                     self.player?.play()
                     
