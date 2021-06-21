@@ -23,9 +23,9 @@
 		ED15AFC5266CDE430023A5C3 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFC4266CDE430023A5C3 /* VideoPlayerView.swift */; };
 		ED15AFCC266CE1B90023A5C3 /* Miniplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */; };
 		ED2EC6562673075C00AA0CED /* HapticFeedBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2EC6552673075C00AA0CED /* HapticFeedBack.swift */; };
-		ED38B0A3267D98D70024FC7A /* ComingSoon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38B0A2267D98D70024FC7A /* ComingSoon.swift */; };
 		ED38B0A5267D9A570024FC7A /* Coming.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38B0A4267D9A570024FC7A /* Coming.swift */; };
 		ED38B0A7267D9D480024FC7A /* Coming.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ED38B0A6267D9D480024FC7A /* Coming.mp4 */; };
+		ED4D2DA426812F33001A456B /* SignInCryptoWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D2DA326812F33001A456B /* SignInCryptoWallet.swift */; };
 		ED599B31267E385E00AC667E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED599B30267E385E00AC667E /* Launch Screen.storyboard */; };
 		ED599B33267E4BC400AC667E /* AUdio.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED599B32267E4BC400AC667E /* AUdio.swift */; };
 		ED9597C5267AE14F004AA17E /* CloudKitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9597C4267AE14F004AA17E /* CloudKitTest.swift */; };
@@ -66,9 +66,9 @@
 		ED15AFC4266CDE430023A5C3 /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Miniplayer.swift; path = "Bopp Music Player/View Model/Miniplayer.swift"; sourceTree = SOURCE_ROOT; };
 		ED2EC6552673075C00AA0CED /* HapticFeedBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedBack.swift; sourceTree = "<group>"; };
-		ED38B0A2267D98D70024FC7A /* ComingSoon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComingSoon.swift; sourceTree = "<group>"; };
 		ED38B0A4267D9A570024FC7A /* Coming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coming.swift; sourceTree = "<group>"; };
 		ED38B0A6267D9D480024FC7A /* Coming.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Coming.mp4; sourceTree = "<group>"; };
+		ED4D2DA326812F33001A456B /* SignInCryptoWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCryptoWallet.swift; sourceTree = "<group>"; };
 		ED599B30267E385E00AC667E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		ED599B32267E4BC400AC667E /* AUdio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUdio.swift; sourceTree = "<group>"; };
 		ED95978D2679173D004AA17E /* PackageFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PackageFolder; path = "Bopp Music Player/PackageFolder"; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 		ED15AFAA266CD2E90023A5C3 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				EDDF0FC5267FA80B00AF7C97 /* LoginViewModel.swift */,
 				ED15AFAF266CD3660023A5C3 /* MusicPlayerViewModel.swift */,
+				EDDF0FC5267FA80B00AF7C97 /* LoginViewModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -176,13 +176,14 @@
 		ED15AFB1266CD46C0023A5C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */,
+				ED4D2DA326812F33001A456B /* SignInCryptoWallet.swift */,
+				EDBF70E32671818A00CF2D97 /* TabBar.swift */,
+				EDDF0FC7267FA83400AF7C97 /* Login.swift */,
 				ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */,
 				ED15AFBA266CD51E0023A5C3 /* Home.swift */,
-				EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */,
-				EDDF0FC7267FA83400AF7C97 /* Login.swift */,
-				ED38B0A4267D9A570024FC7A /* Coming.swift */,
-				EDBF70E32671818A00CF2D97 /* TabBar.swift */,
 				ED15AFBE266CD78D0023A5C3 /* LandmarkRow.swift */,
+				ED38B0A4267D9A570024FC7A /* Coming.swift */,
 				ED15AFBC266CD5930023A5C3 /* MusicListView.swift */,
 				ED9597C4267AE14F004AA17E /* CloudKitTest.swift */,
 				ED15AFC2266CDBB60023A5C3 /* BlurView.swift */,
@@ -202,14 +203,13 @@
 		ED15AFB5266CD4BF0023A5C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ED15AFB8266CD4E40023A5C3 /* Landmark.swift */,
 				EDDF0FCB267FD3C300AF7C97 /* ControlCenter.swift */,
-				ED599B32267E4BC400AC667E /* AUdio.swift */,
 				ED9597CA267AEFAD004AA17E /* MusicData.swift */,
 				ED15AFB6266CD4D40023A5C3 /* ModelData.swift */,
-				ED15AFB8266CD4E40023A5C3 /* Landmark.swift */,
 				EDBF70F3267247F200CF2D97 /* AirPlayView.swift */,
-				ED38B0A2267D98D70024FC7A /* ComingSoon.swift */,
 				EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */,
+				ED599B32267E4BC400AC667E /* AUdio.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -380,8 +380,8 @@
 				EDDF0FC6267FA80B00AF7C97 /* LoginViewModel.swift in Sources */,
 				ED15AFC5266CDE430023A5C3 /* VideoPlayerView.swift in Sources */,
 				ED15AF9C266CD2D10023A5C3 /* Bopp_Music_PlayerApp.swift in Sources */,
-				ED38B0A3267D98D70024FC7A /* ComingSoon.swift in Sources */,
 				ED15AFBB266CD51E0023A5C3 /* Home.swift in Sources */,
+				ED4D2DA426812F33001A456B /* SignInCryptoWallet.swift in Sources */,
 				EDDF0FCA267FAA7F00AF7C97 /* Logout.swift in Sources */,
 				ED15AFBD266CD5930023A5C3 /* MusicListView.swift in Sources */,
 				ED38B0A5267D9A570024FC7A /* Coming.swift in Sources */,
