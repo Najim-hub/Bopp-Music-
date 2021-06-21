@@ -13,6 +13,7 @@ import Firebase
 import SwiftUI
 
 class playVal: ObservableObject {
+    
     @Published var playValue: Float = 0.0
     
     static let sharedInstance = playVal()
@@ -27,7 +28,6 @@ class AudioSetup: ObservableObject {
     
    // let commandCenter = MPRemoteCommandCenter.shared()
     
-  
     var playController = playControl.sharedInstance
     
     var nowPlayingInfo = [String : Any]()

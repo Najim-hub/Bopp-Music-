@@ -25,7 +25,7 @@ struct Logout: View {
             VStack(spacing: 20){
                 
               
-                Text("Click the Logout button to Leave")
+                Text("Click the logout button to exit")
                 
                 Button(action: {
                     // Logging Out User...

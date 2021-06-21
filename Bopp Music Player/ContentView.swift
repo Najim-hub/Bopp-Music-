@@ -21,7 +21,7 @@ struct ContentView: View {
     var body: some View {
   
         ZStack{
-            if log_Status{
+            if !log_Status{
                TabBar()
             }
             else{

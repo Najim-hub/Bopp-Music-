@@ -9,9 +9,16 @@ import MediaPlayer
 
 struct Miniplayer: View {
     
-    @State var gradient = [Color.white, Color.blue, Color.yellow]
+    @State var gradient = [Color.yellow,Color.blue, Color.white]
+    
+    
+   // @State var startPoint = UnitPoint(x: 0.2, y: 0.5)
+   // @State var endPoint = UnitPoint(x: 1, y: 0.3)
+    
     @State var startPoint = UnitPoint(x: 0, y: 0)
-    @State var endPoint = UnitPoint(x: 0, y: 2)
+    @State var endPoint = UnitPoint(x: 0, y: 1)
+    
+    @ObservedObject var control = ControlCenter()
     
     // ScreenHeight..
     @EnvironmentObject var player: MusicPlayerViewModel
@@ -30,6 +37,10 @@ struct Miniplayer: View {
     
     @AppStorage("log_status") var log_Status = false
     
+    @State var colorVal : Double = 0.0
+    
+    //@ObservedObject var controlVolume = volume
+    
     var home = Home()
     // Volume Slider...
     
@@ -45,7 +56,7 @@ struct Miniplayer: View {
     
     var body: some View {
         
-        if log_Status{
+        if !log_Status{
     
         ZStack{
           
@@ -65,11 +76,11 @@ struct Miniplayer: View {
                    
                     Image(songList.songs[playController.position].imageName)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
                         
                     .cornerRadius(5)
                        
-                    .frame(width: playController.isMini ? 67 : 390, height: playController.isMini ? 55 : 365)
+                        .frame(width: playController.isMini ? 55 : 390, height: playController.isMini ? 55 : UIScreen.main.bounds.height/2.5 )
                  
                     .clipShape(Circle())
                     .overlay(Circle().stroke(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint), lineWidth: 4))
@@ -82,14 +93,11 @@ struct Miniplayer: View {
             .background(
                 VideoControls()
             )
-            
-            
             GeometryReader{ reader in
                 
                 VStack{
                     VStack(spacing: 10){
-                       
-                      
+                    
                         HStack{
                             
                             VStack{
@@ -98,7 +106,7 @@ struct Miniplayer: View {
                             .foregroundColor(.primary)
                               .fontWeight(.bold)
                              .frame(width: 270, height: 20, alignment: .leading)
-                             .padding(.top, 55)
+                             .padding(.top, 80)
                                 
                                 Text(songList.songs[playController.position].artistName)
                                 .font(.caption)
@@ -117,7 +125,7 @@ struct Miniplayer: View {
                                 Image(systemName: "ellipsis.circle")
                                     .font(.title2)
                                     .foregroundColor(.primary)
-                            }.padding(.top, 55)
+                            }.padding(.top, 80)
                       
                     }
                     .padding(.top,90)
@@ -128,39 +136,50 @@ struct Miniplayer: View {
          Slider(value: $val.playValue,in: Float(TimeInterval(0.0))...Float(Double(AudioPlayer.sharedInstance.floatTime)) , onEditingChanged: { _ in
              
              self.audio.changeSliderValue()
-             
-             
-             
-    
             })
            .onReceive(AudioPlayer.sharedInstance.timer) { _ in
+            
                     if self.Avplayer.player!.rate > 0 {
-                          
-                self.val.playValue = Float(CMTimeGetSeconds(self.Avplayer.player!.currentTime()))
-                    
-                        self.startPoint = UnitPoint(x: 1, y: -CGFloat(val.playValue))
-                        self.endPoint = UnitPoint(x: 0, y: CGFloat(val.playValue))
+                  
+                   self.val.playValue = Float(CMTimeGetSeconds(self.Avplayer.player!.currentTime()))
+                        
+                        Avplayer.setupCommandCenter()
+                        
+                        colorVal += 0.5
+                        
+                        self.startPoint = UnitPoint(x: 0.1, y: CGFloat(val.playValue))
+                        self.endPoint = UnitPoint(x: CGFloat(-val.playValue), y: CGFloat(-colorVal))
+                        
                             
+                       // print("Print Value, ", colorVal)
                        }
+            
+            
+       
                                        }
            .accentColor(.yellow)
           .introspectSlider { UISlider in
-             UISlider.setThumbImage(UIImage(systemName: "circle.fill"), for: .normal)
+             UISlider.setThumbImage(UIImage(systemName: "circlebadge.fill"), for: .normal)
             UISlider.isContinuous = true
               
           }
          
-     }.padding(20)
-                        
-                HStack(spacing: 280){
+     }//.padding(20)
+                HStack(){
                             
                     Text(String(transToMinSec(time: Float(val.playValue))))
-                            .font(.system(size: 15))
+                        .font(.system(size: 13))
+                        .frame(width: 45)
+                        .offset( x: -140, y: -25)
+                        .foregroundColor(.secondary)
                             
                     Text("-" + String(transToMinSec(time: AudioPlayer.sharedInstance.floatTime - Float(val.playValue))))
-                                .font(.system(size: 15))
+                        .font(.system(size: 13))
+                        .offset(x: 140, y: -25)
+                        .frame(width: 45)
+                        .foregroundColor(.secondary)
                             
-                        }
+                }.padding(10)
                         // Main Play Button...
                         HStack(spacing: 15){
                             
@@ -199,21 +218,20 @@ struct Miniplayer: View {
                                 
                            if Avplayer.player!.rate > 0{
                                 
-                                 Avplayer.player?.pause()
+                              Avplayer.player?.pause()
                                    
                                 playController.isPlaying = false
-                                    
+                            
+                                Avplayer.played = false
+                            
                                 Avplayer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
-                                    
-                                    //audio.setupRemoteTransportControls()
-                                    
-                                                                    }
+                                                }
                                 
                                else
                                   {
                                     Avplayer.player?.play()
                                     
-                                    playController.isPlaying = true
+                                    Avplayer.played = true
                                     
                                     Avplayer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
                                     
@@ -222,7 +240,7 @@ struct Miniplayer: View {
                                     
                             }, label: {
                                 
-                                if  playController.isPlaying == true//&& audio.setupRemoteTransportControls()
+                                if Avplayer.player!.rate > 0 //&& audio.setupRemoteTransportControls()
                                 {
                                     Image(systemName: "pause.fill")
                                         .font(.system(size: 60, weight: .bold))
@@ -230,7 +248,7 @@ struct Miniplayer: View {
                                         
                                 }
                                 
-                                else{
+                                else  {
                                     
                                     Image(systemName: "play.fill")
                                         .font(.system(size: 60, weight: .bold))
@@ -244,7 +262,7 @@ struct Miniplayer: View {
                             }
                            
                             .padding(10)
-                            .padding(.bottom,5)
+                            //.padding(.bottom,5)
                             
                             Button(action: {
                                 
@@ -294,10 +312,17 @@ struct Miniplayer: View {
                          
                           
                         })
-                            .accentColor(.gray)
+                        .introspectSlider { UISlider in
+                         UISlider.setThumbImage(UIImage(systemName: "circle.fill"), for: .normal)
+                          UISlider.isContinuous = true
+                          
+                        }
+                        
+                        .accentColor(.primary)
+                        .foregroundColor(.blue)
                        Image(systemName: "speaker.wave.2.fill")
                     }
-                    .padding()
+                    .padding(5)
                     
                     HStack(spacing: 22){
                 
@@ -306,7 +331,7 @@ struct Miniplayer: View {
                         
                         
                     }
-                    .padding(.bottom,390)
+                    .padding(.bottom,399)
                    }
                    .padding()// this will give strech effect...
                    .frame(height:  0)
@@ -356,12 +381,6 @@ struct Miniplayer: View {
     
         
             }
-            
-        
-            
-           
-            
-            
         }
         
         else{
@@ -427,7 +446,7 @@ struct Miniplayer: View {
     func transToMinSec(time: Float) -> String
     {
        
-        if log_Status{
+        if log_Status && val.playValue != 0.0 {
       
        let allTime = Int(time)
           
@@ -449,7 +468,7 @@ struct Miniplayer: View {
     
         }
         else{
-            return "Log in"
+            return "0:00"
         }
         
     }
@@ -501,10 +520,12 @@ struct VideoControls: View {
                     
                     HapticFeedBack.shared.hit(0.3)
                 
-                    if  playController.isPlaying == true{
+                    if  playController.isPlaying == true && Avplayer.played{
                         AudioPlayer.sharedInstance.player?.pause()
                        
                         playController.isPlaying = false
+                        
+                        Avplayer.played = false
                         
                     }
                     
@@ -513,6 +534,8 @@ struct VideoControls: View {
                         
                      
                         playController.isPlaying = true
+                        
+                        Avplayer.played = true
                       
                     }
                     
@@ -524,11 +547,11 @@ struct VideoControls: View {
                              if Avplayer.player!.rate  > 0  {
                                 Image(systemName: "pause.fill")
                                     .font(.title)
-                                    .foregroundColor(.primary)
+                                    .foregroundColor( playController.isMini ? .primary : .clear)
                                     
                             }
                             
-                            else if Avplayer.player!.rate  == 0{
+                            else if Avplayer.player!.rate  == 0 {
                                 
                                 Image(systemName: "play.fill")
                                     .font(.title)
@@ -569,7 +592,7 @@ struct VideoControls: View {
                     
                     Image(systemName: "forward.fill")
                         .font(.title)
-                        .foregroundColor(.primary)
+                        .foregroundColor(playController.isMini ? .primary : .clear)
                 }).padding(.trailing, 15)
             
            

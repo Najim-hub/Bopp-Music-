@@ -43,6 +43,7 @@
 		EDDF0FC6267FA80B00AF7C97 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDF0FC5267FA80B00AF7C97 /* LoginViewModel.swift */; };
 		EDDF0FC8267FA83400AF7C97 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDF0FC7267FA83400AF7C97 /* Login.swift */; };
 		EDDF0FCA267FAA7F00AF7C97 /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */; };
+		EDDF0FCC267FD3C300AF7C97 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDF0FCB267FD3C300AF7C97 /* ControlCenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		EDDF0FC5267FA80B00AF7C97 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EDDF0FC7267FA83400AF7C97 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
+		EDDF0FCB267FD3C300AF7C97 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
 		F430CFD7DAEB00A1F6724920 /* Pods_Bopp_Music_Player.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bopp_Music_Player.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -174,12 +176,12 @@
 		ED15AFB1266CD46C0023A5C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */,
+				ED15AFBA266CD51E0023A5C3 /* Home.swift */,
 				EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */,
 				EDDF0FC7267FA83400AF7C97 /* Login.swift */,
-				ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */,
 				ED38B0A4267D9A570024FC7A /* Coming.swift */,
 				EDBF70E32671818A00CF2D97 /* TabBar.swift */,
-				ED15AFBA266CD51E0023A5C3 /* Home.swift */,
 				ED15AFBE266CD78D0023A5C3 /* LandmarkRow.swift */,
 				ED15AFBC266CD5930023A5C3 /* MusicListView.swift */,
 				ED9597C4267AE14F004AA17E /* CloudKitTest.swift */,
@@ -200,13 +202,14 @@
 		ED15AFB5266CD4BF0023A5C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EDDF0FCB267FD3C300AF7C97 /* ControlCenter.swift */,
+				ED599B32267E4BC400AC667E /* AUdio.swift */,
 				ED9597CA267AEFAD004AA17E /* MusicData.swift */,
 				ED15AFB6266CD4D40023A5C3 /* ModelData.swift */,
 				ED15AFB8266CD4E40023A5C3 /* Landmark.swift */,
 				EDBF70F3267247F200CF2D97 /* AirPlayView.swift */,
-				EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */,
 				ED38B0A2267D98D70024FC7A /* ComingSoon.swift */,
-				ED599B32267E4BC400AC667E /* AUdio.swift */,
+				EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				EDBF70EF267186BA00CF2D97 /* AppKitIntrospectionView.swift in Sources */,
 				ED2EC6562673075C00AA0CED /* HapticFeedBack.swift in Sources */,
 				ED9597CB267AEFAD004AA17E /* MusicData.swift in Sources */,
+				EDDF0FCC267FD3C300AF7C97 /* ControlCenter.swift in Sources */,
 				EDDD6E80266EBAFB000F9DA5 /* AudioSetup.swift in Sources */,
 				ED15AFB9266CD4E40023A5C3 /* Landmark.swift in Sources */,
 			);

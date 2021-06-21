@@ -57,6 +57,8 @@ struct Home: View {
                             
                             playController.isPlaying = true
                             
+                            
+                            
                             playController.position = landmark.id - 1
                             
                             if Avplayer.player!.rate > 0 {
@@ -169,6 +171,7 @@ struct Home: View {
             })
         .onAppear(perform: {
             
+        
            print("Shared instance size in home view")
            print(loadInfo.sharedInstance.songs.count)
         }
