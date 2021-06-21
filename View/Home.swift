@@ -26,6 +26,9 @@ struct Home: View {
     @State var states : Bool = false
     
     @ObservedObject var Avplayer = AudioPlayer.sharedInstance
+    
+    @ObservedObject var val = playVal.sharedInstance
+    
 
     var data = MusicData()
      
@@ -62,14 +65,19 @@ struct Home: View {
                             playController.position = landmark.id - 1
                             
                             if Avplayer.player!.rate > 0 {
+                                
+                                val.playValue = 0
                             
                                 Avplayer.player?.rate = 0
+                                
+                                
                                 
                                 Avplayer.playSong()
                             
                             }
                             
                             else{
+                                val.playValue = 0
                                 Avplayer.playSong()
                             }
                             HapticFeedBack.shared.hit(0.3)

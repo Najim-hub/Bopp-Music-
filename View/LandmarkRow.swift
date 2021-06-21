@@ -6,13 +6,14 @@ A single row to be displayed in a list of landmarks.
 */
 
 import SwiftUI
-
+import SDWebImageSwiftUI
 struct LandmarkRow: View {
     var landmark: Landmark
     
 
     var body: some View {
         HStack {
+            
             landmark.image
                 .resizable()
                 .frame(width: 50, height: 50)

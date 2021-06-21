@@ -4,7 +4,7 @@
 import SwiftUI
 import AVFoundation
 import MediaPlayer
-
+import SDWebImageSwiftUI
 
 
 struct Miniplayer: View {
@@ -56,7 +56,7 @@ struct Miniplayer: View {
     
     var body: some View {
         
-        if !log_Status{
+        if log_Status{
     
         ZStack{
           
@@ -73,8 +73,8 @@ struct Miniplayer: View {
                 
                 HStack {
                     
-                   
-                    Image(songList.songs[playController.position].imageName)
+    WebImage(url: URL(string:songList.songs[playController.position].imageName))
+                    
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                         
@@ -354,7 +354,10 @@ struct Miniplayer: View {
             
             BlurView()
             
-        }
+        }.background(
+            WebImage(url: URL(string:songList.songs[playController.position].imageName))
+            .resizable()
+           )
         
            
         .ignoresSafeArea(.all, edges: .all)
@@ -373,11 +376,7 @@ struct Miniplayer: View {
        )
         
        
-        .background(
-        Image(songList.songs[playController.position].imageName)
-        .resizable()
-                 
-       )
+        
     
         
             }

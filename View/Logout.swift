@@ -24,8 +24,12 @@ struct Logout: View {
             
             VStack(spacing: 20){
                 
-              
+                Image("alien")
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width/1.5, height: UIScreen.main.bounds.height/3, alignment: .center)
+                    .shadow(color: Color.yellow, radius: 20, x: 50, y: 50)
                 Text("Click the logout button to exit")
+                    .offset(y:-22)
                 
                 Button(action: {
                     // Logging Out User...
@@ -44,12 +48,15 @@ struct Logout: View {
                 }, label: {
                     
                     Text("Log Out")
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .padding(.vertical,12)
-                        .frame(width: UIScreen.main.bounds.width / 2)
+                        .fontWeight(.heavy)
                         .background(Color.yellow)
-                        .clipShape(Capsule())
+                        .frame(width: UIScreen.main.bounds.width/1.5, height: 45, alignment: .center)
+                        .font(.system(size: 25))
+                        .padding()
+                            .background(Color.yellow)
+                            .foregroundColor(.black)
+                            .cornerRadius(15)
+                        
                 })
             }
             .navigationTitle("Hello, " + " \(Name)")

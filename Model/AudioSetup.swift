@@ -56,11 +56,11 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
        
         nowPlayingInfo[MPMediaItemPropertyTitle] = songList.songs[playController.position].name
 
-        if let image = UIImage(named: songList.songs[playController.position].imageName) {
+             /*if let image = UIImage(named: songList.songs[playController.position].imageName) {
             nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
                 return image
             }
-        }
+        }*/
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue - 1
         print("From setup, ", val.playValue)
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = AudioPlayer.sharedInstance.floatTime - 1
@@ -99,11 +99,13 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
       
         nowPlayingInfo[MPMediaItemPropertyTitle] = songList.songs[playController.position].name
 
+        /*
         if let image = UIImage(named: songList.songs[playController.position].imageName) {
             nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
                 return image
             }
-        }
+        }*/
+        
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = AudioPlayer.sharedInstance.floatTime
         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player!.rate
@@ -158,7 +160,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
             storage.downloadURL(completion: { [self](url, error) in
             
             if error != nil {
-                print(error)
+                print(error as Any)
             }
             
             else {

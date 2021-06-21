@@ -31,7 +31,7 @@ class MusicData: ObservableObject{
                 
                     
             }else{
-                print(error)
+                print(error as Any)
             }
         }
     }

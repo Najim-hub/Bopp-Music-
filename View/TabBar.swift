@@ -39,7 +39,7 @@ struct TabBar: View {
             TabView(selection: $current){
                 
                 
-                Text("Wallet")
+                SignInCryptoWallet()
                     .tag(1)
                     .tabItem {
                         
