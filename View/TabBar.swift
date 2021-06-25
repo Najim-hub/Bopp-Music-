@@ -25,7 +25,9 @@ struct TabBar: View {
     
     @StateObject var player = MusicPlayerViewModel()
     
+    @State var searchText: String = ""
     
+    // 1.
     //@ObservedObject var audiosettings = audioSettings()
     
     
@@ -33,8 +35,9 @@ struct TabBar: View {
     
         // Bottom Mini Player...
         
-        
+   
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
+       
             
             TabView(selection: $current){
                 
@@ -83,11 +86,12 @@ struct TabBar: View {
                
             }
             
+            
            
             if playController.showPlayer {
                 Miniplayer()
-                    
-                    .introspectTabBarController { (UITabBarController) in
+                
+                .introspectTabBarController { (UITabBarController) in
                         
                         if !playController.isMini{
                     UITabBarController.tabBar.layer.zPosition = -1
@@ -102,7 +106,7 @@ struct TabBar: View {
                     }
                     //.environmentObject(player)
                     .padding(.bottom, playController.isMini ? 47 : 0)
-                     //.zIndex(2.0)
+                     .zIndex(1.0)
                     .transition(.move(edge: .bottom))
                     .offset(y: playController.offset)
                     
@@ -110,7 +114,7 @@ struct TabBar: View {
                         if value.translation.height > 0 {
                             state = value.translation.height
                             
-                            print("calling")
+                            
                         }
                     })
                     .onEnded(onEnd(value:))
@@ -119,6 +123,7 @@ struct TabBar: View {
             
             
             })
+            .ignoresSafeArea(.keyboard)
         .onChange(of: gestureOffset, perform: { value in
            onChanged()
         })
@@ -162,3 +167,6 @@ struct TabBar: View {
     }
     }
 }
+
+
+

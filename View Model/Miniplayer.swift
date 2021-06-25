@@ -5,22 +5,20 @@ import SwiftUI
 import AVFoundation
 import MediaPlayer
 import SDWebImageSwiftUI
+import SystemConfiguration
 
 
 struct Miniplayer: View {
     
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
+    
+    @State private var showAlert = false
+    
     @State var gradient = [Color.yellow,Color.blue, Color.white]
-    
-    
-   // @State var startPoint = UnitPoint(x: 0.2, y: 0.5)
-   // @State var endPoint = UnitPoint(x: 1, y: 0.3)
     
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 1)
-    
-    @ObservedObject var control = ControlCenter()
-    
-    // ScreenHeight..
+
     @EnvironmentObject var player: MusicPlayerViewModel
     
     @GestureState var gestureOffset: CGFloat = 0
@@ -39,8 +37,6 @@ struct Miniplayer: View {
     
     @State var colorVal : Double = 0.0
     
-    //@ObservedObject var controlVolume = volume
-    
     var home = Home()
     // Volume Slider...
     
@@ -53,6 +49,10 @@ struct Miniplayer: View {
     var nowPlayingInfo = [String : Any]()
     
     @ObservedObject var val = playVal.sharedInstance
+    
+    @State var isToggled : Bool = false
+    
+    @ObservedObject var isShuffled = ToggleShuffle.sharedInstance
     
     var body: some View {
         
@@ -73,7 +73,7 @@ struct Miniplayer: View {
                 
                 HStack {
                     
-    WebImage(url: URL(string:songList.songs[playController.position].imageName))
+                  WebImage(url: URL(string:songList.songs[playController.position].imageName))
                     
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -99,8 +99,7 @@ struct Miniplayer: View {
                     VStack(spacing: 10){
                     
                         HStack{
-                            
-                            VStack{
+                          VStack{
                             Text(songList.songs[playController.position].name)
                                 .font(.title3)
                             .foregroundColor(.primary)
@@ -120,11 +119,21 @@ struct Miniplayer: View {
                             Spacer(minLength: 0)
                              
                             
-                            Button(action: {}) {
+                            Button(action: {
                                 
-                                Image(systemName: "ellipsis.circle")
-                                    .font(.title2)
-                                    .foregroundColor(.primary)
+                                isToggled.toggle()
+                               
+                                self.isShuffled.toggleShuffle.toggle()
+                                
+                                print("Status: ", self.isShuffled.toggleShuffle)
+                                
+                                
+                            }) {
+                                
+                                Image(systemName: "shuffle.circle")
+                                    .font(.largeTitle)
+                                    .foregroundColor(isToggled ? .yellow : .primary)
+                                
                             }.padding(.top, 80)
                       
                     }
@@ -132,41 +141,67 @@ struct Miniplayer: View {
                     
                        
      HStack(spacing: 15){
-                            
+       
          Slider(value: $val.playValue,in: Float(TimeInterval(0.0))...Float(Double(AudioPlayer.sharedInstance.floatTime)) , onEditingChanged: { _ in
              
              self.audio.changeSliderValue()
-            })
+             
+            
+             
+         })
+         
+             
            .onReceive(AudioPlayer.sharedInstance.timer) { _ in
+               
             
                     if self.Avplayer.player!.rate > 0 {
+                        
                   
                    self.val.playValue = Float(CMTimeGetSeconds(self.Avplayer.player!.currentTime()))
+                        
+                  //audio.nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self.val.playValue
                         
                         Avplayer.setupCommandCenter()
                         
                         colorVal += 0.5
                         
                         self.startPoint = UnitPoint(x: 0.1, y: CGFloat(val.playValue))
+                        
                         self.endPoint = UnitPoint(x: CGFloat(-val.playValue), y: CGFloat(-colorVal))
                         
+                        if val.playValue - Float(Double(AudioPlayer.sharedInstance.floatTime)) == 0{
+                            print("Song Over")
                             
-                       // print("Print Value, ", colorVal)
+                            playController.position = playController.position
+                            
+                            Avplayer.player?.play()
+                        }
+                            
+                      
                        }
             
-            
-       
                                        }
            .accentColor(.yellow)
           .introspectSlider { UISlider in
-             UISlider.setThumbImage(UIImage(systemName: "circlebadge.fill"), for: .normal)
-            UISlider.isContinuous = true
               
+             UISlider.setThumbImage(UIImage(systemName: "circlebadge.fill"), for: .normal)
+              
+             UISlider.isContinuous = false
+        
+            UISlider.setThumbImage(UIImage(systemName: "circle.fill"), for: .highlighted)
+              
+              
+              
+            UIView.animate(withDuration: 0.2, animations: {
+              UISlider.setValue(0, animated:true)
+            })
+           
           }
          
-     }//.padding(20)
+     }
                 HStack(){
-                            
+                    
+                   
                     Text(String(transToMinSec(time: Float(val.playValue))))
                         .font(.system(size: 13))
                         .frame(width: 45)
@@ -178,6 +213,8 @@ struct Miniplayer: View {
                         .offset(x: 140, y: -25)
                         .frame(width: 45)
                         .foregroundColor(.secondary)
+                        
+                   
                             
                 }.padding(10)
                         // Main Play Button...
@@ -185,9 +222,11 @@ struct Miniplayer: View {
                             
                             Button(action: {
                                 
-                                HapticFeedBack.shared.hit(0.3)
+                                var flags = SCNetworkReachabilityFlags()
+                                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                                 
-                                
+                                if self.isNetworkReachable(with: flags){
+                               
                             if playController.position <= songList.songs.count - 1 && playController.position != 0 {
                                 
                                 Avplayer.player?.rate = 0
@@ -199,14 +238,24 @@ struct Miniplayer: View {
                                 
                                 Avplayer.playSong()
                                 
+                                Avplayer.setupCommandCenter()
+                                
                                 playController.isPlaying = true
                                 }
+                            
+                                }
+                                    
+                            else{
+                                self.showAlert = true
+                            }
+                               
                                 
                             }) {
                                 
                                 Image(systemName: "backward.fill")
                                     .font(.largeTitle)
                                     .foregroundColor(.primary)
+                                    .frame(width: 70, height: 70)
                             }
                             
                             .padding(10)
@@ -214,33 +263,56 @@ struct Miniplayer: View {
                             Button(action:
                                 {
                                     
-                              HapticFeedBack.shared.hit(0.3)
+                                    
+                                       
+                        var flags = SCNetworkReachabilityFlags()
+                                       SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                                       
+                        if self.isNetworkReachable(with: flags){
+                           
                                 
                            if Avplayer.player!.rate > 0{
                                 
                               Avplayer.player?.pause()
+                               
+                               Avplayer.setupCommandCenter()
                                    
                                 playController.isPlaying = false
                             
                                 Avplayer.played = false
                             
-                                Avplayer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
-                                                }
+                                          }
                                 
                                else
                                   {
+                                    
+                                    
                                     Avplayer.player?.play()
+                                      
+                                      Avplayer.setupCommandCenter()
                                     
                                     Avplayer.played = true
                                     
-                                    Avplayer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
+                                  
+                                    if val.playValue - Float(Double(AudioPlayer.sharedInstance.floatTime)) == 0{
+                                        val.playValue = 0.0
+                                    }
                                     
                                   }
+                                        
+                                       }
+                                        
+                                        else{
+                                            Avplayer.player?.pause()
+                                            Avplayer.player?.rate = 0
+                                            self.showAlert = true
+                                        }
+                                           
                                 
                                     
                             }, label: {
                                 
-                                if Avplayer.player!.rate > 0 //&& audio.setupRemoteTransportControls()
+                                if Avplayer.player!.rate > 0
                                 {
                                     Image(systemName: "pause.fill")
                                         .font(.system(size: 60, weight: .bold))
@@ -266,44 +338,121 @@ struct Miniplayer: View {
                             
                             Button(action: {
                                 
-                                HapticFeedBack.shared.hit(0.3)
+                    
                                 
-                                val.playValue = 0
+                 var flags = SCNetworkReachabilityFlags()
+                                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                                 
+                 if self.isNetworkReachable(with: flags){
+                           
+                                
+                               // HapticFeedBack.shared.hit(0.3)
+                                
+                
+                     if isShuffled.toggleShuffle == false {
                                 if playController.position < songList.songs.count - 1   {
+                                    
+                                    val.playValue = 0.0
                                     
                                     Avplayer.player?.rate = 0
                                     
                                     playController.position =  playController.position + 1
                                 
-                       
-                                
-                                    Avplayer.playSong()
+                                       Avplayer.playSong()
+                                    
+                                    Avplayer.setupCommandCenter()
                                 
                                     playController.isPlaying = true
                               
                                 }
                                 
                                 else{
-                                    playController.position = playController.position
+                                    
+                                    val.playValue = 0.0
+                                    
+                                    Avplayer.player?.rate = 0
+                                    
+                                    playController.position = 0
+                                    
+                                    Avplayer.setupCommandCenter()
+                                    
+                                    Avplayer.playSong()
                                 }
-                              
-                                
-                            }, label: {
+                         
+                     }
+                     
+                     else{
+                         
+                         if playController.position < songList.songs.count - 1   {
+                             
+                             val.playValue = 0.0
+                             
+                             Avplayer.player?.rate = 0
+                             
+                             playController.position = Int.random(in: 0..<songList.songs.count)
+                             
+                             print(playController.position )
+                             
+                             //playController.position + 1
+                             if playController.position !=  playController.position {
+                         
+                             Avplayer.playSong()
+                                 
+                                 print("Doesnt equal Position")
+                             
+                             Avplayer.setupCommandCenter()
+                                 
+                             }
+                             else if playController.position <= songList.songs.count - 1{
+                                 
+                                playController.position =  Int.random(in: 0..<songList.songs.count)
+                                 
+                                 print("Doesnt equal Position yet ")
+                             
+                                 
+                                 Avplayer.playSong()
+                             }
+                             //playController.isPlaying = true
+                       
+                         }
+                         
+                         else{
+                             
+                             val.playValue = 0.0
+                             
+                             Avplayer.player?.rate = 0
+                             
+                             playController.position = 0
+                             
+                             Avplayer.setupCommandCenter()
+                             
+                             Avplayer.playSong()
+                         }
+                         
+                     }
+                    
+                 }
+                  
+                  else{
+                      self.showAlert = true
+                  }
+                     }, label: {
                                 Image(systemName: "forward.fill")
                                     .font(.largeTitle)
                                     .foregroundColor(.primary)
+                                    .frame(width: 70, height: 70)
                             })
                             
                         }.frame(width: 80, height: 40, alignment: .center)
                         .padding(.bottom, 50)
                         .padding(.trailing, 15)
                         
+                        
                     HStack(spacing: 15){
                         
                         Image(systemName: "speaker.fill")
                         
-                        Slider(value: $playController.soundLevel, in: 0...1,step: 0.0625, onEditingChanged: { data in
+                        Slider(value: $playController.soundLevel, in: 0...1, onEditingChanged: { data in
                     
                             
                             MPVolumeView.setVolume(self.playController.soundLevel)
@@ -315,6 +464,8 @@ struct Miniplayer: View {
                         .introspectSlider { UISlider in
                          UISlider.setThumbImage(UIImage(systemName: "circle.fill"), for: .normal)
                           UISlider.isContinuous = true
+                            UISlider.setValue(playController.soundLevel, animated: true)
+                            
                           
                         }
                         
@@ -358,28 +509,23 @@ struct Miniplayer: View {
             WebImage(url: URL(string:songList.songs[playController.position].imageName))
             .resizable()
            )
-        
-           
+            .onAppear(perform: {
+            
+            
+            Avplayer.setupRemoteTransportControls()
+            
+        })
         .ignoresSafeArea(.all, edges: .all)
         .onTapGesture {
-            withAnimation (.easeInOut(duration: 0.3)){
-                
-             
-                
-                playController.width = UIScreen.main.bounds.width
+            withAnimation (.easeInOut(duration: 0.25)){
+                 playController.width = UIScreen.main.bounds.width
                 
                 playController.isMini.toggle()
                 
             }}
-     
-        
-       )
-        
-       
-        
-    
-        
-            }
+      )} //.add(self.searchBar)
+                .alert(isPresented: self.$showAlert){
+                Alert(title: Text("No Internet Connection"), message: Text("Please enable WiFi or Cellular Data"), dismissButton: .default(Text("Ok")))}
         }
         
         else{
@@ -387,7 +533,21 @@ struct Miniplayer: View {
         }
     }
     
+   
+    
     // Getting Frame And Opacity While Dragging
+    
+    private func isNetworkReachable(with flags : SCNetworkReachabilityFlags) -> Bool{
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
+        
+      
+    }
     
     func getFrame()->CGFloat{
         
@@ -445,6 +605,11 @@ struct Miniplayer: View {
     func transToMinSec(time: Float) -> String
     {
        
+        guard !(time.isNaN || time.isInfinite) else {
+            
+          return "0:00"
+        }
+        
         if log_Status && val.playValue != 0.0 {
       
        let allTime = Int(time)
@@ -486,6 +651,10 @@ struct MiniPlayer_Previews: PreviewProvider {
 
 struct VideoControls: View {
     
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
+    
+    @State private var showAlert = false
+    
     @ObservedObject var songList = loadInfo.sharedInstance
     
     @EnvironmentObject var player: MusicPlayerViewModel
@@ -495,6 +664,8 @@ struct VideoControls: View {
     @ObservedObject var playController = playControl.sharedInstance
     
     @ObservedObject var Avplayer = AudioPlayer.sharedInstance
+    
+    @ObservedObject var val = playVal.sharedInstance
     
     var body: some View{
        
@@ -517,40 +688,61 @@ struct VideoControls: View {
           
                 Button(action: {
                     
-                    HapticFeedBack.shared.hit(0.3)
-                
-                    if  playController.isPlaying == true && Avplayer.played{
-                        AudioPlayer.sharedInstance.player?.pause()
-                       
-                        playController.isPlaying = false
-                        
-                        Avplayer.played = false
-                        
-                    }
+                    var flags = SCNetworkReachabilityFlags()
+                                   SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                             
                     
-                    else{
-                        AudioPlayer.sharedInstance.player?.play()
-                        
-                     
-                        playController.isPlaying = true
+            if self.isNetworkReachable(with: flags){
+                            
+                  //HapticFeedBack.shared.hit(0.3)
+                    
+               if Avplayer.player!.rate > 0{
+                    
+                  Avplayer.player?.pause()
+                       
+                    playController.isPlaying = false
+                
+                    Avplayer.played = false
+                
+                    Avplayer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
+                                    }
+                    
+                   else
+                      {
+                        Avplayer.player?.play()
                         
                         Avplayer.played = true
-                      
-                    }
+                        
+                        Avplayer.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
+                        
+                        
+                if val.playValue - Float(Double(AudioPlayer.sharedInstance.floatTime)) == 0{
+                            
+                            val.playValue = 0.0
+                        }
+                      }
+                            
+                           }
+                            
+                            else{
+                                Avplayer.player?.pause()
+                                Avplayer.player?.rate = 0
+                                self.showAlert = true
+                            }
+                               
+                    
                     
                     
                 }, label: {
                     
-                  //&& //audio.setupRemoteTransportControls()
-                            
-                             if Avplayer.player!.rate  > 0  {
+                    if Avplayer.player!.rate  > 0  {
                                 Image(systemName: "pause.fill")
                                     .font(.title)
                                     .foregroundColor( playController.isMini ? .primary : .clear)
                                     
                             }
                             
-                            else if Avplayer.player!.rate  == 0 {
+                            else {
                                 
                                 Image(systemName: "play.fill")
                                     .font(.title)
@@ -564,10 +756,14 @@ struct VideoControls: View {
                 Button(action: {
                     
                     
-                    HapticFeedBack.shared.hit(0.3)
+     var flags = SCNetworkReachabilityFlags()
+                    SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                     
-                    //playController.playValue = 0.0
-                
+     if self.isNetworkReachable(with: flags){
+               
+                    
+                    
+                    //HapticFeedBack.shared.hit(0.3)
                     
                     if playController.position < songList.songs.count - 1   {
                         
@@ -582,9 +778,17 @@ struct VideoControls: View {
                   
                     }
                     
+     
+                    
                     else{
                         playController.position = playController.position
                     }
+        
+     }
+        
+        else{
+            self.showAlert = true
+        }
                  
                     
                 }, label: {
@@ -594,19 +798,32 @@ struct VideoControls: View {
                         .foregroundColor(playController.isMini ? .primary : .clear)
                 }).padding(.trailing, 15)
             
+            
            
             }
-      
+        .alert(isPresented: self.$showAlert){
+            Alert(title: Text("No Internet Connection"), message: Text("Please enable WiFi or Cellular Data"), dismissButton: .default(Text("Ok")))}
         .padding(.horizontal)
         .frame(width: 390, height: 55, alignment: .center)
         
     }
     
+    private func isNetworkReachable(with flags : SCNetworkReachabilityFlags) -> Bool{
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+      
+        
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
+        
+      
+    }
+    
     
 
 }
-
-
 
 
 

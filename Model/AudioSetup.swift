@@ -10,8 +10,26 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 import Firebase
+import SDWebImageSwiftUI
+import AVKit
+import Cache
+import SystemConfiguration
 
-
+class ToggleShuffle: ObservableObject{
+    
+    
+    var toggleShuffle: Bool = false
+    
+    
+    static let sharedInstance = ToggleShuffle()
+    
+    
+    init(){
+        
+    }
+   
+    
+}
 
 
 class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
@@ -21,6 +39,11 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     let url = Bundle.main.url(forResource: "Coming", withExtension: "mp4")
     
     var player: AVPlayer? = AVPlayer()
+    
+    let diskConfig = DiskConfig(name: "DiskCache")
+      let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
+
+  
     
     var playController = playControl.sharedInstance
     
@@ -32,8 +55,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     var audio = AudioSetup()
     
-//    let commandCenter = MPRemoteCommandCenter.shared()
-    
+
     var playerDuration: CMTime = CMTimeMake(value: 0, timescale: 0);
     
     var floatTime : Float = 0.0
@@ -44,6 +66,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     var val = playVal.sharedInstance
     
+    var isShuffled = ToggleShuffle.sharedInstance
     
     let commandCenter = MPRemoteCommandCenter.shared()
     
@@ -51,36 +74,58 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     
      static let sharedInstance = AudioPlayer()
     
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
+    
    
      func setupCommandCenter() {
+        
        
         nowPlayingInfo[MPMediaItemPropertyTitle] = songList.songs[playController.position].name
 
-             /*if let image = UIImage(named: songList.songs[playController.position].imageName) {
-            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
-                return image
-            }
-        }*/
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue - 1
-        print("From setup, ", val.playValue)
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = AudioPlayer.sharedInstance.floatTime - 1
-        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player!.rate
+         nowPlayingInfo[MPMediaItemPropertyArtist] = songList.songs[playController.position].artistName
+    
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue//- 1
         
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = AudioPlayer.sharedInstance.floatTime - 1
+        
+         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player!.rate
+         
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
 
         let commandCenter = MPRemoteCommandCenter.shared()
+         
+         commandCenter.stopCommand.isEnabled = true
+        
         commandCenter.playCommand.isEnabled = true
         commandCenter.pauseCommand.isEnabled = true
+         commandCenter.nextTrackCommand.isEnabled = true
+         commandCenter.previousTrackCommand.isEnabled = true
+         
         commandCenter.playCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
             self?.player?.play()
+          
+            MPNowPlayingInfoCenter.default().nowPlayingInfo =  self?.nowPlayingInfo
+            
+            
             self?.nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self?.val.playValue
+            
             return .success
         }
         commandCenter.pauseCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
+            
+            self?.nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 0
+            
             self?.player?.pause()
+            
+            
             self?.nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self?.val.playValue
+            
+            MPNowPlayingInfoCenter.default().nowPlayingInfo =  self?.nowPlayingInfo
+
+            //self?.val.playValue
             return .success
         }
+
     }
     
     func audioRouteChanged(note: Notification) {
@@ -89,39 +134,91 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
             if reason == AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue {
             // headphones plugged out
             player?.pause()
+             nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue
+                
+                
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
           }
         }
       }
     }
     
-    func setupNowPlaying() {
-        // Define Now Playing Info
-      
-        nowPlayingInfo[MPMediaItemPropertyTitle] = songList.songs[playController.position].name
-
-        /*
-        if let image = UIImage(named: songList.songs[playController.position].imageName) {
-            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
-                return image
-            }
-        }*/
-        
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = AudioPlayer.sharedInstance.floatTime
-        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player!.rate
-
-        // Set the metadata
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-    }
-
-    
     func setupRemoteTransportControls() {
+        
+        
+        // Get the shared MPRemoteCommandCenter
+        commandCenter.nextTrackCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
+               // player?.play()
+           // self?.nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = 0.0
+            
+            self?.player?.rate = 0
+            
+            if (self?.playController.position)! <  (self?.songList.songs.count)! - 1  {
+                
+                self?.playController.position =  (self?.playController.position)! + 1
+            
+                self?.playSong()
+            
+                self?.val.playValue = 0.0
+                
+                self?.playController.isPlaying = true
+          
+            }
+            
+            else{
+                
+                
+                self?.val.playValue = 0.0
+                
+                self?.player?.rate = 0
+                
+                self?.playController.position = 0
+                
+                self?.playSong()
+            }
+            
+                return .success
+            }
+        
+        
+        
+        commandCenter.previousTrackCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
+               // player?.play()
+            //self?.nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = 0.0
+            self?.player?.rate = 0
+            
+            if (self?.playController.position)! <= (self?.songList.songs.count)! - 1 && self?.playController.position != 0  {
+                self?.playController.position =   (self?.playController.position)! - 1
+                
+                
+                self?.playSong()
+            
+                self?.val.playValue = 0.0
+                
+                self?.playController.isPlaying = true
+          
+            }
+            
+            else{
+                
+                
+                self?.val.playValue = 0.0
+                
+                //self?.player?.rate = 0
+                
+                self?.playController.position = 0
+                
+                self?.playSong()
+            }
+            
+                return .success
+            }
         // Get the shared MPRemoteCommandCenter
         let commandCenter = MPRemoteCommandCenter.shared()
 
         // Add handler for Play Command
         commandCenter.playCommand.addTarget { [unowned self] event in
-            //print("Play command - is playing: \(self.player.isPlaying)")
+           
             if self.player!.rate == 0 {
                 self.player!.play()
                 return .success
@@ -131,7 +228,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
 
         // Add handler for Pause Command
         commandCenter.pauseCommand.addTarget { [unowned self] event in
-           // print("Pause command - is playing: \(self.player.isPlaying)")
+          
             if self.player!.rate > 0  {
                 self.player!.pause()
                 return .success
@@ -147,14 +244,14 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func playSong(){
         
+        var flags = SCNetworkReachabilityFlags()
+        SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+        
+        if self.isNetworkReachable(with: flags){
+        
         
         if playController.position <= songList.songs.count - 1 && playController.position >= 0{
             
-            
-         print(playController.position)
-     
-            print(playController.position, "Within position")
-    
             let storage = Storage.storage().reference(forURL: songList.songs[playController.position].file)
         
             storage.downloadURL(completion: { [self](url, error) in
@@ -176,44 +273,80 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
                     try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
                    
 
-                    print("Url, ", url!)
-                
-                    self.player = AVPlayer(url:url!)
-
-                    self.player?.currentItem?.preferredPeakBitRate = 0
+                    let imageData = try! Data(contentsOf: URL(string: songList.songs[playController.position].imageName)!)
                    
-                    self.player?.play()
+                   
+                        if let image = UIImage(data: imageData) {
+                       nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
+                           return image
+                       }
+                   }
+                   
+                    
+                    let asset = AVAsset(url: url!)
+                    
+                    let keys: [String] = ["playable"]
+                    
+                    asset.loadValuesAsynchronously(forKeys: keys, completionHandler: {
+                        
+                        
+                        var error: NSError? = nil
+                            let status = asset.statusOfValue(forKey: "playable", error: &error)
+                            switch status {
+                               case .loaded:
+                                    DispatchQueue.main.async {
+                                      let item = AVPlayerItem(asset: asset)
+                                        
+                                      self.player? = AVPlayer(playerItem: item)
+                                        
+                                        self.player?.automaticallyWaitsToMinimizeStalling = false;
+                                        
+                                        self.player?.playImmediately(atRate: 1.0)
+                                     
+                                       
+                                        NotificationCenter.default.addObserver(self,
+                                                                                   selector: #selector(animationDidFinish(_:)),
+                                                                                   name: .AVPlayerItemDidPlayToEndTime,
+                                                                                   object: player?.currentItem)
+                                    
+                                        self.playerDuration = (self.player?.currentItem?.asset.duration)!
+                                        
+                                        self.floatTime =   Float(CMTimeGetSeconds(self.playerDuration))
+                                        
+                                        self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
+                                     
+                                        self.playController.isPlaying = true
+                                        
+                                        
+                                        debugPrint("AVAudioSession is Active and Category Playback is set")
+                                         UIApplication.shared.beginReceivingRemoteControlEvents()
+                                        
+                                           setupCommandCenter()
+                                        // self.player?.play()
+                                                 }
+                                break
+                            case .failed:
+                                 DispatchQueue.main.async {
+                                     //do something, show alert, put a placeholder image etc.
+                                     
+                                     print("Oh no failed to load asset")
+                                }
+                                break
+                             case .cancelled:
+                                DispatchQueue.main.async {
+                                    //do something, show alert, put a placeholder image etc.
+                                }
+                                break
+                             default:
+                                break
+                       }
+                    })
                 
-                    self.playerDuration = (self.player?.currentItem?.asset.duration)!
+                   // self.player = AVPlayer(url:url!)
                     
-                    self.floatTime =   Float(CMTimeGetSeconds(self.playerDuration))
+                   
                     
-                    self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
-                 
-                    self.playController.isPlaying = true
-                    
-                    NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
-
-                    
-                    debugPrint("AVAudioSession is Active and Category Playback is set")
-                            UIApplication.shared.beginReceivingRemoteControlEvents()
-                    
-                            setupCommandCenter()
-                    
-    NotificationCenter.default.addObserver(forName: .AVPlayerItemNewAccessLogEntry,
-                                                           object:  self.player?.currentItem,
-                                                                 queue: nil) { [weak self] notification in
-            if let event = self?.player?.currentItem!.accessLog()?.events.last {
-                              
-        let bitsTransferred = Double(event.numberOfBytesTransferred * 8)
-        let bitrate =  bitsTransferred / Double(event.segmentsDownloadedDuration)
-                              
-        print("Calculated Bit Rate: \(bitrate)")
-                              
-                              // This gives the same value as Anurag's answer
-        print("Average Bit Rate: \(event.averageAudioBitrate)")
-                            }
-                    }
+   
                  
              }
              catch let errors {
@@ -233,9 +366,57 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
         
        
    }
+        }
+        else{
+            
+            
+            print("Not Connected to the Internet")
+            
+     
+            
+        }
         
     }
     
+    private func isNetworkReachable(with flags : SCNetworkReachabilityFlags) -> Bool{
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
+        
+      
+    }
+    
+    @objc func animationDidFinish(_ notification: NSNotification) {
+         print("Song did finish")
+        
+        val.playValue = 0
+        
+        if playController.position < songList.songs.count - 1   {
+            
+            player?.rate = 0
+            
+            playController.position =  playController.position + 1
+        
+             playSong()
+            
+           
+            playController.isPlaying = true
+      
+        }
+        
+        else{
+            playController.position = 0
+            
+            playSong()
+           
+        }
+        
+     }
+
     
      @objc func playerDidFinishPlaying(note: NSNotification) {
          print("Song Finished")
@@ -253,9 +434,8 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
         
              playSong()
             
-            
-        
-            playController.isPlaying = true
+           
+             playController.isPlaying = true
       
         }
         
@@ -275,6 +455,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     deinit {
            print("deinit singleton")
+        NotificationCenter.default.removeObserver(self)
        }
     
 }

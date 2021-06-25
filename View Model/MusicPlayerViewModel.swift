@@ -80,45 +80,16 @@ class loadInfo: ObservableObject{
     let artistName = document.data() ["artistName"] as? String ?? "error"
     let trackName = document.data() ["trackName"] as? String ?? "error"
     let file = document.data()["file"] as? String ?? "error"
+                
                     
-    print("ID: OUT", document.data() ["imageName"] as? String ?? "error")
-        
-                    
-                    
-    //causes issues with the array, after sometime it's almost like it skips variables
-    //I do not know the cause so for now, I would be storing the link directly into
-    //the firebase collection
-   /* let storageRef = Storage.storage().reference(withPath: "/AlbumArtwork/\(document.data() ["imageName"] as? String ?? "error").jpg")
-                    
-                    print("Storage ref: ", storageRef)
-                    
-                     storageRef.downloadURL { (url, error) in
-                                     if error != nil {
-                                         print((error?.localizedDescription)!)
-                                         return
-                              }
-                         imageText.sharedInstance.imageURL = url!
-                                  
-                         _ = url?.absoluteString
-                         //print("ID: IN", document.data() ["imageName"] as? String ?? "error")
-                        
-                         
-                        // print("Url: ", imageText.sharedInstance.imageURL)
-                   
-                         
-                        }*/
-                    
-                   // let pathString =
-                    
-                    loadInfo.sharedInstance.songs.append(Landmark(id: id, name: name, albumName: albumName, artistName: artistName, trackName: trackName, file: file, imageName: imageName))
+       loadInfo.sharedInstance.songs.append(Landmark(id: id, name: name, albumName: albumName, artistName: artistName, trackName: trackName, file: file, imageName: imageName))
                          
                    
     
                    
               }
                 
-          print("Shared instance size")
-         print(loadInfo.sharedInstance.songs.count)
+   
                 
                     
             }else{

@@ -12,15 +12,7 @@ import Firebase
 @main
 struct Bopp_Music_PlayerApp: App {
     
-   var data = MusicData()
-    
-    /*
-    init(){
-       
-        FirebaseApp.configure()
-        
-   }*/
-    
+   
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {

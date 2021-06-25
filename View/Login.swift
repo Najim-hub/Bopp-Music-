@@ -39,7 +39,7 @@ struct Login: View {
                 
                 VStack(alignment: .leading, spacing: 30, content: {
                     
-                    Text("Crypto\nTaken to the Next Level")
+                    Text("Music\nTaken to the Next Level")
                         .font(.system(size: 45))
                         .fontWeight(.heavy)
                         .foregroundColor(.yellow)
@@ -77,9 +77,7 @@ struct Login: View {
                             return
                         }
                         
-                            let pmt = PersonNameComponentsFormatter()
-                       
-                        // Create an account in your system
+                           
                         
                         if credential.fullName?.givenName != nil{
                             Name = (credential.fullName?.givenName)!

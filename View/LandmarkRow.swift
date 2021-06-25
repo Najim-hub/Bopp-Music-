@@ -16,7 +16,7 @@ struct LandmarkRow: View {
             
             landmark.image
                 .resizable()
-                .frame(width: 50, height: 50)
+                .frame(width: 120, height: 120)
                 .cornerRadius(5)
             
             VStack(alignment: .leading, spacing: 3)
@@ -29,8 +29,6 @@ struct LandmarkRow: View {
                 .foregroundColor(.secondary)
             }
             
-            
-           
         }
     }
 }

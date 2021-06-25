@@ -8,10 +8,14 @@
 import SwiftUI
 import AVFoundation
 import MediaPlayer
+import SystemConfiguration
+
 
 struct Home: View {
     
-  
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
+    
+    @State private var showAlert = false
     
     @StateObject var player = MusicPlayerViewModel()
   
@@ -29,38 +33,72 @@ struct Home: View {
     
     @ObservedObject var val = playVal.sharedInstance
     
+    @ObservedObject var searchBar: SearchBar = SearchBar()
+    
+    var texting = searching.sharedInstance
+   
 
-    var data = MusicData()
+    @State var searchText: String = ""
+    
+    
+   @State private var keyboardHeight: CGFloat = 0
+
+   
      
     @State var value: Float = 0
     
     @AppStorage("Name") var Name = ""
-    //Text("Hello, \(Name)" )
+    
+    //@State private var searchText : String = ""
+
     
     var body: some View {
         
-        ZStack(alignment: .bottom, content: {
-          
-            NavigationView {
- 
-                List{
-
-    ForEach(songList.songs, id: \.id) { landmark in
+        NavigationView {
+                
+                  List(
+                    songList.songs.filter {
+                                 
+                    texting.text.isEmpty
+                      
+                            ||
+                            
+                     $0.trackName.localizedStandardContains(texting.text)
+                      
+                          ||
+                      
+                      $0.trackName.localizedStandardContains(val.searchText)
+                      
+                      ||
+                      
+                      $0.artistName.localizedStandardContains(texting.text)
+                      
+                      ||
+                      
+                      
+                      $0.artistName.localizedStandardContains(val.searchText)
+                            
+                            }){
+                          landmark in
                 
                 HStack(spacing: 15){
                     
                     LandmarkRow(landmark: landmark)
-                    .padding(.horizontal)
+                    //.padding(.horizontal)
                     .onTapGesture {
                         withAnimation{
                             
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            
+                            if self.isNetworkReachable(with: flags){
                             playController.showPlayer = true
                             
-                            print("I was Tapped")
                             
                             playController.isPlaying = true
                             
-                            
+                                playController.isMini = true
+                           
                             
                             playController.position = landmark.id - 1
                             
@@ -83,14 +121,28 @@ struct Home: View {
                             HapticFeedBack.shared.hit(0.3)
                         
                             }
+                            
+                            else{
+                                self.showAlert = true
+                            }
+
+                            
                         }
+                        
+                    }
                     
                     Button(action: {
                         
+                        var flags = SCNetworkReachabilityFlags()
+                        SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                        
+                        if self.isNetworkReachable(with: flags){
+                            
+                            
                         playController.showPlayer = true
                         
-                        print("I was Tapped")
-                        
+                            playController.isMini = true
+                       
                         playController.isPlaying = true
                         
                         playController.position = landmark.id - 1
@@ -107,6 +159,12 @@ struct Home: View {
                             Avplayer.playSong()
                         }
                         HapticFeedBack.shared.hit(0.3)
+                            
+                        }
+                        
+                        else{
+                            self.showAlert = true
+                        }
                         
                  
                             
@@ -131,70 +189,72 @@ struct Home: View {
                     .offset(x: 5)
                     
                 
-                }
+                
                  
+                
+                }.onAppear(perform: {
+                     var flags = SCNetworkReachabilityFlags()
+                    SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                    
+                    if self.isNetworkReachable(with: flags){
+                        
+                        
+                    }
+                    
+                    else{
+                        self.showAlert = true
+                    }
+                    
+                    
+                })
+                    //.padding(.bottom, playController.isMini ? 90 : 0)
+                .listStyle(PlainListStyle())
+                .alert(isPresented: self.$showAlert){
+                    Alert(title: Text("No Internet Connection"), message: Text("Please enable WiFi or Cellular Data"), dismissButton: .default(Text("Ok")))
                 }
+                                
+                                
+                    
                 }
-                .offset(y: playController.isMini ? -100 : 0)
+            
+            
+              
+               // .frame(width:  UIScreen.main.bounds.width, height: .infinity, alignment: .center)
+               // .offset(y: playController.isMini ? -100 : 0)
                 
                 .navigationBarTitle(Text("Songs"), displayMode: .automatic)
-           
+            
+                .add(self.searchBar)
+            
+                .ignoresSafeArea(.keyboard)
+                }
+        
+        
+        
+            .navigationViewStyle(StackNavigationViewStyle())
                 
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-             
-               player.soundLevel =  AVAudioSession.sharedInstance().outputVolume
+            
+            .onChange(of: gestureOffset, perform: { value in
+            onChanged()
                 
-                
-                AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
-                
-                //value = Float(CMTimeGetSeconds((Avplayer.player?.currentItem?.currentTime())!))
-                
-               // playController.playValue = TimeInterval(value)
-                
+        })
+        
       
-               // print(playController.playValue, "You Back??!!")
-         
-            }
-            
-            
-            /*
-            if playControl.sharedInstance.showPlayer {
-                Miniplayer()
-                    .zIndex(2.0)
-                .transition(.move(edge: .bottom))
-                    .offset(y: player.offset)
-                    .gesture(DragGesture().updating($gestureOffset, body: { (value, state, _) in
-                        
-                        state = value.translation.height
-                        
-                       
-                       
-                    })
-                    .onEnded(onEnd(value:)
-                    
-                    
-                    ))
-            }*/
-            })
-        .onAppear(perform: {
-            
         
-           print("Shared instance size in home view")
-           print(loadInfo.sharedInstance.songs.count)
-        }
-        )
-        .onChange(of: gestureOffset, perform: { value in
-        onChanged()
-            
-    }
- 
- )
-        //.environmentObject(player)
-        
-        
+       
 }
     
+    private func isNetworkReachable(with flags : SCNetworkReachabilityFlags) -> Bool{
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
+        
+      
+    }
     
     func onChanged(){
         
@@ -231,7 +291,88 @@ struct Home: View {
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()
-            .padding(.all)
+           // .padding(.all)
     }
 }
+}
+class SearchBar: NSObject, ObservableObject {
+    
+    @Published var text: String = ""
+    
+  var val = playVal.sharedInstance
+    
+    
+   var playController = playControl.sharedInstance
+    
+    
+    var texting = searching.sharedInstance
+   
+    let searchController: UISearchController = UISearchController(searchResultsController: nil)
+    
+    override init() {
+        super.init()
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchResultsUpdater = self
+       
+    }
+}
+
+extension SearchBar: UISearchResultsUpdating {
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        print("updating")
+        // Publish search bar text changes.
+        
+       
+            if let searchBarText = searchController.searchBar.text {
+                
+                self.text = searchBarText
+                
+                val.searchText = searchBarText
+                
+                searching.sharedInstance.text = searchBarText
+                
+                print("Not Mini: ", self.text)
+                
+                print("Val: ",  val.searchText)
+            
+        }
+    }
+}
+
+struct SearchBarModifier: ViewModifier {
+    
+    let searchBar: SearchBar
+    
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                ViewControllerResolver { viewController in
+                    viewController.navigationItem.searchController = self.searchBar.searchController
+                }
+                    .frame(width: 0, height: 0)
+            )
+    }
+}
+
+
+class searching: ObservableObject{
+    
+    @Published var text = ""
+    
+    static let sharedInstance = searching()
+    
+    init(){
+        
+    }
+    
+}
+
+extension View {
+    
+    func add(_ searchBar: SearchBar) -> some View {
+        return self.modifier(SearchBarModifier(searchBar: searchBar))
+    }
 }
