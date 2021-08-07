@@ -35,6 +35,8 @@ struct Home: View {
     
     @ObservedObject var searchBar: SearchBar = SearchBar()
     
+    @ObservedObject var gen = GenWallet.sharedInstance
+    
     var texting = searching.sharedInstance
    
 
@@ -92,6 +94,9 @@ struct Home: View {
                             SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                             
                             if self.isNetworkReachable(with: flags){
+                                
+                            gen.balance()
+                                
                             playController.showPlayer = true
                             
                             
@@ -136,14 +141,18 @@ struct Home: View {
                         var flags = SCNetworkReachabilityFlags()
                         SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                         
+                        val.playValue = 0
+                        
                         if self.isNetworkReachable(with: flags){
                             
                             
                         playController.showPlayer = true
                         
-                            playController.isMini = true
+                        playController.isMini = true
                        
                         playController.isPlaying = true
+                            
+                       
                         
                         playController.position = landmark.id - 1
                         
@@ -178,19 +187,7 @@ struct Home: View {
                     )
                     
                     
-                    Spacer()
                     
-                    Button(action: {}) {
-                        
-                        Image(systemName: "ellipsis")
-                            .font(.title2)
-                            .foregroundColor(.primary)
-                    }.frame(width: 50, height: 50, alignment: .trailing)
-                    .offset(x: 5)
-                    
-                
-                
-                 
                 
                 }.onAppear(perform: {
                      var flags = SCNetworkReachabilityFlags()
@@ -221,7 +218,6 @@ struct Home: View {
               
                // .frame(width:  UIScreen.main.bounds.width, height: .infinity, alignment: .center)
                // .offset(y: playController.isMini ? -100 : 0)
-                
                 .navigationBarTitle(Text("Songs"), displayMode: .automatic)
             
                 .add(self.searchBar)
@@ -324,9 +320,7 @@ extension SearchBar: UISearchResultsUpdating {
         
         print("updating")
         // Publish search bar text changes.
-        
-       
-            if let searchBarText = searchController.searchBar.text {
+         if let searchBarText = searchController.searchBar.text {
                 
                 self.text = searchBarText
                 

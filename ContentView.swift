@@ -14,9 +14,7 @@ struct ContentView: View {
     
     @EnvironmentObject var player: MusicPlayerViewModel
     
-   // var data = MusicData()
 
-    
     @AppStorage("log_status") var log_Status = false
     
     @AppStorage("connection_status") var connection_status = false

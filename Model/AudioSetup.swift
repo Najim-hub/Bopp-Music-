@@ -4,7 +4,6 @@
 //
 //  Created by Najim Mohammed on 2021-06-07.
 //
-
 import Foundation
 import UIKit
 import AVFoundation
@@ -14,6 +13,7 @@ import SDWebImageSwiftUI
 import AVKit
 import Cache
 import SystemConfiguration
+import web3swift
 
 class ToggleShuffle: ObservableObject{
     
@@ -24,9 +24,7 @@ class ToggleShuffle: ObservableObject{
     static let sharedInstance = ToggleShuffle()
     
     
-    init(){
-        
-    }
+    init(){}
    
     
 }
@@ -41,10 +39,9 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     var player: AVPlayer? = AVPlayer()
     
     let diskConfig = DiskConfig(name: "DiskCache")
-      let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
-
-  
     
+    let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
+
     var playController = playControl.sharedInstance
     
     var songList = loadInfo.sharedInstance
@@ -55,14 +52,11 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     var audio = AudioSetup()
     
-
     var playerDuration: CMTime = CMTimeMake(value: 0, timescale: 0);
     
     var floatTime : Float = 0.0
     
     var timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
-    
-    //var nowPlayingInfo = [String : Any]()
     
     var val = playVal.sharedInstance
     
@@ -76,33 +70,37 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
     
+    
+     func contract(_ abiString: String, at: EthereumAddress? = nil, abiVersion: Int = 2) -> String? {
+        return "web3contract(web3: self, abiString: abiString, at: at, transactionOptions: self.transactionOptions, abiVersion: abiVersion)"
+    }
+    
    
      func setupCommandCenter() {
         
-       
         nowPlayingInfo[MPMediaItemPropertyTitle] = songList.songs[playController.position].name
 
-         nowPlayingInfo[MPMediaItemPropertyArtist] = songList.songs[playController.position].artistName
+        nowPlayingInfo[MPMediaItemPropertyArtist] = songList.songs[playController.position].artistName
     
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue//- 1
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue
         
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = AudioPlayer.sharedInstance.floatTime - 1
         
-         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player!.rate
+        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player!.rate
          
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
 
         let commandCenter = MPRemoteCommandCenter.shared()
          
-         commandCenter.stopCommand.isEnabled = true
-        
+        commandCenter.stopCommand.isEnabled = true
         commandCenter.playCommand.isEnabled = true
         commandCenter.pauseCommand.isEnabled = true
-         commandCenter.nextTrackCommand.isEnabled = true
-         commandCenter.previousTrackCommand.isEnabled = true
-         
+        commandCenter.nextTrackCommand.isEnabled = true
+        commandCenter.previousTrackCommand.isEnabled = true
+        
         commandCenter.playCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-            self?.player?.play()
+            
+        self?.player?.play()
           
             MPNowPlayingInfoCenter.default().nowPlayingInfo =  self?.nowPlayingInfo
             
@@ -111,18 +109,17 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
             
             return .success
         }
+        
         commandCenter.pauseCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
             
             self?.nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 0
             
             self?.player?.pause()
-            
-            
+           
             self?.nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self?.val.playValue
             
             MPNowPlayingInfoCenter.default().nowPlayingInfo =  self?.nowPlayingInfo
 
-            //self?.val.playValue
             return .success
         }
 
@@ -130,14 +127,16 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func audioRouteChanged(note: Notification) {
       if let userInfo = note.userInfo {
+        
         if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? Int {
+            
             if reason == AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue {
-            // headphones plugged out
+     
             player?.pause()
-             nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue
                 
+            nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = val.playValue
                 
-                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
           }
         }
       }
@@ -148,10 +147,8 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         // Get the shared MPRemoteCommandCenter
         commandCenter.nextTrackCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-               // player?.play()
-           // self?.nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = 0.0
-            
-            self?.player?.rate = 0
+           
+                self?.player?.rate = 0
             
             if (self?.playController.position)! <  (self?.songList.songs.count)! - 1  {
                 
@@ -183,13 +180,12 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         
         commandCenter.previousTrackCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-               // player?.play()
-            //self?.nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = 0.0
+           
             self?.player?.rate = 0
             
             if (self?.playController.position)! <= (self?.songList.songs.count)! - 1 && self?.playController.position != 0  {
-                self?.playController.position =   (self?.playController.position)! - 1
                 
+                self?.playController.position =   (self?.playController.position)! - 1
                 
                 self?.playSong()
             
@@ -201,10 +197,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
             
             else{
                 
-                
                 self?.val.playValue = 0.0
-                
-                //self?.player?.rate = 0
                 
                 self?.playController.position = 0
                 
@@ -213,10 +206,9 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
             
                 return .success
             }
-        // Get the shared MPRemoteCommandCenter
+        
         let commandCenter = MPRemoteCommandCenter.shared()
 
-        // Add handler for Play Command
         commandCenter.playCommand.addTarget { [unowned self] event in
            
             if self.player!.rate == 0 {
@@ -226,7 +218,6 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
             return .commandFailed
         }
 
-        // Add handler for Pause Command
         commandCenter.pauseCommand.addTarget { [unowned self] event in
           
             if self.player!.rate > 0  {
@@ -238,7 +229,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
 
     
-    
+  
     
     
     
@@ -302,6 +293,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
                                         self.player?.automaticallyWaitsToMinimizeStalling = false;
                                         
                                         self.player?.playImmediately(atRate: 1.0)
+                                        
                                      
                                        
                                         NotificationCenter.default.addObserver(self,
@@ -342,11 +334,6 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
                        }
                     })
                 
-                   // self.player = AVPlayer(url:url!)
-                    
-                   
-                    
-   
                  
              }
              catch let errors {
@@ -415,6 +402,21 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
            
         }
         
+     }
+    
+    @objc func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+      NotificationCenter.default.addObserver(self, selector: Selector(("volumeDidChanged:")), name: NSNotification.Name(rawValue: "AVSystemController_SystemVolumeDidChangeNotification"), object: nil)
+        
+        print("Changed")
+      return true
+    }
+
+    @objc func volumeDidChange(notification: NSNotification) {
+        playControl.sharedInstance.soundLevel = notification.userInfo!["AVSystemController_AudioVolumeNotificationParameter"] as! Float
+            
+        
+        print(playControl.sharedInstance.soundLevel)
+      
      }
 
     

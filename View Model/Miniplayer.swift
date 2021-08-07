@@ -33,7 +33,9 @@ struct Miniplayer: View {
     
     @ObservedObject var Avplayer = AudioPlayer.sharedInstance
     
-    @AppStorage("log_status") var log_Status = false
+    @AppStorage("log_status") var log_Status = true
+    
+
     
     @State var colorVal : Double = 0.0
     
@@ -511,7 +513,7 @@ struct Miniplayer: View {
            )
             .onAppear(perform: {
             
-            
+               
             Avplayer.setupRemoteTransportControls()
             
         })
@@ -600,6 +602,8 @@ struct Miniplayer: View {
         }
         return 1
     }
+    
+
   
     
     func transToMinSec(time: Float) -> String
