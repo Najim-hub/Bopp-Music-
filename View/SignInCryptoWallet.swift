@@ -9,12 +9,18 @@ import SwiftUI
 import Foundation
 import AlertX
 import IGIdenticon
+import WKView
+
 
 struct SignInCryptoWallet: View {
     
     @State private var showingAlert = false
     
+    @State private var isSheetPresented = false
+    
     @State var showAlertX: Bool = false
+    
+    @State var show: Bool = false
     
     @ObservedObject var gen = GenWallet.sharedInstance
     
@@ -22,7 +28,7 @@ struct SignInCryptoWallet: View {
     
     @AppStorage("AccountBalance") var AccountBalance = ""
     
-    @AppStorage("Mnemonic") var Mnemonic = ""
+    @AppStorage("ValidAddress") var ValidAddress = false
     
     
 
@@ -32,52 +38,65 @@ struct SignInCryptoWallet: View {
             
             var image = Identicon().icon(from: AccountNumber, size: CGSize(width: 325, height: 325))
             
-            if AccountNumber == ""{
-        
-        VStack{
+            if ValidAddress == false{
             
-        Text("Create Your Wallet")
-                .font(.system(size: 35))
-                .fontWeight(.heavy)
-                .offset(y: -90)
-                 .accentColor(.yellow)
-            
-            Text("You can not change or modify your wallet\n once registered")
-                .multilineTextAlignment(.center)
-                .offset(y: -40)
-
-            Button(action: {gen.createAccount()}){
-            
-            
-            HStack{
-            
-              Image("Etheruem_")
-               .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 75, height: 65, alignment: .center)
-            .offset(x: -40)
-            
-              Text("Create Wallet")
-                    .font(.system(size: 25))
-                    .fontWeight(.heavy)
+                VStack{
+                    
+                Text("Setup Etheruem Wallet")
+                        .font(.system(size: 25))
+                        .fontWeight(.heavy)
+                        .offset(y: -90)
+                       .accentColor(.accentColor)
+                    
+                    HStack {
+                        
+                        Image(systemName: "person").foregroundColor(.gray)
+                     TextField("Paste Wallet Address", text: self.$AccountNumber)
+                        .frame(width: UIScreen.main.bounds.width/1.5, height: 45, alignment: .center)
+                      
+                    }
+                    .padding()
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                    
+                    Text("Notice: This address has to exist in the Etheruem Blockchain")
+                        .multilineTextAlignment(.center)
+                        .offset(y: 220)
+                        .font(.caption)
+                    
+                    
+                    
+                    Button(action: {
+                        gen.isValid()
+                        showingAlert = !ValidAddress
+                        
+                    }){
+                    
+                    
+                    HStack{
+                    
+                      Image("Etheruem_")
+                       .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 55, height: 55, alignment: .center)
                     .offset(x: -40)
                     
+                      Text("Connect Wallet")
+                        
+                            .font(.system(size: 20))
+                            .offset(x: -30)
+                            
+                            
+                   }.frame(width: UIScreen.main.bounds.width/1.5, height: 45, alignment: .center)
                     
-           }.frame(width: UIScreen.main.bounds.width/1.5, height: 45, alignment: .center)
-            
-           
-        }.padding()
-            .background(Color.yellow)
-            .foregroundColor(.black)
-            .cornerRadius(15)
-            .alert(isPresented: $showingAlert) { () -> Alert in
-                        Alert(title: Text("Currently Unavailable"))
-        
-    }
-            Text("By tapping connecting your wallet you accept all our terms and conditions")
-                .multilineTextAlignment(.center)
-                .offset(y: 70)
-                .font(.caption)
+                   
+                }.padding()
+                    .background(Color.yellow)
+                    .foregroundColor(.black)
+                    .cornerRadius(15)
+                    .alert(isPresented: $showingAlert) { () -> Alert in
+                        Alert(title: Text("Please input a valid Address"))
+                        
+                    }
             
         }.padding(.bottom, 65)
                 
@@ -92,7 +111,7 @@ struct SignInCryptoWallet: View {
                      .resizable()
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.orange, lineWidth: 9))
-                        .overlay(Circle().stroke(Color.primary, lineWidth: 2))
+                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
                   .aspectRatio(contentMode: .fit)
                   .frame(width: 225, height: 225, alignment: .center)
                    .offset(y:  -UIScreen.main.bounds.height/6)
@@ -132,29 +151,74 @@ struct SignInCryptoWallet: View {
                     })
                    
                  Spacer()
-                   
-                    Button(action: {gen.send()}) {
-                      
-                        
-                            
-                            Text("Send ETH")
-                                .fontWeight(.semibold)
-                                .font(.title)
-                                .padding()
-                                .background(Color.yellow)
-                                .cornerRadius(8)
-                                .foregroundColor(.black)
-                            
-                            
-                       
-                    }.offset(y: -UIScreen.main.bounds.height/8)
-                    //.shadow(color: Color.yellow, radius: 10, y: 2)
-                   
-                        
+                    Button(action: {isSheetPresented.toggle()
+                                    }, label: {
+                                        
+                                        HStack{
+                                            Image(systemName: "arrow.triangle.swap")
+                                                .resizable()
+                                                .frame(width: 35, height: 30)
+                                        Text("Swap")
+                                            
+                                            .font(.title)
+                                           
+                                        
+                                    }
+                                        .padding()
+                                        .background(Color.yellow)
+                                        .cornerRadius(8)
+                                        .foregroundColor(.black)
+                                    }).sheet(isPresented: $isSheetPresented, content: {
+                                        NavigationView {
+                                          
+                                WebView(url: "https://app.uniswap.org/#/swap?outputCurrency=0xdac17f958d2ee523a2206206994597c13d831ec7&amp;use=V2"
+                                            ){ (onNavigationAction) in
+                                                switch onNavigationAction {
+                                                case .decidePolicy(let webView, let navigationAction, let policy):
+                                                    print("WebView -> \(String(describing: webView.url)) -> decidePolicy navigationAction: \(navigationAction)")
+                                                    switch policy {
+                                                    case .cancel:
+                                                        print("WebView -> \(String(describing: webView.url)) -> decidePolicy: .cancel")
+                                                        isSheetPresented = false
+                                                    case .allow:
+                                                        print("WebView -> \(String(describing: webView.url)) -> decidePolicy: .allow")
+                                                    @unknown default:
+                                                        print("WebView -> \(String(describing: webView.url)) -> decidePolicy: @unknown default")
+                                                    }
+                                                    
+                                                case .didRecieveAuthChallenge(let webView, let challenge, let disposition, let credential):
+                                                    print("WebView -> \(String(describing: webView.url)) -> didRecieveAuthChallange challenge: \(challenge.protectionSpace.host)")
+                                                    print("WebView -> \(String(describing: webView.url)) -> didRecieveAuthChallange disposition: \(disposition.rawValue)")
+                                                    if let credential = credential {
+                                                        print("WebView -> \(String(describing: webView.url)) -> didRecieveAuthChallange credential: \(credential)")
+                                                    }
+                                                    
+                                                case .didStartProvisionalNavigation(let webView, let navigation):
+                                                    print("WebView -> \(String(describing: webView.url)) -> didStartProvisionalNavigation: \(navigation)")
+                                                case .didReceiveServerRedirectForProvisionalNavigation(let webView, let navigation):
+                                                    print("WebView -> \(String(describing: webView.url)) -> didReceiveServerRedirectForProvisionalNavigation: \(navigation)")
+                                                case .didCommit(let webView, let navigation):
+                                                    print("WebView -> \(String(describing: webView.url)) -> didCommit: \(navigation)")
+                                                case .didFinish(let webView, let navigation):
+                                                    print("WebView -> \(String(describing: webView.url)) -> didFinish: \(navigation)")
+                                                case .didFailProvisionalNavigation(let webView, let navigation, let error):
+                                                    print("WebView -> \(String(describing: webView.url)) -> didFailProvisionalNavigation: \(navigation)")
+                                                    print("WebView -> \(String(describing: webView.url)) -> didFailProvisionalNavigation: \(error)")
+                                                case .didFail(let webView, let navigation, let error):
+                                                    print("WebView -> \(String(describing: webView.url)) -> didFail: \(navigation)")
+                                                    print("WebView -> \(String(describing: webView.url)) -> didFail: \(error)")
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                    }).offset(y: -UIScreen.main.bounds.height/8)
+                
+                           
                }
                 .onAppear(perform: {
                     gen.balance()
-                    print( Mnemonic)
+                   
                 })
                 .frame(width: UIScreen.main.bounds.width/1.5, height: 45, alignment: .center)
                 .navigationBarTitle( Text("Wallet") , displayMode: .automatic)
@@ -172,7 +236,8 @@ struct SignInCryptoWallet: View {
                                         }
                           
                     )
-                
+                    
+                        
                 }
                 
                 

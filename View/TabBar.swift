@@ -96,7 +96,7 @@ struct TabBar: View {
                         if !playController.isMini{
                     UITabBarController.tabBar.layer.zPosition = -1
                     UITabBarController.tabBar.isUserInteractionEnabled = false;
-                  
+                          
                         }
                         
                         else{
