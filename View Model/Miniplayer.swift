@@ -350,7 +350,7 @@ struct Miniplayer: View {
                                 
                                // HapticFeedBack.shared.hit(0.3)
                                 
-                
+                    Avplayer.player?.rate = 0
                      if isShuffled.toggleShuffle == false {
                                 if playController.position < songList.songs.count - 1   {
                                     

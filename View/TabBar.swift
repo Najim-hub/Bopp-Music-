@@ -42,7 +42,8 @@ struct TabBar: View {
             TabView(selection: $current){
                 
                 
-                SignInCryptoWallet()
+                //SignInCryptoWallet()
+                CardView()
                     .tag(1)
                     .tabItem {
                         

@@ -39,4 +39,13 @@ struct Song : Hashable, Codable{
   
 }
 
+struct Wallet : Hashable, Codable{
+    
+    let symbol: String
+    let amount : String
+  
+    
+  
+}
+
 

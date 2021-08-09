@@ -415,7 +415,7 @@ struct Home: View {
                                     .overlay(Circle().stroke(Color.orange, lineWidth: 1))
                             .overlay(Circle().stroke(Color.white, lineWidth: 0.5))
                                   .aspectRatio(contentMode: .fit)
-                            .offset(x:  -UIScreen.main.bounds.width/2.8)
+                            .offset(x:  -UIScreen.main.bounds.width/2.6)
                             .frame(width: 25, height: 25, alignment: .leading)
                                     
                                     
@@ -496,7 +496,10 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        Group {
+            Home()
+            Home()
+        }
            // .padding(.all)
     }
 }

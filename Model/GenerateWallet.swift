@@ -61,6 +61,8 @@ class GenWallet : ObservableObject {
                    }
             
     let balance = try web3.eth.getBalance(address: address)
+            
+            
       
     let balanceString = Web3.Utils.formatToEthereumUnits(balance, toUnits: .eth, decimals: 5)
             

@@ -40,7 +40,6 @@ struct Logout: View {
                     .offset(y:  -UIScreen.main.bounds.height/25)
                 
                 Button(action: {
-                    
                     DispatchQueue.global(qos: .background).async {
                         
                         try? Auth.auth().signOut()
@@ -52,19 +51,26 @@ struct Logout: View {
                         log_Status = false
                     }
                     
-                }, label: {
+                }){
+                
+               
+                
+                  Text("Log Out")
                     
-                    Text("Log Out")
-                        
-                        .background(Color.yellow)
-                        .frame(width: UIScreen.main.bounds.width/1.5, height: 45, alignment: .center)
                         .font(.system(size: 20))
-                        .padding()
-                            .background(Color.yellow)
-                            .foregroundColor(.black)
-                            .cornerRadius(15)
-                        .offset(y:  -UIScreen.main.bounds.height/25)
-                        })
+                        .offset(x: -30)
+                        
+                        
+               }.frame(width: UIScreen.main.bounds.width/1.5, height: 45, alignment: .center)
+              .padding()
+                .background(Color.yellow)
+                .foregroundColor(.black)
+                .cornerRadius(15)
+            .offset(y:-UIScreen.main.bounds.height/25)
+          
+        
+                
+                Spacer()
                 
                 Button(action: {
                     

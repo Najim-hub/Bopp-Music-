@@ -31,6 +31,8 @@ struct SignInCryptoWallet: View {
     @AppStorage("ValidAddress") var ValidAddress = false
     
     
+    
+    @ObservedObject var mark = MarketCap.sharedInstance
 
     var body: some View {
         
@@ -38,11 +40,11 @@ struct SignInCryptoWallet: View {
             
             var image = Identicon().icon(from: AccountNumber, size: CGSize(width: 325, height: 325))
             
-            if ValidAddress == false{
+            if ValidAddress == true{
             
                 VStack{
                     
-                Text("Setup Etheruem Wallet")
+                Text("Setup Ethereum Wallet")
                         .font(.system(size: 25))
                         .fontWeight(.heavy)
                         .offset(y: -90)
@@ -218,6 +220,7 @@ struct SignInCryptoWallet: View {
                }
                 .onAppear(perform: {
                     gen.balance()
+                    mark.getData()
                    
                 })
                 .frame(width: UIScreen.main.bounds.width/1.5, height: 45, alignment: .center)
