@@ -46,7 +46,7 @@ struct Home: View {
     
    @State private var keyboardHeight: CGFloat = 0
 
-   
+    @ObservedObject var dataList = MarketCap.sharedInstance
      
     @State var value: Float = 0
     
@@ -402,7 +402,13 @@ struct Home: View {
                 }
             
             
-              
+                  .onAppear(perform: {
+                                
+                                
+                                //dataList.getData()
+                    
+                    
+                  })
                // .frame(width:  UIScreen.main.bounds.width, height: .infinity, alignment: .center)
                // .offset(y: playController.isMini ? -100 : 0)
                 .navigationBarTitle(Text("Songs"), displayMode: .automatic)
@@ -435,13 +441,16 @@ struct Home: View {
                 .ignoresSafeArea(.keyboard)
                 }
         
+        
             .navigationViewStyle(StackNavigationViewStyle())
-                
+    
             
             .onChange(of: gestureOffset, perform: { value in
             onChanged()
                 
         })
+            
+        
             
         }
         

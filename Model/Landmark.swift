@@ -41,11 +41,26 @@ struct Song : Hashable, Codable{
 
 struct Wallet : Hashable, Codable{
     
+    let name: String
+    
     let symbol: String
     let amount : String
-  
+    let address: String
     
+    let rawAmount: String
+    
+    let decimal: String
   
+}
+
+struct Price: Hashable, Codable{
+    
+    let name: String
+    
+    let symbols: String
+    
+    let price: Double
+    
 }
 
 

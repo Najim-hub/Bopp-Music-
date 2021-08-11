@@ -10,15 +10,18 @@ import SwiftUI
 struct CardView: View {
     
     @ObservedObject var dataList = MarketCap.sharedInstance
-  
     
+    
+    @AppStorage("MarketData") var MarketData: [Wallet] = []
     var body: some View {
         
         ZStack{
-    
-        HStack{
             
-            VStack(alignment: .leading, spacing: 2) {
+            NavigationView{
+    
+            VStack{
+                VStack(alignment: .center, spacing: 2) {
+                
                 Text("Placeholder")
                     .font(.system(size: 25))
                     .fontWeight(.semibold)
@@ -32,32 +35,33 @@ struct CardView: View {
                 
                 
             }
-            Spacer()
-            
-        }
-        .frame(width:325, height: 200)
-        .padding()
-        .background(Color.yellow)
+        .frame(width:370, height: 300)
+       .background(Color.yellow)
         .cornerRadius(20)
-        .shadow(radius: 10)
-        .offset(y: -UIScreen.main.bounds.height/4)
-        
-        Spacer()
-        
-        HStack{
-       
+        .offset(y: -UIScreen.main.bounds.height/5)
      
-        List(dataList.MarketData, id: \.symbol) { landmark in
+        List(MarketData, id: \.symbol) { landmark in
             WalletView(wallinfo: landmark)
                   }
+        
+        .listStyle(PlainListStyle())
+        .offset(y: -UIScreen.main.bounds.height/45)
             
-        }.onAppear(perform: {
+        .onAppear(perform: {
+           
+          // dataList.getEtherLastPrice()
+            
+        })
+        .onDisappear(perform: {
+            
             dataList.getData()
-            
-            print(dataList.MarketData)
         })
         
-    }
+                
+            }
+                
+            }
+        }
         
     }
 }
