@@ -12,19 +12,16 @@ import Firebase
 @main
 struct Bopp_Music_PlayerApp: App {
     
-   var data = MusicData()
+    @ObservedObject var dataList = MarketCap.sharedInstance
     
-    /*
-    init(){
-       
-        FirebaseApp.configure()
-        
-   }*/
-    
+   
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear(perform: {
+                   // dataList.getData()
+                })
         }
     }
     

@@ -15,7 +15,7 @@ import Firebase
 class LoginViewModel: ObservableObject{
     
     @Published var nonce = ""
-    @AppStorage("log_status") var log_Status = false
+    @AppStorage("log_status") var log_Status = true
     
     func authenticate(credential: ASAuthorizationAppleIDCredential){
         

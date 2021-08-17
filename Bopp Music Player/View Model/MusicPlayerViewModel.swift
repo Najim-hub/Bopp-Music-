@@ -10,6 +10,7 @@ import SwiftUI
 import AVFoundation
 import MediaPlayer
 import Firebase
+import FirebaseStorage
 
 class MusicPlayerViewModel: ObservableObject {
 
@@ -35,15 +36,39 @@ class single: ObservableObject{
 }
 
 
+class imageText: ObservableObject{
+    
+    @Published var imageURL = URL(string: "")
+    
+    static let sharedInstance = imageText()
+    
+    init(){
+        
+    }
+    
+}
+
 
 
 class loadInfo: ObservableObject{
+    
+    //@State var imageURL = URL(string: "")
     
     @Published var songs : [Landmark] = []
     
     static let sharedInstance = loadInfo()
     
     init(){
+        
+       // let settings = FirestoreSettings()
+        //settings.isPersistenceEnabled = false
+
+        // Any additional options
+        // ...
+
+       //let db = Firestore.firestore()
+        //db.settings = settings
+        
         Firestore.firestore().collection("Albums").getDocuments{ (snapshot, error) in
             if error == nil{
                 for document in snapshot!.documents{
@@ -55,18 +80,20 @@ class loadInfo: ObservableObject{
     let artistName = document.data() ["artistName"] as? String ?? "error"
     let trackName = document.data() ["trackName"] as? String ?? "error"
     let file = document.data()["file"] as? String ?? "error"
+                
                     
-    //let data =  document.data()
+       loadInfo.sharedInstance.songs.append(Landmark(id: id, name: name, albumName: albumName, artistName: artistName, trackName: trackName, file: file, imageName: imageName))
+                         
+                   
     
-        loadInfo.sharedInstance.songs.append(Landmark(id: id, name: name, albumName: albumName, artistName: artistName, trackName: trackName, file: file, imageName: imageName))
+                   
               }
                 
-          print("Shared instance size")
-         print(loadInfo.sharedInstance.songs.count)
+   
                 
                     
             }else{
-                print(error)
+                print(error as Any)
             }
         }
     

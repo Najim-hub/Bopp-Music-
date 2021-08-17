@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct TabBar: View {
     // Selected Tab Index...
     // Default is third...
@@ -25,21 +26,27 @@ struct TabBar: View {
     
     @StateObject var player = MusicPlayerViewModel()
     
+    @State var searchText: String = ""
     
+    @State var cornerRad = 25
+    
+    // 1.
     //@ObservedObject var audiosettings = audioSettings()
-    
+   
     
     var body: some View {
     
         // Bottom Mini Player...
         
-        
+   
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
+       
             
             TabView(selection: $current){
                 
                 
-                Text("Wallet")
+                //SignInCryptoWallet()
+                CardView()
                     .tag(1)
                     .tabItem {
                         
@@ -53,7 +60,7 @@ struct TabBar: View {
                     .tag(2)
                     .tabItem {
                         
-                        Image(systemName: "purchased")
+                        Image(systemName: "bag")
                         
                         Text("MarketPlace")
                         
@@ -68,12 +75,13 @@ struct TabBar: View {
                         Text("Music")
                     }
                 
-                Logout()
+                SettingsView()
+             // Logout()
                     .tag(4)
                     .tabItem {
-                       Image(systemName: "person.crop.circle")
+                       Image(systemName: "gearshape.fill")
                         
-                        Text("User")
+                        Text("Settings")
                         
                     }
                 
@@ -81,28 +89,42 @@ struct TabBar: View {
                 
                 
                
-            }
+            } .introspectTabBarController { (UITabBarController) in
+                if playController.isMini || !playController.showPlayer{
+            UITabBarController.tabBar.shadowImage = UIImage()
+                   // UITabBarController.tabBar.layer.shouldRasterize = true
+                    //UITabBarController.tabBar.layer.rasterizationScale = UIScreen.main.scale
             
+            UITabBarController.tabBar.barTintColor = .clear
+            UITabBarController.tabBar.backgroundImage = UIImage()
+                }
+            }
            
+            if !playController.isMini{
             if playController.showPlayer {
                 Miniplayer()
+                  
+                   // .cornerRadius(CGFloat(cornerRad))
+                .introspectTabBarController { (UITabBarController) in
+                  
                     
-                    .introspectTabBarController { (UITabBarController) in
-                        
                         if !playController.isMini{
                     UITabBarController.tabBar.layer.zPosition = -1
                     UITabBarController.tabBar.isUserInteractionEnabled = false;
-                  
+                            cornerRad = 0
                         }
                         
                         else{
                      UITabBarController.tabBar.layer.zPosition = -0
                      UITabBarController.tabBar.isUserInteractionEnabled = true;
+                            cornerRad = 35
                         }
+                    
+                  
                     }
                     //.environmentObject(player)
                     .padding(.bottom, playController.isMini ? 47 : 0)
-                     //.zIndex(2.0)
+                     .zIndex(1.0)
                     .transition(.move(edge: .bottom))
                     .offset(y: playController.offset)
                     
@@ -110,15 +132,56 @@ struct TabBar: View {
                         if value.translation.height > 0 {
                             state = value.translation.height
                             
-                            print("calling")
+                            
                         }
                     })
                     .onEnded(onEnd(value:))
                     )
+            }//end of if
+            
             }
             
-            
+            else{
+                if playController.showPlayer {
+                    Miniplayer()
+                      
+                        .cornerRadius(CGFloat(cornerRad))
+                    .introspectTabBarController { (UITabBarController) in
+                      
+                        
+                            if !playController.isMini{
+                        UITabBarController.tabBar.layer.zPosition = -1
+                        UITabBarController.tabBar.isUserInteractionEnabled = false;
+                                cornerRad = 0
+                            }
+                            
+                            else{
+                         UITabBarController.tabBar.layer.zPosition = -0
+                         UITabBarController.tabBar.isUserInteractionEnabled = true;
+                                cornerRad = 35
+                            }
+                        
+                      
+                        }
+                        //.environmentObject(player)
+                        .padding(.bottom, playController.isMini ? 47 : 0)
+                         .zIndex(1.0)
+                        .transition(.move(edge: .bottom))
+                        .offset(y: playController.offset)
+                        
+                        .gesture(DragGesture().updating($gestureOffset, body: { value, state, transaction in
+                            if value.translation.height > 0 {
+                                state = value.translation.height
+                                
+                                
+                            }
+                        })
+                        .onEnded(onEnd(value:))
+                        )
+                }
+            }
             })
+            .ignoresSafeArea(.keyboard)
         .onChange(of: gestureOffset, perform: { value in
            onChanged()
         })
@@ -162,3 +225,6 @@ struct TabBar: View {
     }
     }
 }
+
+
+

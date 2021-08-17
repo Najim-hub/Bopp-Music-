@@ -8,6 +8,7 @@ A representation of a single landmark.
 import Foundation
 import SwiftUI
 import CoreLocation
+import SDWebImageSwiftUI
 
 struct Landmark: Hashable, Codable, Identifiable {
     
@@ -17,10 +18,11 @@ struct Landmark: Hashable, Codable, Identifiable {
     var artistName : String
     var trackName : String
     var file : String
-    var imageName: String
+    var imageName : String //URL(string: "")
     
-    var image: Image {
-        Image(imageName)
+    
+    var image: WebImage {
+        WebImage(url:URL(string:imageName))
     }
 
 }
@@ -36,5 +38,30 @@ struct Song : Hashable, Codable{
     
   
 }
+
+struct Wallet : Hashable, Codable{
+    
+    let name: String
+    
+    let symbol: String
+    let amount : String
+    let address: String
+    
+    let rawAmount: String
+    
+    let decimal: String
+  
+}
+
+struct Price: Hashable, Codable{
+    
+    let name: String
+    
+    let symbols: String
+    
+    let price: Double
+    
+}
+
 
 

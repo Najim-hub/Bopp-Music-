@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,19 +22,62 @@
 		ED15AFC3266CDBB60023A5C3 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFC2266CDBB60023A5C3 /* BlurView.swift */; };
 		ED15AFC5266CDE430023A5C3 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFC4266CDE430023A5C3 /* VideoPlayerView.swift */; };
 		ED15AFCC266CE1B90023A5C3 /* Miniplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */; };
+		ED2862C726C081FA0086DDE3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2862C626C081FA0086DDE3 /* CardView.swift */; };
+		ED2862C926C088DD0086DDE3 /* MarketCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2862C826C088DD0086DDE3 /* MarketCap.swift */; };
 		ED2EC6562673075C00AA0CED /* HapticFeedBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2EC6552673075C00AA0CED /* HapticFeedBack.swift */; };
 		ED38B0A5267D9A570024FC7A /* Coming.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38B0A4267D9A570024FC7A /* Coming.swift */; };
 		ED38B0A7267D9D480024FC7A /* Coming.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ED38B0A6267D9D480024FC7A /* Coming.mp4 */; };
+		ED42F05B26B9CCD40084E6D1 /* AlertX in Frameworks */ = {isa = PBXBuildFile; productRef = ED42F05A26B9CCD40084E6D1 /* AlertX */; };
 		ED46895226821EE800F8D1E3 /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED46895126821EE800F8D1E3 /* CachingPlayerItem.swift */; };
 		ED4D2DA426812F33001A456B /* SignInCryptoWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D2DA326812F33001A456B /* SignInCryptoWallet.swift */; };
 		ED599B31267E385E00AC667E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED599B30267E385E00AC667E /* Launch Screen.storyboard */; };
+		ED6053FE26BEFC5E00384202 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6053FD26BEFC5E00384202 /* WebView.swift */; };
+		ED60540126BEFD2800384202 /* WKView in Frameworks */ = {isa = PBXBuildFile; productRef = ED60540026BEFD2800384202 /* WKView */; };
+		ED6ED20026BC875C007BA432 /* Key.json in Resources */ = {isa = PBXBuildFile; fileRef = ED6ED1FF26BC875C007BA432 /* Key.json */; };
 		ED8521C526838EBF003BAE94 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8521C326838EBF003BAE94 /* SearchBar.swift */; };
 		ED8521C626838EBF003BAE94 /* ViewControllerResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8521C426838EBF003BAE94 /* ViewControllerResolver.swift */; };
 		ED8521C82684AD40003BAE94 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8521C72684AD40003BAE94 /* Control.swift */; };
 		ED9597C5267AE14F004AA17E /* CloudKitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9597C4267AE14F004AA17E /* CloudKitTest.swift */; };
 		ED9597C7267AEDAC004AA17E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED9597C6267AEDAB004AA17E /* GoogleService-Info.plist */; };
-		ED9597CB267AEFAD004AA17E /* MusicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9597CA267AEFAD004AA17E /* MusicData.swift */; };
 		EDADD1DD2678E1E70024C6D1 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDADD1DC2678E1E70024C6D1 /* CloudKit.framework */; };
+		EDAEF11926C3FC57001D3C8E /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = EDAEF11826C3FC57001D3C8E /* SwiftUICharts */; };
+		EDAEF11E26C43948001D3C8E /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF11D26C43948001D3C8E /* IndicatorPoint.swift */; };
+		EDAEF12026C4396A001D3C8E /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF11F26C4396A001D3C8E /* Legend.swift */; };
+		EDAEF12226C43997001D3C8E /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF12126C43997001D3C8E /* Line.swift */; };
+		EDAEF12426C439C6001D3C8E /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF12326C439C6001D3C8E /* LineChartView.swift */; };
+		EDAEF12626C439E0001D3C8E /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF12526C439E0001D3C8E /* LineView.swift */; };
+		EDAEF12826C43A20001D3C8E /* MagnifierRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF12726C43A20001D3C8E /* MagnifierRect.swift */; };
+		EDAEF12A26C43A3F001D3C8E /* MultiLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF12926C43A3F001D3C8E /* MultiLineChartView.swift */; };
+		EDAEF12C26C43A97001D3C8E /* Path+QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF12B26C43A97001D3C8E /* Path+QuadCurve.swift */; };
+		EDAEF12E26C43AB3001D3C8E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF12D26C43AB3001D3C8E /* Helpers.swift */; };
+		EDAEF13226C459AA001D3C8E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF13126C459AA001D3C8E /* SettingsView.swift */; };
+		EDB6619526C45C47001722A7 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6619426C45C47001722A7 /* SettingsStore.swift */; };
+		EDB661AE26C484FD001722A7 /* FuturaPTLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB6619726C484FA001722A7 /* FuturaPTLight.otf */; };
+		EDB661AF26C484FD001722A7 /* FuturaPTDemi.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB6619826C484FA001722A7 /* FuturaPTDemi.otf */; };
+		EDB661B026C484FD001722A7 /*  FuturePTBold in Resources */ = {isa = PBXBuildFile; fileRef = EDB6619926C484FA001722A7 /*  FuturePTBold */; };
+		EDB661B126C484FD001722A7 /* FuturaPTExtraBoldOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB6619A26C484FA001722A7 /* FuturaPTExtraBoldOblique.otf */; };
+		EDB661B226C484FD001722A7 /* FuturaPTCondBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB6619B26C484FA001722A7 /* FuturaPTCondBold.otf */; };
+		EDB661B326C484FD001722A7 /* FuturaPTCondMediumOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB6619C26C484FB001722A7 /* FuturaPTCondMediumOblique.otf */; };
+		EDB661B426C484FD001722A7 /* FuturaPTCondBookOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB6619D26C484FB001722A7 /* FuturaPTCondBookOblique.otf */; };
+		EDB661B526C484FD001722A7 /* FuturaPTBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB6619E26C484FB001722A7 /* FuturaPTBook.otf */; };
+		EDB661B626C484FD001722A7 /* FuturaPTDemiOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB6619F26C484FB001722A7 /* FuturaPTDemiOblique.otf */; };
+		EDB661B726C484FD001722A7 /* FuturaPTExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A026C484FB001722A7 /* FuturaPTExtraBold.otf */; };
+		EDB661B826C484FD001722A7 /* FuturaPTBoldOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A126C484FB001722A7 /* FuturaPTBoldOblique.otf */; };
+		EDB661B926C484FD001722A7 /* FuturaPTBookOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A226C484FC001722A7 /* FuturaPTBookOblique.otf */; };
+		EDB661BA26C484FD001722A7 /* FuturaPTCondBoldOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A326C484FC001722A7 /* FuturaPTCondBoldOblique.otf */; };
+		EDB661BB26C484FD001722A7 /* FuturaPTHeavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A426C484FC001722A7 /* FuturaPTHeavy.otf */; };
+		EDB661BC26C484FD001722A7 /* FuturaPTHeavyOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A526C484FC001722A7 /* FuturaPTHeavyOblique.otf */; };
+		EDB661BD26C484FD001722A7 /* FuturaPTMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A626C484FC001722A7 /* FuturaPTMedium.otf */; };
+		EDB661BE26C484FD001722A7 /* FuturaPTCondBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A726C484FC001722A7 /* FuturaPTCondBook.otf */; };
+		EDB661BF26C484FD001722A7 /* fontsme.com.url in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A826C484FC001722A7 /* fontsme.com.url */; };
+		EDB661C026C484FD001722A7 /* FuturaPTLightOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661A926C484FD001722A7 /* FuturaPTLightOblique.otf */; };
+		EDB661C126C484FD001722A7 /* FuturaPTCondExtraBoldOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661AA26C484FD001722A7 /* FuturaPTCondExtraBoldOblique.otf */; };
+		EDB661C226C484FD001722A7 /* FuturaPTCondMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661AB26C484FD001722A7 /* FuturaPTCondMedium.otf */; };
+		EDB661C326C484FD001722A7 /* FuturaPTMediumOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661AC26C484FD001722A7 /* FuturaPTMediumOblique.otf */; };
+		EDB661C426C484FD001722A7 /* FuturaPTCondExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDB661AD26C484FD001722A7 /* FuturaPTCondExtraBold.otf */; };
+		EDB661C726C57124001722A7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB661C626C57124001722A7 /* NetworkManager.swift */; };
+		EDB661C926C5B125001722A7 /* CardViewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB661C826C5B125001722A7 /* CardViewed.swift */; };
+		EDB661CC26C5B8A5001722A7 /* Shiny in Frameworks */ = {isa = PBXBuildFile; productRef = EDB661CB26C5B8A5001722A7 /* Shiny */; };
 		EDBF70E42671818A00CF2D97 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70E32671818A00CF2D97 /* TabBar.swift */; };
 		EDBF70ED267186BA00CF2D97 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70E6267186BA00CF2D97 /* ViewExtensions.swift */; };
 		EDBF70EE267186BA00CF2D97 /* UIKitIntrospectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70E7267186BA00CF2D97 /* UIKitIntrospectionViewController.swift */; };
@@ -42,11 +85,13 @@
 		EDBF70F0267186BA00CF2D97 /* UIKitIntrospectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70EA267186BA00CF2D97 /* UIKitIntrospectionView.swift */; };
 		EDBF70F2267186BA00CF2D97 /* Introspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70EC267186BA00CF2D97 /* Introspect.swift */; };
 		EDBF70F4267247F300CF2D97 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBF70F3267247F200CF2D97 /* AirPlayView.swift */; };
+		EDD8293926B962AB00F74794 /* GenerateWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8293826B962AB00F74794 /* GenerateWallet.swift */; };
 		EDDD6E80266EBAFB000F9DA5 /* AudioSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */; };
 		EDDF0FC6267FA80B00AF7C97 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDF0FC5267FA80B00AF7C97 /* LoginViewModel.swift */; };
 		EDDF0FC8267FA83400AF7C97 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDF0FC7267FA83400AF7C97 /* Login.swift */; };
 		EDDF0FCA267FAA7F00AF7C97 /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */; };
 		EDDF0FCC267FD3C300AF7C97 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDF0FCB267FD3C300AF7C97 /* ControlCenter.swift */; };
+		EDED47B326C0CBD5003DB2B6 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDED47B226C0CBD5003DB2B6 /* WalletView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,21 +113,60 @@
 		ED15AFC2266CDBB60023A5C3 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		ED15AFC4266CDE430023A5C3 /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Miniplayer.swift; path = "Bopp Music Player/View Model/Miniplayer.swift"; sourceTree = SOURCE_ROOT; };
+		ED2862C626C081FA0086DDE3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		ED2862C826C088DD0086DDE3 /* MarketCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCap.swift; sourceTree = "<group>"; };
 		ED2EC6552673075C00AA0CED /* HapticFeedBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedBack.swift; sourceTree = "<group>"; };
 		ED38B0A4267D9A570024FC7A /* Coming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coming.swift; sourceTree = "<group>"; };
 		ED38B0A6267D9D480024FC7A /* Coming.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Coming.mp4; sourceTree = "<group>"; };
 		ED46895126821EE800F8D1E3 /* CachingPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingPlayerItem.swift; sourceTree = "<group>"; };
 		ED4D2DA326812F33001A456B /* SignInCryptoWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCryptoWallet.swift; sourceTree = "<group>"; };
 		ED599B30267E385E00AC667E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		ED6053FD26BEFC5E00384202 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		ED6ED1FF26BC875C007BA432 /* Key.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Key.json; sourceTree = "<group>"; };
 		ED8521C326838EBF003BAE94 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		ED8521C426838EBF003BAE94 /* ViewControllerResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerResolver.swift; sourceTree = "<group>"; };
 		ED8521C72684AD40003BAE94 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		ED95978D2679173D004AA17E /* PackageFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PackageFolder; path = "Bopp Music Player/PackageFolder"; sourceTree = "<group>"; };
 		ED9597C4267AE14F004AA17E /* CloudKitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitTest.swift; sourceTree = "<group>"; };
 		ED9597C6267AEDAB004AA17E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		ED9597CA267AEFAD004AA17E /* MusicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicData.swift; sourceTree = "<group>"; };
 		EDADD1DA2678E1540024C6D1 /* Bopp Music Player.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bopp Music Player.entitlements"; sourceTree = "<group>"; };
 		EDADD1DC2678E1E70024C6D1 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		EDAEF11D26C43948001D3C8E /* IndicatorPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
+		EDAEF11F26C4396A001D3C8E /* Legend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
+		EDAEF12126C43997001D3C8E /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		EDAEF12326C439C6001D3C8E /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
+		EDAEF12526C439E0001D3C8E /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		EDAEF12726C43A20001D3C8E /* MagnifierRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagnifierRect.swift; sourceTree = "<group>"; };
+		EDAEF12926C43A3F001D3C8E /* MultiLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineChartView.swift; sourceTree = "<group>"; };
+		EDAEF12B26C43A97001D3C8E /* Path+QuadCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+QuadCurve.swift"; sourceTree = "<group>"; };
+		EDAEF12D26C43AB3001D3C8E /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		EDAEF13126C459AA001D3C8E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EDB6619426C45C47001722A7 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		EDB6619726C484FA001722A7 /* FuturaPTLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTLight.otf; sourceTree = "<group>"; };
+		EDB6619826C484FA001722A7 /* FuturaPTDemi.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTDemi.otf; sourceTree = "<group>"; };
+		EDB6619926C484FA001722A7 /*  FuturePTBold */ = {isa = PBXFileReference; lastKnownFileType = file; path = " FuturePTBold"; sourceTree = "<group>"; };
+		EDB6619A26C484FA001722A7 /* FuturaPTExtraBoldOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTExtraBoldOblique.otf; sourceTree = "<group>"; };
+		EDB6619B26C484FA001722A7 /* FuturaPTCondBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTCondBold.otf; sourceTree = "<group>"; };
+		EDB6619C26C484FB001722A7 /* FuturaPTCondMediumOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTCondMediumOblique.otf; sourceTree = "<group>"; };
+		EDB6619D26C484FB001722A7 /* FuturaPTCondBookOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTCondBookOblique.otf; sourceTree = "<group>"; };
+		EDB6619E26C484FB001722A7 /* FuturaPTBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTBook.otf; sourceTree = "<group>"; };
+		EDB6619F26C484FB001722A7 /* FuturaPTDemiOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTDemiOblique.otf; sourceTree = "<group>"; };
+		EDB661A026C484FB001722A7 /* FuturaPTExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTExtraBold.otf; sourceTree = "<group>"; };
+		EDB661A126C484FB001722A7 /* FuturaPTBoldOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTBoldOblique.otf; sourceTree = "<group>"; };
+		EDB661A226C484FC001722A7 /* FuturaPTBookOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTBookOblique.otf; sourceTree = "<group>"; };
+		EDB661A326C484FC001722A7 /* FuturaPTCondBoldOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTCondBoldOblique.otf; sourceTree = "<group>"; };
+		EDB661A426C484FC001722A7 /* FuturaPTHeavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTHeavy.otf; sourceTree = "<group>"; };
+		EDB661A526C484FC001722A7 /* FuturaPTHeavyOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTHeavyOblique.otf; sourceTree = "<group>"; };
+		EDB661A626C484FC001722A7 /* FuturaPTMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTMedium.otf; sourceTree = "<group>"; };
+		EDB661A726C484FC001722A7 /* FuturaPTCondBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTCondBook.otf; sourceTree = "<group>"; };
+		EDB661A826C484FC001722A7 /* fontsme.com.url */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fontsme.com.url; sourceTree = "<group>"; };
+		EDB661A926C484FD001722A7 /* FuturaPTLightOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTLightOblique.otf; sourceTree = "<group>"; };
+		EDB661AA26C484FD001722A7 /* FuturaPTCondExtraBoldOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTCondExtraBoldOblique.otf; sourceTree = "<group>"; };
+		EDB661AB26C484FD001722A7 /* FuturaPTCondMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTCondMedium.otf; sourceTree = "<group>"; };
+		EDB661AC26C484FD001722A7 /* FuturaPTMediumOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTMediumOblique.otf; sourceTree = "<group>"; };
+		EDB661AD26C484FD001722A7 /* FuturaPTCondExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FuturaPTCondExtraBold.otf; sourceTree = "<group>"; };
+		EDB661C626C57124001722A7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EDB661C826C5B125001722A7 /* CardViewed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewed.swift; sourceTree = "<group>"; };
 		EDBF70E32671818A00CF2D97 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		EDBF70E6267186BA00CF2D97 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		EDBF70E7267186BA00CF2D97 /* UIKitIntrospectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitIntrospectionViewController.swift; sourceTree = "<group>"; };
@@ -91,11 +175,13 @@
 		EDBF70EA267186BA00CF2D97 /* UIKitIntrospectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitIntrospectionView.swift; sourceTree = "<group>"; };
 		EDBF70EC267186BA00CF2D97 /* Introspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introspect.swift; sourceTree = "<group>"; };
 		EDBF70F3267247F200CF2D97 /* AirPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPlayView.swift; sourceTree = "<group>"; };
+		EDD8293826B962AB00F74794 /* GenerateWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateWallet.swift; sourceTree = "<group>"; };
 		EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSetup.swift; sourceTree = "<group>"; };
 		EDDF0FC5267FA80B00AF7C97 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EDDF0FC7267FA83400AF7C97 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
 		EDDF0FCB267FD3C300AF7C97 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
+		EDED47B226C0CBD5003DB2B6 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		F430CFD7DAEB00A1F6724920 /* Pods_Bopp_Music_Player.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bopp_Music_Player.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -104,8 +190,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDB661CC26C5B8A5001722A7 /* Shiny in Frameworks */,
 				EDADD1DD2678E1E70024C6D1 /* CloudKit.framework in Frameworks */,
 				582641C2EF40247C494E67A0 /* Pods_Bopp_Music_Player.framework in Frameworks */,
+				ED42F05B26B9CCD40084E6D1 /* AlertX in Frameworks */,
+				ED60540126BEFD2800384202 /* WKView in Frameworks */,
+				EDAEF11926C3FC57001D3C8E /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +233,9 @@
 		ED15AF9A266CD2D10023A5C3 /* Bopp Music Player */ = {
 			isa = PBXGroup;
 			children = (
+				EDB661C526C5710E001722A7 /* Network */,
+				EDB6619626C484CC001722A7 /* CustomFont */,
+				EDAEF11C26C43927001D3C8E /* Charts */,
 				ED9597C6267AEDAB004AA17E /* GoogleService-Info.plist */,
 				ED599B30267E385E00AC667E /* Launch Screen.storyboard */,
 				EDADD1DA2678E1540024C6D1 /* Bopp Music Player.entitlements */,
@@ -173,10 +266,13 @@
 		ED15AFAA266CD2E90023A5C3 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				ED2862C826C088DD0086DDE3 /* MarketCap.swift */,
+				ED15AFAF266CD3660023A5C3 /* MusicPlayerViewModel.swift */,
 				ED8521C326838EBF003BAE94 /* SearchBar.swift */,
 				ED8521C426838EBF003BAE94 /* ViewControllerResolver.swift */,
-				ED15AFAF266CD3660023A5C3 /* MusicPlayerViewModel.swift */,
 				EDDF0FC5267FA80B00AF7C97 /* LoginViewModel.swift */,
+				ED6053FD26BEFC5E00384202 /* WebView.swift */,
+				EDB6619426C45C47001722A7 /* SettingsStore.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -184,12 +280,16 @@
 		ED15AFB1266CD46C0023A5C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */,
+				ED2862C626C081FA0086DDE3 /* CardView.swift */,
 				ED15AFBA266CD51E0023A5C3 /* Home.swift */,
-				ED15AFBE266CD78D0023A5C3 /* LandmarkRow.swift */,
 				EDBF70E32671818A00CF2D97 /* TabBar.swift */,
-				EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */,
+				EDB661C826C5B125001722A7 /* CardViewed.swift */,
+				EDAEF13126C459AA001D3C8E /* SettingsView.swift */,
 				ED4D2DA326812F33001A456B /* SignInCryptoWallet.swift */,
+				EDED47B226C0CBD5003DB2B6 /* WalletView.swift */,
+				ED15AFBE266CD78D0023A5C3 /* LandmarkRow.swift */,
+				ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */,
+				EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */,
 				EDDF0FC7267FA83400AF7C97 /* Login.swift */,
 				ED38B0A4267D9A570024FC7A /* Coming.swift */,
 				ED15AFBC266CD5930023A5C3 /* MusicListView.swift */,
@@ -211,14 +311,15 @@
 		ED15AFB5266CD4BF0023A5C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ED46895126821EE800F8D1E3 /* CachingPlayerItem.swift */,
 				ED15AFB8266CD4E40023A5C3 /* Landmark.swift */,
-				ED9597CA267AEFAD004AA17E /* MusicData.swift */,
+				EDD8293826B962AB00F74794 /* GenerateWallet.swift */,
+				ED46895126821EE800F8D1E3 /* CachingPlayerItem.swift */,
 				ED15AFB6266CD4D40023A5C3 /* ModelData.swift */,
 				EDBF70F3267247F200CF2D97 /* AirPlayView.swift */,
 				ED8521C72684AD40003BAE94 /* Control.swift */,
 				EDDF0FCB267FD3C300AF7C97 /* ControlCenter.swift */,
 				EDDD6E7F266EBAFB000F9DA5 /* AudioSetup.swift */,
+				ED6ED1FF26BC875C007BA432 /* Key.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,6 +347,60 @@
 				F430CFD7DAEB00A1F6724920 /* Pods_Bopp_Music_Player.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EDAEF11C26C43927001D3C8E /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				EDAEF11D26C43948001D3C8E /* IndicatorPoint.swift */,
+				EDAEF11F26C4396A001D3C8E /* Legend.swift */,
+				EDAEF12126C43997001D3C8E /* Line.swift */,
+				EDAEF12326C439C6001D3C8E /* LineChartView.swift */,
+				EDAEF12526C439E0001D3C8E /* LineView.swift */,
+				EDAEF12726C43A20001D3C8E /* MagnifierRect.swift */,
+				EDAEF12926C43A3F001D3C8E /* MultiLineChartView.swift */,
+				EDAEF12B26C43A97001D3C8E /* Path+QuadCurve.swift */,
+				EDAEF12D26C43AB3001D3C8E /* Helpers.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		EDB6619626C484CC001722A7 /* CustomFont */ = {
+			isa = PBXGroup;
+			children = (
+				EDB661A826C484FC001722A7 /* fontsme.com.url */,
+				EDB6619926C484FA001722A7 /*  FuturePTBold */,
+				EDB661A126C484FB001722A7 /* FuturaPTBoldOblique.otf */,
+				EDB6619E26C484FB001722A7 /* FuturaPTBook.otf */,
+				EDB661A226C484FC001722A7 /* FuturaPTBookOblique.otf */,
+				EDB6619B26C484FA001722A7 /* FuturaPTCondBold.otf */,
+				EDB661A326C484FC001722A7 /* FuturaPTCondBoldOblique.otf */,
+				EDB661A726C484FC001722A7 /* FuturaPTCondBook.otf */,
+				EDB6619D26C484FB001722A7 /* FuturaPTCondBookOblique.otf */,
+				EDB661AD26C484FD001722A7 /* FuturaPTCondExtraBold.otf */,
+				EDB661AA26C484FD001722A7 /* FuturaPTCondExtraBoldOblique.otf */,
+				EDB661AB26C484FD001722A7 /* FuturaPTCondMedium.otf */,
+				EDB6619C26C484FB001722A7 /* FuturaPTCondMediumOblique.otf */,
+				EDB6619826C484FA001722A7 /* FuturaPTDemi.otf */,
+				EDB6619F26C484FB001722A7 /* FuturaPTDemiOblique.otf */,
+				EDB661A026C484FB001722A7 /* FuturaPTExtraBold.otf */,
+				EDB6619A26C484FA001722A7 /* FuturaPTExtraBoldOblique.otf */,
+				EDB661A426C484FC001722A7 /* FuturaPTHeavy.otf */,
+				EDB661A526C484FC001722A7 /* FuturaPTHeavyOblique.otf */,
+				EDB6619726C484FA001722A7 /* FuturaPTLight.otf */,
+				EDB661A926C484FD001722A7 /* FuturaPTLightOblique.otf */,
+				EDB661A626C484FC001722A7 /* FuturaPTMedium.otf */,
+				EDB661AC26C484FD001722A7 /* FuturaPTMediumOblique.otf */,
+			);
+			path = CustomFont;
+			sourceTree = "<group>";
+		};
+		EDB661C526C5710E001722A7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EDB661C626C57124001722A7 /* NetworkManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		EDBF70E5267186BA00CF2D97 /* Introspect */ = {
@@ -279,6 +434,12 @@
 			dependencies = (
 			);
 			name = "Bopp Music Player";
+			packageProductDependencies = (
+				ED42F05A26B9CCD40084E6D1 /* AlertX */,
+				ED60540026BEFD2800384202 /* WKView */,
+				EDAEF11826C3FC57001D3C8E /* SwiftUICharts */,
+				EDB661CB26C5B8A5001722A7 /* Shiny */,
+			);
 			productName = "Bopp Music Player";
 			productReference = ED15AF98266CD2D10023A5C3 /* Bopp Music Player.app */;
 			productType = "com.apple.product-type.application";
@@ -306,6 +467,12 @@
 				Base,
 			);
 			mainGroup = ED15AF8F266CD2D10023A5C3;
+			packageReferences = (
+				ED42F05926B9CCD40084E6D1 /* XCRemoteSwiftPackageReference "AlertX" */,
+				ED6053FF26BEFD2800384202 /* XCRemoteSwiftPackageReference "WKView" */,
+				EDAEF11726C3FC57001D3C8E /* XCRemoteSwiftPackageReference "ChartView" */,
+				EDB661CA26C5B8A4001722A7 /* XCRemoteSwiftPackageReference "shiny" */,
+			);
 			productRefGroup = ED15AF99266CD2D10023A5C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -321,11 +488,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED599B31267E385E00AC667E /* Launch Screen.storyboard in Resources */,
+				EDB661C126C484FD001722A7 /* FuturaPTCondExtraBoldOblique.otf in Resources */,
+				EDB661BD26C484FD001722A7 /* FuturaPTMedium.otf in Resources */,
+				EDB661AF26C484FD001722A7 /* FuturaPTDemi.otf in Resources */,
+				EDB661B126C484FD001722A7 /* FuturaPTExtraBoldOblique.otf in Resources */,
+				EDB661C326C484FD001722A7 /* FuturaPTMediumOblique.otf in Resources */,
 				ED15AFA3266CD2D30023A5C3 /* Preview Assets.xcassets in Resources */,
+				EDB661B926C484FD001722A7 /* FuturaPTBookOblique.otf in Resources */,
 				ED15AFA0266CD2D30023A5C3 /* Assets.xcassets in Resources */,
+				EDB661B426C484FD001722A7 /* FuturaPTCondBookOblique.otf in Resources */,
+				EDB661AE26C484FD001722A7 /* FuturaPTLight.otf in Resources */,
+				EDB661C026C484FD001722A7 /* FuturaPTLightOblique.otf in Resources */,
+				EDB661BB26C484FD001722A7 /* FuturaPTHeavy.otf in Resources */,
+				ED6ED20026BC875C007BA432 /* Key.json in Resources */,
+				EDB661BC26C484FD001722A7 /* FuturaPTHeavyOblique.otf in Resources */,
+				EDB661B226C484FD001722A7 /* FuturaPTCondBold.otf in Resources */,
+				EDB661BE26C484FD001722A7 /* FuturaPTCondBook.otf in Resources */,
+				EDB661B626C484FD001722A7 /* FuturaPTDemiOblique.otf in Resources */,
+				EDB661C426C484FD001722A7 /* FuturaPTCondExtraBold.otf in Resources */,
+				EDB661BA26C484FD001722A7 /* FuturaPTCondBoldOblique.otf in Resources */,
+				EDB661B526C484FD001722A7 /* FuturaPTBook.otf in Resources */,
 				ED15AFB4266CD4A30023A5C3 /* landmarkData.json in Resources */,
 				ED9597C7267AEDAC004AA17E /* GoogleService-Info.plist in Resources */,
 				ED38B0A7267D9D480024FC7A /* Coming.mp4 in Resources */,
+				EDB661B026C484FD001722A7 /*  FuturePTBold in Resources */,
+				EDB661BF26C484FD001722A7 /* fontsme.com.url in Resources */,
+				EDB661B826C484FD001722A7 /* FuturaPTBoldOblique.otf in Resources */,
+				EDB661C226C484FD001722A7 /* FuturaPTCondMedium.otf in Resources */,
+				EDB661B726C484FD001722A7 /* FuturaPTExtraBold.otf in Resources */,
+				EDB661B326C484FD001722A7 /* FuturaPTCondMediumOblique.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,35 +571,52 @@
 			files = (
 				EDBF70F2267186BA00CF2D97 /* Introspect.swift in Sources */,
 				ED15AF9E266CD2D10023A5C3 /* ContentView.swift in Sources */,
+				ED2862C926C088DD0086DDE3 /* MarketCap.swift in Sources */,
+				EDAEF11E26C43948001D3C8E /* IndicatorPoint.swift in Sources */,
 				ED15AFB7266CD4D40023A5C3 /* ModelData.swift in Sources */,
 				EDBF70EE267186BA00CF2D97 /* UIKitIntrospectionViewController.swift in Sources */,
+				EDAEF12026C4396A001D3C8E /* Legend.swift in Sources */,
+				EDB6619526C45C47001722A7 /* SettingsStore.swift in Sources */,
 				ED9597C5267AE14F004AA17E /* CloudKitTest.swift in Sources */,
 				ED8521C626838EBF003BAE94 /* ViewControllerResolver.swift in Sources */,
 				EDBF70F0267186BA00CF2D97 /* UIKitIntrospectionView.swift in Sources */,
 				ED15AFB0266CD3660023A5C3 /* MusicPlayerViewModel.swift in Sources */,
+				EDAEF12426C439C6001D3C8E /* LineChartView.swift in Sources */,
 				EDDF0FC6267FA80B00AF7C97 /* LoginViewModel.swift in Sources */,
+				EDAEF12E26C43AB3001D3C8E /* Helpers.swift in Sources */,
 				ED15AFC5266CDE430023A5C3 /* VideoPlayerView.swift in Sources */,
 				ED15AF9C266CD2D10023A5C3 /* Bopp_Music_PlayerApp.swift in Sources */,
 				ED15AFBB266CD51E0023A5C3 /* Home.swift in Sources */,
 				ED4D2DA426812F33001A456B /* SignInCryptoWallet.swift in Sources */,
 				EDDF0FCA267FAA7F00AF7C97 /* Logout.swift in Sources */,
+				EDED47B326C0CBD5003DB2B6 /* WalletView.swift in Sources */,
 				ED15AFBD266CD5930023A5C3 /* MusicListView.swift in Sources */,
+				EDAEF12A26C43A3F001D3C8E /* MultiLineChartView.swift in Sources */,
+				EDB661C926C5B125001722A7 /* CardViewed.swift in Sources */,
 				ED38B0A5267D9A570024FC7A /* Coming.swift in Sources */,
 				ED8521C82684AD40003BAE94 /* Control.swift in Sources */,
 				EDDF0FC8267FA83400AF7C97 /* Login.swift in Sources */,
 				ED15AFC3266CDBB60023A5C3 /* BlurView.swift in Sources */,
 				EDBF70ED267186BA00CF2D97 /* ViewExtensions.swift in Sources */,
+				EDAEF13226C459AA001D3C8E /* SettingsView.swift in Sources */,
 				ED15AFCC266CE1B90023A5C3 /* Miniplayer.swift in Sources */,
+				ED6053FE26BEFC5E00384202 /* WebView.swift in Sources */,
 				ED8521C526838EBF003BAE94 /* SearchBar.swift in Sources */,
 				EDBF70F4267247F300CF2D97 /* AirPlayView.swift in Sources */,
 				EDBF70E42671818A00CF2D97 /* TabBar.swift in Sources */,
+				EDAEF12826C43A20001D3C8E /* MagnifierRect.swift in Sources */,
 				ED15AFBF266CD78D0023A5C3 /* LandmarkRow.swift in Sources */,
+				EDB661C726C57124001722A7 /* NetworkManager.swift in Sources */,
 				EDBF70EF267186BA00CF2D97 /* AppKitIntrospectionView.swift in Sources */,
 				ED2EC6562673075C00AA0CED /* HapticFeedBack.swift in Sources */,
+				EDAEF12C26C43A97001D3C8E /* Path+QuadCurve.swift in Sources */,
+				EDD8293926B962AB00F74794 /* GenerateWallet.swift in Sources */,
+				EDAEF12626C439E0001D3C8E /* LineView.swift in Sources */,
+				EDAEF12226C43997001D3C8E /* Line.swift in Sources */,
 				ED46895226821EE800F8D1E3 /* CachingPlayerItem.swift in Sources */,
-				ED9597CB267AEFAD004AA17E /* MusicData.swift in Sources */,
 				EDDF0FCC267FD3C300AF7C97 /* ControlCenter.swift in Sources */,
 				EDDD6E80266EBAFB000F9DA5 /* AudioSetup.swift in Sources */,
+				ED2862C726C081FA0086DDE3 /* CardView.swift in Sources */,
 				ED15AFB9266CD4E40023A5C3 /* Landmark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,7 +750,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Bopp Music Player/Bopp Music Player.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"Bopp Music Player/Preview Content\"";
 				DEVELOPMENT_TEAM = 8YBV925VBW;
 				ENABLE_PREVIEWS = YES;
@@ -571,7 +779,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Bopp Music Player/Bopp Music Player.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"Bopp Music Player/Preview Content\"";
 				DEVELOPMENT_TEAM = 8YBV925VBW;
 				ENABLE_PREVIEWS = YES;
@@ -612,6 +820,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED42F05926B9CCD40084E6D1 /* XCRemoteSwiftPackageReference "AlertX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/neel-makhecha/AlertX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+		ED6053FF26BEFD2800384202 /* XCRemoteSwiftPackageReference "WKView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rebeloper/WKView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.6;
+			};
+		};
+		EDAEF11726C3FC57001D3C8E /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
+		EDB661CA26C5B8A4001722A7 /* XCRemoteSwiftPackageReference "shiny" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maustinstar/shiny";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED42F05A26B9CCD40084E6D1 /* AlertX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED42F05926B9CCD40084E6D1 /* XCRemoteSwiftPackageReference "AlertX" */;
+			productName = AlertX;
+		};
+		ED60540026BEFD2800384202 /* WKView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED6053FF26BEFD2800384202 /* XCRemoteSwiftPackageReference "WKView" */;
+			productName = WKView;
+		};
+		EDAEF11826C3FC57001D3C8E /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDAEF11726C3FC57001D3C8E /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+		EDB661CB26C5B8A5001722A7 /* Shiny */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDB661CA26C5B8A4001722A7 /* XCRemoteSwiftPackageReference "shiny" */;
+			productName = Shiny;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ED15AF90266CD2D10023A5C3 /* Project object */;
 }

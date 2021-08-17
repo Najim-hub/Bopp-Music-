@@ -8,10 +8,14 @@
 import SwiftUI
 import AVFoundation
 import MediaPlayer
+import SystemConfiguration
+import IGIdenticon
 
 struct Home: View {
     
-  
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
+    
+    @State private var showAlert = false
     
     @StateObject var player = MusicPlayerViewModel()
   
@@ -26,38 +30,134 @@ struct Home: View {
     @State var states : Bool = false
     
     @ObservedObject var Avplayer = AudioPlayer.sharedInstance
+    
+    @ObservedObject var val = playVal.sharedInstance
+    
+    @ObservedObject var searchBar: SearchBar = SearchBar()
+    
+    @ObservedObject var gen = GenWallet.sharedInstance
+    
+    var texting = searching.sharedInstance
+   
+    @AppStorage("AccountBalance") var AccountBalance = ""
 
-    var data = MusicData()
+    @State var searchText: String = ""
+    @AppStorage("AccountNumber") var AccountNumber = ""
+    
+   @State private var keyboardHeight: CGFloat = 0
+
+    @ObservedObject var dataList = MarketCap.sharedInstance
      
     @State var value: Float = 0
     
     @AppStorage("Name") var Name = ""
-    //Text("Hello, \(Name)" )
     
+    //@State private var searchText : String = ""
+    
+    
+
     var body: some View {
         
-        ZStack(alignment: .bottom, content: {
-          
+        
+        if AccountBalance == ""{
+            
             NavigationView {
- 
-                List{
-
-    ForEach(songList.songs, id: \.id) { landmark in
-                
-                HStack(spacing: 15){
                     
-                    LandmarkRow(landmark: landmark)
-                    .padding(.horizontal)
-                    .onTapGesture {
-                        withAnimation{
+                      List(
+                        songList.songs.filter {
+                                     
+                        texting.text.isEmpty
+                          
+                                ||
+                                
+                         $0.trackName.localizedStandardContains(texting.text)
+                          
+                              ||
+                          
+                          $0.trackName.localizedStandardContains(val.searchText)
+                          
+                          ||
+                          
+                          $0.artistName.localizedStandardContains(texting.text)
+                          
+                          ||
+                          
+                          
+                          $0.artistName.localizedStandardContains(val.searchText)
+                                
+                                }){
+                              landmark in
+                    
+                    HStack(spacing: 15){
+                        
+                        LandmarkRow(landmark: landmark)
+                        //.padding(.horizontal)
+                        .onTapGesture {
+                            withAnimation{
+                                
+                                var flags = SCNetworkReachabilityFlags()
+                                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                                
+                                if self.isNetworkReachable(with: flags){
+                                    
+                                gen.balance()
+                                    
+                                playController.showPlayer = true
+                                
+                                
+                                playController.isPlaying = true
+                                
+                                    playController.isMini = true
+                               
+                                
+                                playController.position = landmark.id - 1
+                                
+                                if Avplayer.player!.rate > 0 {
+                                    
+                                    val.playValue = 0
+                                
+                                    Avplayer.player?.rate = 0
+                                    
+                                    
+                                    
+                                    Avplayer.playSong()
+                                
+                                }
+                                
+                                else{
+                                    val.playValue = 0
+                                    Avplayer.playSong()
+                                }
+                                HapticFeedBack.shared.hit(0.3)
                             
+                                }
+                                
+                                else{
+                                    self.showAlert = true
+                                }
+
+                                
+                            }
+                            
+                        }
+                        
+                        Button(action: {
+                            
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            
+                            val.playValue = 0
+                            
+                            if self.isNetworkReachable(with: flags){
+                                
+                                
                             playController.showPlayer = true
                             
-                            print("I was Tapped")
-                            
+                            playController.isMini = true
+                           
                             playController.isPlaying = true
-                            
-                            
+                                
+                           
                             
                             playController.position = landmark.id - 1
                             
@@ -73,17 +173,172 @@ struct Home: View {
                                 Avplayer.playSong()
                             }
                             HapticFeedBack.shared.hit(0.3)
+                                
+                            }
+                            
+                            else{
+                                self.showAlert = true
+                            }
+                            
+                     
+                                
+                        }, label: {
+                            
+                                Image(systemName: "")
+                                    .font(.largeTitle)
+                                    .foregroundColor(.white)
+                                
+                        }
+                        )
+                        
+                        
+                        
+                    
+                    }.onAppear(perform: {
+                         var flags = SCNetworkReachabilityFlags()
+                        SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                        
+                        if self.isNetworkReachable(with: flags){
+                            
+                            
+                        }
+                        
+                        else{
+                            self.showAlert = true
+                        }
+                        
+                        
+                    })
+                        //.padding(.bottom, playController.isMini ? 90 : 0)
+                    .listStyle(PlainListStyle())
+                    .alert(isPresented: self.$showAlert){
+                        Alert(title: Text("No Internet Connection"), message: Text("Please enable a WiFi or Cellular Data Connection"), dismissButton: .default(Text("Ok")))
+                    }
+                                    
+                                    
+                        
+                    }
+                
+                
+                  
+                   // .frame(width:  UIScreen.main.bounds.width, height: .infinity, alignment: .center)
+                   // .offset(y: playController.isMini ? -100 : 0)
+                    .navigationBarTitle(Text("Songs"), displayMode: .automatic)
+                    
+                    .add(self.searchBar)
+                
+                    .ignoresSafeArea(.keyboard)
+                    }
+            
+                .navigationViewStyle(StackNavigationViewStyle())
+                    
+                
+                .onChange(of: gestureOffset, perform: { value in
+                onChanged()
+                    
+            })
+            
+            
+        }
+        else{
+            
+        NavigationView {
+            var image = Identicon().icon(from: AccountNumber, size: CGSize(width: 25, height: 25))
+                  List(
+                    songList.songs.filter {
+                                 
+                    texting.text.isEmpty
+                      
+                            ||
+                            
+                     $0.trackName.localizedStandardContains(texting.text)
+                      
+                          ||
+                      
+                      $0.trackName.localizedStandardContains(val.searchText)
+                      
+                      ||
+                      
+                      $0.artistName.localizedStandardContains(texting.text)
+                      
+                      ||
+                      
+                      
+                      $0.artistName.localizedStandardContains(val.searchText)
+                            
+                            }){
+                          landmark in
+                
+                HStack(spacing: 15){
+                    
+                    LandmarkRow(landmark: landmark)
+                    //.padding(.horizontal)
+                    .onTapGesture {
+                        withAnimation{
+                            
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            
+                            if self.isNetworkReachable(with: flags){
+                                
+                            gen.balance()
+                                
+                            playController.showPlayer = true
+                            
+                            
+                            playController.isPlaying = true
+                            
+                                playController.isMini = true
+                           
+                            
+                            playController.position = landmark.id - 1
+                            
+                                if Avplayer.player!.rate > 0 {
+                                
+                                val.playValue = 0
+                            
+                                Avplayer.player?.rate = 0
+                                
+                                
+                                
+                                Avplayer.playSong()
+                            
+                            }
+                            
+                            else{
+                                val.playValue = 0
+                                Avplayer.playSong()
+                            }
+                            HapticFeedBack.shared.hit(0.3)
                         
                             }
+                            
+                            else{
+                                self.showAlert = true
+                            }
+
+                            
                         }
+                        
+                    }
                     
                     Button(action: {
                         
+                        var flags = SCNetworkReachabilityFlags()
+                        SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                        
+                        val.playValue = 0
+                        
+                        if self.isNetworkReachable(with: flags){
+                            
+                            
                         playController.showPlayer = true
                         
-                        print("I was Tapped")
-                        
+                        playController.isMini = true
+                       
                         playController.isPlaying = true
+                            
+                       
                         
                         playController.position = landmark.id - 1
                         
@@ -99,6 +354,12 @@ struct Home: View {
                             Avplayer.playSong()
                         }
                         HapticFeedBack.shared.hit(0.3)
+                            
+                        }
+                        
+                        else{
+                            self.showAlert = true
+                        }
                         
                  
                             
@@ -112,81 +373,106 @@ struct Home: View {
                     )
                     
                     
-                    Spacer()
                     
-                    Button(action: {}) {
+                
+                }.onAppear(perform: {
+                     var flags = SCNetworkReachabilityFlags()
+                    SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                    
+                    if self.isNetworkReachable(with: flags){
                         
-                        Image(systemName: "ellipsis")
-                            .font(.title2)
-                            .foregroundColor(.primary)
-                    }.frame(width: 50, height: 50, alignment: .trailing)
-                    .offset(x: 5)
+                        
+                    }
                     
-                
+                    else{
+                        self.showAlert = true
+                    }
+                    
+                    
+                })
+                    //.padding(.bottom, playController.isMini ? 90 : 0)
+                .listStyle(PlainListStyle())
+                .alert(isPresented: self.$showAlert){
+                    Alert(title: Text("No Internet Connection"), message: Text("Please enable WiFi or Cellular Data"), dismissButton: .default(Text("Ok")))
                 }
-                 
+                                
+                                
+                    
                 }
-                }
-                .offset(y: playController.isMini ? -100 : 0)
-                
+            
+            
+                  .onAppear(perform: {
+                                
+                    for family: String in UIFont.familyNames
+                          {
+                              print(family)
+                              for names: String in UIFont.fontNames(forFamilyName: family)
+                              {
+                                  print("== \(names)")
+                              }
+                          }
+                  })
+               // .frame(width:  UIScreen.main.bounds.width, height: .infinity, alignment: .center)
+               // .offset(y: playController.isMini ? -100 : 0)
                 .navigationBarTitle(Text("Songs"), displayMode: .automatic)
-           
-                
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-             
-               player.soundLevel =  AVAudioSession.sharedInstance().outputVolume
-                
-                
-                AudioPlayer.sharedInstance.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect();
-                
-                //value = Float(CMTimeGetSeconds((Avplayer.player?.currentItem?.currentTime())!))
-                
-               // playController.playValue = TimeInterval(value)
-                
-      
-               // print(playController.playValue, "You Back??!!")
-         
-            }
+                  .navigationBarItems(trailing:
+                                HStack{
+                            /*
+                        Image(uiImage: image!)
+                                     .resizable()
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.orange, lineWidth: 1))
+                            .overlay(Circle().stroke(Color.white, lineWidth: 0.5))
+                                  .aspectRatio(contentMode: .fit)
+                            .offset(x:  -UIScreen.main.bounds.width/2.6)
+                            .frame(width: 25, height: 25, alignment: .leading)
+                                    
+                                    */
+                   Image("ethereum")
+                          .resizable()
+                    .frame(width: 19, height: 19, alignment: .trailing)
+                                              
+                          Text(AccountBalance + " ETH")
+                                        .font(.system(size: 15))
+                                        .fontWeight(.light)
+                                      
+                                          }
+                            
+                      )
+                .add(self.searchBar)
             
+                .ignoresSafeArea(.keyboard)
+                }
+        
+        
+            .navigationViewStyle(StackNavigationViewStyle())
+    
             
-            /*
-            if playControl.sharedInstance.showPlayer {
-                Miniplayer()
-                    .zIndex(2.0)
-                .transition(.move(edge: .bottom))
-                    .offset(y: player.offset)
-                    .gesture(DragGesture().updating($gestureOffset, body: { (value, state, _) in
-                        
-                        state = value.translation.height
-                        
-                       
-                       
-                    })
-                    .onEnded(onEnd(value:)
-                    
-                    
-                    ))
-            }*/
-            })
-        .onAppear(perform: {
+            .onChange(of: gestureOffset, perform: { value in
+            onChanged()
+                
+        })
             
         
-           print("Shared instance size in home view")
-           print(loadInfo.sharedInstance.songs.count)
+            
         }
-        )
-        .onChange(of: gestureOffset, perform: { value in
-        onChanged()
-            
-    }
- 
- )
-        //.environmentObject(player)
         
+      
         
+       
 }
     
+    private func isNetworkReachable(with flags : SCNetworkReachabilityFlags) -> Bool{
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
+        
+      
+    }
     
     func onChanged(){
         
@@ -222,8 +508,90 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
-            .padding(.all)
+        Group {
+            Home()
+            Home()
+        }
+           // .padding(.all)
     }
 }
+}
+class SearchBar: NSObject, ObservableObject {
+    
+    @Published var text: String = ""
+    
+  var val = playVal.sharedInstance
+    
+    
+   var playController = playControl.sharedInstance
+    
+    
+    var texting = searching.sharedInstance
+   
+    let searchController: UISearchController = UISearchController(searchResultsController: nil)
+    
+    override init() {
+        super.init()
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchResultsUpdater = self
+       
+    }
+}
+
+extension SearchBar: UISearchResultsUpdating {
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        print("updating")
+        // Publish search bar text changes.
+         if let searchBarText = searchController.searchBar.text {
+                
+                self.text = searchBarText
+                
+                val.searchText = searchBarText
+                
+                searching.sharedInstance.text = searchBarText
+                
+                print("Not Mini: ", self.text)
+                
+                print("Val: ",  val.searchText)
+            
+        }
+    }
+}
+
+struct SearchBarModifier: ViewModifier {
+    
+    let searchBar: SearchBar
+    
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                ViewControllerResolver { viewController in
+                    viewController.navigationItem.searchController = self.searchBar.searchController
+                }
+                    .frame(width: 0, height: 0)
+            )
+    }
+}
+
+
+class searching: ObservableObject{
+    
+    @Published var text = ""
+    
+    static let sharedInstance = searching()
+    
+    init(){
+        
+    }
+    
+}
+
+extension View {
+    
+    func add(_ searchBar: SearchBar) -> some View {
+        return self.modifier(SearchBarModifier(searchBar: searchBar))
+    }
 }
