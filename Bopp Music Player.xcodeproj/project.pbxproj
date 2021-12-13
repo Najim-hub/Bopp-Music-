@@ -34,11 +34,11 @@
 		ED6053FE26BEFC5E00384202 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6053FD26BEFC5E00384202 /* WebView.swift */; };
 		ED60540126BEFD2800384202 /* WKView in Frameworks */ = {isa = PBXBuildFile; productRef = ED60540026BEFD2800384202 /* WKView */; };
 		ED6ED20026BC875C007BA432 /* Key.json in Resources */ = {isa = PBXBuildFile; fileRef = ED6ED1FF26BC875C007BA432 /* Key.json */; };
+		ED77113D26CE973A00147669 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED77113C26CE973A00147669 /* GoogleService-Info.plist */; };
 		ED8521C526838EBF003BAE94 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8521C326838EBF003BAE94 /* SearchBar.swift */; };
 		ED8521C626838EBF003BAE94 /* ViewControllerResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8521C426838EBF003BAE94 /* ViewControllerResolver.swift */; };
 		ED8521C82684AD40003BAE94 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8521C72684AD40003BAE94 /* Control.swift */; };
 		ED9597C5267AE14F004AA17E /* CloudKitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9597C4267AE14F004AA17E /* CloudKitTest.swift */; };
-		ED9597C7267AEDAC004AA17E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED9597C6267AEDAB004AA17E /* GoogleService-Info.plist */; };
 		EDADD1DD2678E1E70024C6D1 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDADD1DC2678E1E70024C6D1 /* CloudKit.framework */; };
 		EDAEF11926C3FC57001D3C8E /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = EDAEF11826C3FC57001D3C8E /* SwiftUICharts */; };
 		EDAEF11E26C43948001D3C8E /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAEF11D26C43948001D3C8E /* IndicatorPoint.swift */; };
@@ -123,12 +123,12 @@
 		ED599B30267E385E00AC667E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		ED6053FD26BEFC5E00384202 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ED6ED1FF26BC875C007BA432 /* Key.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Key.json; sourceTree = "<group>"; };
+		ED77113C26CE973A00147669 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED8521C326838EBF003BAE94 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		ED8521C426838EBF003BAE94 /* ViewControllerResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerResolver.swift; sourceTree = "<group>"; };
 		ED8521C72684AD40003BAE94 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		ED95978D2679173D004AA17E /* PackageFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PackageFolder; path = "Bopp Music Player/PackageFolder"; sourceTree = "<group>"; };
 		ED9597C4267AE14F004AA17E /* CloudKitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitTest.swift; sourceTree = "<group>"; };
-		ED9597C6267AEDAB004AA17E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDADD1DA2678E1540024C6D1 /* Bopp Music Player.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bopp Music Player.entitlements"; sourceTree = "<group>"; };
 		EDADD1DC2678E1E70024C6D1 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		EDAEF11D26C43948001D3C8E /* IndicatorPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
@@ -233,11 +233,10 @@
 		ED15AF9A266CD2D10023A5C3 /* Bopp Music Player */ = {
 			isa = PBXGroup;
 			children = (
+				ED77113C26CE973A00147669 /* GoogleService-Info.plist */,
 				EDB661C526C5710E001722A7 /* Network */,
 				EDB6619626C484CC001722A7 /* CustomFont */,
 				EDAEF11C26C43927001D3C8E /* Charts */,
-				ED9597C6267AEDAB004AA17E /* GoogleService-Info.plist */,
-				ED599B30267E385E00AC667E /* Launch Screen.storyboard */,
 				EDADD1DA2678E1540024C6D1 /* Bopp Music Player.entitlements */,
 				EDBF70E5267186BA00CF2D97 /* Introspect */,
 				ED15AFD3266D17770023A5C3 /* Files */,
@@ -280,6 +279,8 @@
 		ED15AFB1266CD46C0023A5C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ED599B30267E385E00AC667E /* Launch Screen.storyboard */,
+				ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */,
 				ED2862C626C081FA0086DDE3 /* CardView.swift */,
 				ED15AFBA266CD51E0023A5C3 /* Home.swift */,
 				EDBF70E32671818A00CF2D97 /* TabBar.swift */,
@@ -288,7 +289,6 @@
 				ED4D2DA326812F33001A456B /* SignInCryptoWallet.swift */,
 				EDED47B226C0CBD5003DB2B6 /* WalletView.swift */,
 				ED15AFBE266CD78D0023A5C3 /* LandmarkRow.swift */,
-				ED15AFCB266CE1B90023A5C3 /* Miniplayer.swift */,
 				EDDF0FC9267FAA7F00AF7C97 /* Logout.swift */,
 				EDDF0FC7267FA83400AF7C97 /* Login.swift */,
 				ED38B0A4267D9A570024FC7A /* Coming.swift */,
@@ -352,7 +352,6 @@
 		EDAEF11C26C43927001D3C8E /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				EDAEF11D26C43948001D3C8E /* IndicatorPoint.swift */,
 				EDAEF11F26C4396A001D3C8E /* Legend.swift */,
 				EDAEF12126C43997001D3C8E /* Line.swift */,
 				EDAEF12326C439C6001D3C8E /* LineChartView.swift */,
@@ -368,6 +367,7 @@
 		EDB6619626C484CC001722A7 /* CustomFont */ = {
 			isa = PBXGroup;
 			children = (
+				EDAEF11D26C43948001D3C8E /* IndicatorPoint.swift */,
 				EDB661A826C484FC001722A7 /* fontsme.com.url */,
 				EDB6619926C484FA001722A7 /*  FuturePTBold */,
 				EDB661A126C484FB001722A7 /* FuturaPTBoldOblique.otf */,
@@ -504,12 +504,12 @@
 				EDB661BC26C484FD001722A7 /* FuturaPTHeavyOblique.otf in Resources */,
 				EDB661B226C484FD001722A7 /* FuturaPTCondBold.otf in Resources */,
 				EDB661BE26C484FD001722A7 /* FuturaPTCondBook.otf in Resources */,
+				ED77113D26CE973A00147669 /* GoogleService-Info.plist in Resources */,
 				EDB661B626C484FD001722A7 /* FuturaPTDemiOblique.otf in Resources */,
 				EDB661C426C484FD001722A7 /* FuturaPTCondExtraBold.otf in Resources */,
 				EDB661BA26C484FD001722A7 /* FuturaPTCondBoldOblique.otf in Resources */,
 				EDB661B526C484FD001722A7 /* FuturaPTBook.otf in Resources */,
 				ED15AFB4266CD4A30023A5C3 /* landmarkData.json in Resources */,
-				ED9597C7267AEDAC004AA17E /* GoogleService-Info.plist in Resources */,
 				ED38B0A7267D9D480024FC7A /* Coming.mp4 in Resources */,
 				EDB661B026C484FD001722A7 /*  FuturePTBold in Resources */,
 				EDB661BF26C484FD001722A7 /* fontsme.com.url in Resources */,
@@ -750,7 +750,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Bopp Music Player/Bopp Music Player.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Bopp Music Player/Preview Content\"";
 				DEVELOPMENT_TEAM = 8YBV925VBW;
 				ENABLE_PREVIEWS = YES;
@@ -760,7 +760,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 1.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "Najim.Bopp-Music-Player";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -779,7 +779,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Bopp Music Player/Bopp Music Player.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_ASSET_PATHS = "\"Bopp Music Player/Preview Content\"";
 				DEVELOPMENT_TEAM = 8YBV925VBW;
 				ENABLE_PREVIEWS = YES;
@@ -789,7 +789,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 1.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "Najim.Bopp-Music-Player";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
