@@ -214,6 +214,12 @@ PODS:
     - abseil/base/config
     - abseil/meta/type_traits
   - Alamofire (5.4.3)
+  - AppAuth (1.5.0):
+    - AppAuth/Core (= 1.5.0)
+    - AppAuth/ExternalUserAgent (= 1.5.0)
+  - AppAuth/Core (1.5.0)
+  - AppAuth/ExternalUserAgent (1.5.0):
+    - AppAuth/Core
   - BigInt (5.2.0)
   - BlockiesSwift (0.1.2)
   - BoringSSL-GRPC (0.0.7):
@@ -345,6 +351,10 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
+  - GoogleSignIn (6.2.2):
+    - AppAuth (~> 1.5)
+    - GTMAppAuth (~> 1.3)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUtilities/AppDelegateSwizzler (7.4.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -389,6 +399,9 @@ PODS:
     - BoringSSL-GRPC (= 0.0.7)
     - gRPC-Core/Interface (= 1.28.2)
   - gRPC-Core/Interface (1.28.2)
+  - GTMAppAuth (1.3.0):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.5.0)
   - IGIdenticon (0.8.0)
   - leveldb-library (1.22.1)
@@ -434,6 +447,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Performance
   - Firebase/Storage
+  - GoogleSignIn
   - IGIdenticon
   - ReachabilitySwift
   - SDWebImageSwiftUI
@@ -443,6 +457,7 @@ SPEC REPOS:
   trunk:
     - abseil
     - Alamofire
+    - AppAuth
     - BigInt
     - BlockiesSwift
     - BoringSSL-GRPC
@@ -462,9 +477,11 @@ SPEC REPOS:
     - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
+    - GoogleSignIn
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
+    - GTMAppAuth
     - GTMSessionFetcher
     - IGIdenticon
     - leveldb-library
@@ -496,6 +513,7 @@ SPEC CHECKSUMS:
   AAInfographics: e57c6cc15ddc17df3555db6f586fb0e1b911a0b7
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
   BlockiesSwift: 22d8d56dd187e6bfd16cb8c8fbd4fd4896c3e65d
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
@@ -515,9 +533,11 @@ SPEC CHECKSUMS:
   FirebaseStorage: 5b5958efaf84fb991568ad36f157f60c76bdcd80
   GoogleAppMeasurement: 9ff7b9e23cced93a5a41736c09bdeb5b5b7fb111
   GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
+  GoogleSignIn: 3c68388ac221f379676e8f1cb115df3aaf73b93f
   GoogleUtilities: f8a43108b38a68eebe8b3540e1f4f2d28843ce20
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
+  GTMAppAuth: 4d8f864896f3646f0c33baf38a28362f4c601e15
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   IGIdenticon: b6e655a11290c82c3614fbae16b53400b418da03
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
@@ -532,6 +552,6 @@ SPEC CHECKSUMS:
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   web3swift: dcc8da6f0944a062faa381869ce64114ddb5f8d3
 
-PODFILE CHECKSUM: 442ed2e942c936778a600f661fc8d09ed14fb6d4
+PODFILE CHECKSUM: 9433dfe628d704b00f241325aee02ad6906e5678
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.3

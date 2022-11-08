@@ -20,6 +20,8 @@ target 'Bopp Music Player' do
   pod ‘SDWebImageSwiftUI’
   
   pod 'Firebase/Performance'
+
+  pod 'GoogleSignIn'
   
   pod 'Cache'
 
