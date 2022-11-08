@@ -1,116 +1,82 @@
-<<<<<<< HEAD
-#Bopp-Music
-=======
-This is a new README file
->>>>>>> branch_to_create_merge_conflict
+![logo](https://user-images.githubusercontent.com/59806355/200640410-f207c699-a926-4e3e-a643-855c6efe40ff.jpeg)
 
-Bopp Music
- Inc. Streaming
-App
-FIRST DECENTRALIZED MUSIC STREAMING SERVICE
-  August 9th, 2021
-  DISCUSSION FLOW
-Underpaid artist
-Lack of control for artist Lack of transparency Centralized governance
- Current problem in the music
-industry
-   
-     Underpaid artists
-PRO-RATA MODEL
-Most streaming platforms pay artists by pooling revenue and distributing based on stream count. Which doesn't help small artists.
-EARNING BELOW MINIMUM WAGE
-On average, most artists need a minimum 300,000 monthly streams to earn a minimum wage in the United states.
-  
-   Lack of control
-"MASTERS" IS A PHRASE MOST USED IN THE MUSIC INDSUTRY. IT REFERS TO THE RIGHTS TO A SONG. MOST ARTISTS DO NOT OWN THE RIGHTS TO THEIR MUSIC.
-  
-  NO
-TRANSPARENCY
-CENTRALIZED GOVERNANCE
-These two points go hand in hand. Essentially, large streaming platforms control the flow of data. So, commonly, artists never know their true earning potentials because these organization never disclose this information. All the governance lies in the hand of the streaming platform which creates inefficiencies.
-  
-Solution
-  FULL PAYMENT TO ARTISTS
-A zero commission music streaming platform
-FULL CONTROL TO ARTISTS
-Artists have full rights to their music as compared to the inefficient streaming model.
-COMPLETE TRANSPARENCY AND OPEN GOVERNANCE
-Creating a self-sustaining music ecosystem whereby artists, producers, songwriters, and fans can play a vital role in managing and developing the platform.
- 
-     FULL PAYMENT TO ARTISTS
-We plan to eliminate platform fees and give the artist back the total value from their music sales. A zero-commission model will lead to better income for artists, who, in return, will pass on some of the matter to the fans by investing in their music and themselves.
- 
- Full control and rights to artists
- MUSIC DISTRIBUTION
-Bopp decentralized platform will allow artists to distribute their music from a unique ETH wallet address
-NO THIRD PARTY IS INVOLVED
-it’s a direct transaction between the fan and the artist.
-REVENUE SHARING
-Artists no longer need to pay any streaming platform to distribute their music, neither do they have to share revenue with any record label.
-    
-  COMPLETE TRANSPARENCY
-Bopp’s decentralized music streaming platform will allow users a higher level of transparency. All the transactions will be recorded on the blockchain. Every transaction will be made visible, which creates the highest level of transparency.
- OPEN GOVERNANCE
-Bopp is creating a self- sustaining music ecosystem whereby artists, producers, songwriters, and fans can play a vital role in managing and developing the platform. Bopp believes not one entity knows what works best for each artist or lover, so Bopp will be produced as a platform whereby each platform can use it how it fits them best.
- 
-  MUSIC OWNERSHIP
-A shift away from the current model of pay as you go. Fans now own the music they purchase, this the next step in the music industry.
-   MUSIC 3.0
-  
- Blockchain Technology
- FULL TRANSPARENCY
-The Ethereum blockchain brings a high level of transparency into the music industry. It massively increases the efficiency by which all parties on the platforms operate
-OPEN GOVERNANCE
-Bopp holders stake their tokens, which gives them voting rights in upgrades in the Bopp music app
-DECENTRALIZATION
-Bopp music will be a decentralized protocol. So, the authority needed to make decisions will not belong to the Bopp team. Instead, it will be the community.
-    
-Smart Contract Implementation
-  ETHEREUM
-Our smart contracts are written in solidity, which is the native language of the Ethereum blockchain. The contracts are complied with using truffle.
-MAIN CONTRACT
-The main contract is the music contract: When songs are added by artists on Bopp, they get uploaded directly onto the Ethereum blockchain, with a unique hash. The user that mints this song is the owner of this unique hash, they then disturb the music onto the Bopp marketplace.
-    
-Bopp User Interface
-The beta app is currently on the app store while we await further funding to develop the marketplace section of our app. This will offer full functionality and allow users enjoy the complete experience of Bopp Music
-Download our beta app: https://apps.apple.com/ca/app/bopp-music/id1573437750?fbclid=IwAR3l8Iex5Xlk- ULKy2GTMB8d6ZcX8b_ZZibKZQgN02rOs26J2w7xQd1tL4k
-              Wallet Tracker Music dashboard Settings
 
- TOKENOMICS
- TOKEN TYPE TOKEN SYMBOL
-ERC-20 TOKEN
-TOTAL SUPPLY
-100,000,000
-$BOPP
-           
- TOKEN DISTRIBUTION
-Marketing 15%
-Team 10%
-Private Sale 20%
-Advisory 10%
-Public Sale 5%
- Ecosystem 20%
-Community 20%
-PUBLIC SALE
-5,000,000
-PRIVATE SALE
-20,000,000
-COMMUNITY INCENTIVE
-ECOSYSTEM DEVELOPMENT
-20,000,000
-MARKETING&PARTNERSHIPS
-20,000,000
-15,000,000
- TEAM
-      10,000,000
-ADVISORY
-10,000,000
-    
- Q2 2021
-Prepare pilot iOS application
-  Q3 2021
-Pilot iOS application launch, public sale, Exchange listing, Prepare pilot Android application
-Q4 2021
-Staking platform launch, Version 2 of iOS and Android applications, enabling governance.
+# Bopp Music Inc
 
+### Overview 
+
+Bopp — an innovative, industry-leading audio streaming company. Bopp is the first music audio streaming service that has a fully integrated MFT (Music Fungible Token) Marketplace. 
+
+Which Gap Does Bopp Fill?
+Bopp makes it easy for artists to sell their music as NFTs with our unique marketplace. Users can mint (create) and trade Music NFTs on our marketplace and our mobile app allows users to stream music from their favorite artists. We are maintaining the user experience of music streaming while integrating NFTs which bring more value to users and artists overall.
+
+Our marketplace empowers artist to generate more revenue for their art through offers of exclusive music to fans, crowdfunding (funding which can be put towards albums, equipment, touring, etc.), and trading fees. Music NFTs are the next biggest opportunity for musicians to be fairly compensated for their content. 
+
+
+# Products
+
+Music Streaming Application
+Bopp offers digital copyright restricted music to our users around the world. The mobile app is an on-demand audio streaming app that allows users to stream music uploaded by artists worldwide. 
+The audio streaming app offers:
+Downloadable music. 
+Listen anywhere.
+
+Version One of the mobile application is on the apple store; https://apps.apple.com/ca/app/bopp-music/id1573437750
+
+### The Mockup for Version Two of the mobile application
+
+<details>
+<summary>The Mockup for Version Two of the mobile application</summary><details>
+
+<img src="https://user-images.githubusercontent.com/59806355/200636972-0256723f-8e36-45de-9cc6-8fd935e06a3a.JPG" width="200">
+
+<img src="https://user-images.githubusercontent.com/59806355/200636975-c0dd21e5-0265-4d02-83c0-2eb4e5ba50bb.JPG" width="200">
+
+<img src="https://user-images.githubusercontent.com/59806355/200636977-e335b930-05fa-46cf-8fd3-dd8743b1b28c.JPG" width="200">
+
+<img src="https://user-images.githubusercontent.com/59806355/200637051-7ba18a45-af64-49df-bc04-1e9999fe1e13.JPG" width="200">
+
+<img src="https://user-images.githubusercontent.com/59806355/200637562-20c12e76-bcd7-4bf1-8ce9-41044984ae19.png" width="200">
+
+<img src="https://user-images.githubusercontent.com/59806355/200637571-ff9a83e1-1d9d-4cb9-bd2d-218aae82ba2f.png" width="200">
+
+<img src="https://user-images.githubusercontent.com/59806355/200637605-142d9e97-9cb6-46b7-9a3a-1cff012651b5.png" width="200">
+
+<img src="https://user-images.githubusercontent.com/59806355/200637632-6f22e6f7-57ff-4a93-bb2d-64026fd17584.png" width="200">
+
+<img src="https://user-images.githubusercontent.com/59806355/200637595-03ffc74e-d0c8-4cb8-a1ea-d177360f873d.png" width="200">
+</details>
+
+Version Two we will be integrated with Web3 (Wallet, NFT Marketplace, Token gating). Users will have a Near wallet, allowing users to hold tokens on the Near blockchain and trade NFTs. 
+
+## NFT Marketplace
+The Bopp NFT platform allows users to store, display, trade, and mint music NFTs. 
+When a music NFT is traded on the Bopp marketplace, the artist receives a royalty based on the percentage set by the artist. Bopp also takes a 2.5% fee from every trade.
+
+## NFT Ticketing
+NFT tickets are digital access credentials that offer holders exclusive benefits at the event they attend. 
+The tickets are digital assets stored on a blockchain, so the risk of your ticket getting lost, stolen or damaged is relatively low. 
+Overtime they will become valuable collectibles, acting as lasting memorabilia.
+![ticketing](https://user-images.githubusercontent.com/59806355/200638759-7a709e5e-d165-456a-9934-530ceddafcd4.png)
+Example of the NFT tickets in app. It can be traded on our NFT Marketplace, also its a digital ticket than has a QR code and will be used to gain access to events.
+
+## Non-Custodial Wallet
+All users will have a blockchain wallet that allows them to be their own bank. The user will have full control over their funds and associated private keys. 
+## Custodian of Private Key 
+All our blockchain custodial services reside with users.
+## Transaction Type
+Transactions are reflected on the blockchain in real-time.
+# Security
+With non-custodial crypto wallets, all personal information remains with users. This reduces the risk of data theft.
+Backup and Recovery Possibility
+Wallets are under the sole authority of the user.
+## Offline Accessibility
+Non-Custodial wallets are accessible offline and offer full blockchain development services in real-time. 
+
+# Crowdfunding
+On the Bopp Music NFT Marketplace, fans will be able to fund an artist's album in exchange for a share of streaming revenue generated by the album. This is done through the Music NFT Collection drop. 
+First, the artist must release their Music NFTs. Artists have the freedom to decide how many units of NFTs they will put up for sale. The artist can then take the proceeds from the launch and apply the proceeds towards creating their album. When their album is available for streaming, investors will receive a percentage (set by the artist) of all the total streaming revenue. 
+The Bopp marketplace is effectively eliminating the need for record labels, giving the artist the opportunity to source funds without getting drawn into exploitative contracts. 
+Bopp’s music market model enables the revenue from any track streamed on the Bopp Music App to be automatically distributed to the investors and the artist. 
+On the Bopp platform, it pays to invest in an artist you believe in. Not only will you have the chance to see them flourish and prosper, but you can also benefit financially from their success. The earlier you invest in your artists, the more you will benefit.
 
