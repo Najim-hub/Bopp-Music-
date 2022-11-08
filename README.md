@@ -1,8 +1,8 @@
 
 
 <p align="center">
-  
-  <img src="https://user-images.githubusercontent.com/59806355/200640410-f207c699-a926-4e3e-a643-855c6efe40ff.jpeg" width="200">
+ 
+  <img src="https://user-images.githubusercontent.com/59806355/200662050-8c79a5d8-f171-4d1f-848d-2b458602b8bc.png" width="200">
   
 </p>
 
