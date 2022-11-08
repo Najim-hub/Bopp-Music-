@@ -49,6 +49,8 @@ Version One of the mobile application is on the apple store; https://apps.apple.
 
 <img src="https://user-images.githubusercontent.com/59806355/200637632-6f22e6f7-57ff-4a93-bb2d-64026fd17584.png" width="200">
 
+<img src="https://user-images.githubusercontent.com/59806355/200664756-45240680-53cf-4039-885a-d4338fb08433.png" width="200">
+  
 <img src="https://user-images.githubusercontent.com/59806355/200637595-03ffc74e-d0c8-4cb8-a1ea-d177360f873d.png" width="200">
 </details>
 
