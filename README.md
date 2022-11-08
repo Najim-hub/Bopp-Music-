@@ -1,5 +1,10 @@
-![logo](https://user-images.githubusercontent.com/59806355/200640410-f207c699-a926-4e3e-a643-855c6efe40ff.jpeg)
 
+
+<p align="center">
+  
+  <img src="https://user-images.githubusercontent.com/59806355/200640410-f207c699-a926-4e3e-a643-855c6efe40ff.jpeg" width="200">
+  
+</p>
 
 # Bopp Music Inc
 
@@ -26,7 +31,7 @@ Version One of the mobile application is on the apple store; https://apps.apple.
 ### The Mockup for Version Two of the mobile application
 
 <details>
-<summary>The Mockup for Version Two of the mobile application</summary><details>
+<summary>Click to View Mockups</summary>
 
 <img src="https://user-images.githubusercontent.com/59806355/200636972-0256723f-8e36-45de-9cc6-8fd935e06a3a.JPG" width="200">
 
@@ -49,28 +54,31 @@ Version One of the mobile application is on the apple store; https://apps.apple.
 
 Version Two we will be integrated with Web3 (Wallet, NFT Marketplace, Token gating). Users will have a Near wallet, allowing users to hold tokens on the Near blockchain and trade NFTs. 
 
-## NFT Marketplace
+### NFT Marketplace
 The Bopp NFT platform allows users to store, display, trade, and mint music NFTs. 
 When a music NFT is traded on the Bopp marketplace, the artist receives a royalty based on the percentage set by the artist. Bopp also takes a 2.5% fee from every trade.
 
-## NFT Ticketing
+### NFT Ticketing
 NFT tickets are digital access credentials that offer holders exclusive benefits at the event they attend. 
 The tickets are digital assets stored on a blockchain, so the risk of your ticket getting lost, stolen or damaged is relatively low. 
 Overtime they will become valuable collectibles, acting as lasting memorabilia.
-![ticketing](https://user-images.githubusercontent.com/59806355/200638759-7a709e5e-d165-456a-9934-530ceddafcd4.png)
+
+<img src="https://user-images.githubusercontent.com/59806355/200638759-7a709e5e-d165-456a-9934-530ceddafcd4.png" width="450">
+
+
 Example of the NFT tickets in app. It can be traded on our NFT Marketplace, also its a digital ticket than has a QR code and will be used to gain access to events.
 
-## Non-Custodial Wallet
+### Non-Custodial Wallet
 All users will have a blockchain wallet that allows them to be their own bank. The user will have full control over their funds and associated private keys. 
-## Custodian of Private Key 
+### Custodian of Private Key 
 All our blockchain custodial services reside with users.
-## Transaction Type
+### Transaction Type
 Transactions are reflected on the blockchain in real-time.
 # Security
 With non-custodial crypto wallets, all personal information remains with users. This reduces the risk of data theft.
 Backup and Recovery Possibility
 Wallets are under the sole authority of the user.
-## Offline Accessibility
+### Offline Accessibility
 Non-Custodial wallets are accessible offline and offer full blockchain development services in real-time. 
 
 # Crowdfunding
