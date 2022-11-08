@@ -33,13 +33,13 @@ Version One of the mobile application is on the apple store; https://apps.apple.
 <details>
 <summary>Click to View Mockups</summary>
 
-<img src="https://user-images.githubusercontent.com/59806355/200636972-0256723f-8e36-45de-9cc6-8fd935e06a3a.JPG" width="200">
+<img src="https://user-images.githubusercontent.com/59806355/200663329-0c3dabda-9a44-4321-9198-2c742181b952.png" width="200">
 
-<img src="https://user-images.githubusercontent.com/59806355/200636975-c0dd21e5-0265-4d02-83c0-2eb4e5ba50bb.JPG" width="200">
+<img src="https://user-images.githubusercontent.com/59806355/200663524-ea018e08-835b-4f82-8b48-bdb14c9fcfb8.png" width="200">
 
-<img src="https://user-images.githubusercontent.com/59806355/200636977-e335b930-05fa-46cf-8fd3-dd8743b1b28c.JPG" width="200">
+<img src="https://user-images.githubusercontent.com/59806355/200663672-ea1f1094-7deb-4dec-8783-3f7d20246f24.png" width="200">
 
-<img src="https://user-images.githubusercontent.com/59806355/200637051-7ba18a45-af64-49df-bc04-1e9999fe1e13.JPG" width="200">
+<img src="https://user-images.githubusercontent.com/59806355/200664055-6375411d-ae3b-4153-8cdc-82d86902d3d6.png" width="200">
 
 <img src="https://user-images.githubusercontent.com/59806355/200637562-20c12e76-bcd7-4bf1-8ce9-41044984ae19.png" width="200">
 
