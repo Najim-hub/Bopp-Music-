@@ -37,7 +37,7 @@ Version One of the mobile application is on the apple store; https://apps.apple.
 
 <img src="https://user-images.githubusercontent.com/59806355/200663524-ea018e08-835b-4f82-8b48-bdb14c9fcfb8.png" width="200">
 
-<img src="https://user-images.githubusercontent.com/59806355/200663672-ea1f1094-7deb-4dec-8783-3f7d20246f24.png" width="200">
+<img src="https://user-images.githubusercontent.com/59806355/200664536-4dbacfc4-f78c-4286-a1e3-25b5a34a8159.png" width="200">
 
 <img src="https://user-images.githubusercontent.com/59806355/200664055-6375411d-ae3b-4153-8cdc-82d86902d3d6.png" width="200">
 
