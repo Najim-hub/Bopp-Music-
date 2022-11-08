@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #Bopp-Music
+=======
+This is a new README file
+>>>>>>> branch_to_create_merge_conflict
 
 Bopp Music
  Inc. Streaming
@@ -108,3 +112,5 @@ Prepare pilot iOS application
 Pilot iOS application launch, public sale, Exchange listing, Prepare pilot Android application
 Q4 2021
 Staking platform launch, Version 2 of iOS and Android applications, enabling governance.
+
+
