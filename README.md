@@ -1,3 +1,1 @@
-# Bopp Music Player
-
-A description of this package.
+This is a new README file
