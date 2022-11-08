@@ -72,9 +72,9 @@ Example of the NFT tickets in app. It can be traded on our NFT Marketplace, also
 
 ### Non-Custodial Wallet
 All users will have a blockchain wallet that allows them to be their own bank. The user will have full control over their funds and associated private keys. 
-### Custodian of Private Key 
+# Custodian of Private Key 
 All our blockchain custodial services reside with users.
-### Transaction Type
+# Transaction Type
 Transactions are reflected on the blockchain in real-time.
 # Security
 With non-custodial crypto wallets, all personal information remains with users. This reduces the risk of data theft.
