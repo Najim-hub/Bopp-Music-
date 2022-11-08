@@ -13,6 +13,12 @@ struct Login: View {
     @StateObject var loginData = LoginViewModel()
     
     @AppStorage("Name") var Name = ""
+    
+    @AppStorage("JWt_client_secret") var client_secret: String = ""
+    
+    
+    @AppStorage("cred") var cred: String = ""
+        
   
     var body: some View {
         
@@ -27,10 +33,10 @@ struct Login: View {
             
             VStack(spacing: 25){
                 
-                Text("Bopp Music Player")
+                Text("Bopp")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
-                    .foregroundColor(.yellow)
+                    .foregroundColor(Color.accentColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
                   
@@ -42,24 +48,36 @@ struct Login: View {
                     Text("Music\nTaken to the Next Level")
                         .font(.system(size: 45))
                         .fontWeight(.heavy)
-                        .foregroundColor(.yellow)
+                        .foregroundColor(Color.accentColor)
                     
                     Text("The internet's source of freely-usable music. Powered by creators everywhere for you.")
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
+                    
+                    /* Delete later*/
+                   
+                    
+                  
+                    /* Delete later*/
                 })
                 .padding(.horizontal,30)
                 
                 Spacer()
                 
+             
+                
+                
                 // Login Button....
                 
                 SignInWithAppleButton { (request) in
-                    
                     // requesting paramertes from apple login...
                     loginData.nonce = randomNonceString()
                     request.requestedScopes = [.email,.fullName]
                     request.nonce = sha256(loginData.nonce)
+                    
+                    
+                    
+                    client_secret =  request.nonce!
                    
                 } onCompletion: { (result) in
                     
@@ -87,6 +105,9 @@ struct Login: View {
                         
                         print("Full Name: \(Name)")
                         loginData.authenticate(credential: credential)
+                        
+                   
+                        
                     case.failure(let error):
                         print(error.localizedDescription)
                     }

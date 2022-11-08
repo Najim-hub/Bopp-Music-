@@ -15,7 +15,7 @@ struct ContentView: View {
     @EnvironmentObject var player: MusicPlayerViewModel
     
 
-    @AppStorage("log_status") var log_Status = false
+    @AppStorage("log_status") var log_Status = true
     
     @AppStorage("connection_status") var connection_status = false
     
@@ -24,11 +24,13 @@ struct ContentView: View {
         ZStack{
             if log_Status{
                TabBar()
-                
+                //Yellow_Portfolio()
                 
             }
             else{
-                Login()
+                Login() //*Add this back for sign in with Apple*
+                
+                //LoginWithGoogle()
             }
             
         }

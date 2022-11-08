@@ -1,0 +1,72 @@
+//
+//  TicketDetailMainView.swift
+//  FlightTicketBrowser
+//
+//  Created by Takuya Aso on 2021/12/30.
+//
+
+import SwiftUI
+
+struct TicketDetailMainView: View {
+    
+    let ticketInfo: TicketInfo
+    
+    var body: some View {
+        VStack(spacing: 16.0) {
+            HStack(spacing: .zero) {
+                BlockView(key: "TICKET NUM", value: ticketInfo.flightNumber, rows: 3)
+                Divider()
+                BlockView(key: "SECTION", value: ticketInfo.terminal, rows: 3)
+                Divider()
+                BlockView(key: "ROW", value: ticketInfo.gate, rows: 3)
+            }
+            Divider()
+            HStack(spacing: .zero) {
+                BlockView(key: "DATE", value: ticketInfo.date, rows: 3)
+                Divider()
+                BlockView(key: "START TIME", value: ticketInfo.departureTime, rows: 3)
+                Divider()
+                BlockView(key: "SEAT", value: ticketInfo.seatNumber, rows: 3)
+            }
+            Divider()
+            HStack(spacing: .zero) {
+                BlockView(key: "HOLDER", value: ticketInfo.passenger, rows: 2)
+                Divider()
+                BlockView(key: "ID", value: ticketInfo.passportNumber, rows: 2)
+            }
+            Divider()
+            HStack(spacing: .zero) {
+                BlockView(key: "E-TICKET NUM", value: ticketInfo.eTicketNumber, rows: 2)
+                Divider()
+                BlockView(key: "BOOKING CODE", value: ticketInfo.bookingCode, rows: 2)
+            }
+            Divider()
+            HStack(spacing: .zero) {
+                BlockView(key: "PAYMENT METHOD", value: ticketInfo.payment, rows: 2)
+                Divider()
+                BlockView(key: "PRICE", value: ticketInfo.price, rows: 2)
+            }
+            // It is not displayed for some reason. Maybe bug,
+//            Image(uiImage: BarcodeGenerator.generate(barcodeStr: ticketInfo.eTicketNumber + ticketInfo.bookingCode))
+//                .resizable()
+//                .scaledToFit()
+//                .frame(height: 32.0)
+            Image("barcode")
+                .resizable()
+                .frame(width: UIScreen.main.bounds.width - 80.0 ,height: 24.0)
+                .padding(.vertical, 20.0)
+        }
+        .padding(.horizontal, 20.0)
+        .padding(.top, 12.0)
+        .padding(.bottom, 20.0)
+        .frame(maxWidth: .infinity)
+        .background(Color(UIColor.tertiarySystemBackground))
+        .cornerRadius(12.0, corners: [.bottomLeft, .bottomRight])
+    }
+}
+
+struct TicketDetailMainView_Previews: PreviewProvider {
+    static var previews: some View {
+        TicketDetailMainView(ticketInfo: sampleTicketData[0])
+    }
+}

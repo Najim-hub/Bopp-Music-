@@ -14,7 +14,12 @@ struct Miniplayer: View {
     
     @State private var showAlert = false
     
-    @State var gradient = [Color.yellow,Color.blue, Color.white]
+    
+    //original bopp
+   // @State var gradient = [Color.accentColor,Color.blue, Color.white]
+    
+    
+    @State var gradient = [Color.white, Color.purple, Color.accentColor]
     
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 1)
@@ -35,7 +40,7 @@ struct Miniplayer: View {
     
     @AppStorage("log_status") var log_Status = true
     
-
+    
     
     @State var colorVal : Double = 0.0
     
@@ -82,7 +87,7 @@ struct Miniplayer: View {
                         
                     .cornerRadius(5)
                        
-                        .frame(width: playController.isMini ? 55 : 390, height: playController.isMini ? 55 : UIScreen.main.bounds.height/2.5 )
+    .frame(width: playController.isMini ? 55 : 390, height: playController.isMini ? 55 : UIScreen.main.bounds.height/2.5 )
                  
                     .clipShape(Circle())
                     .overlay(Circle().stroke(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint), lineWidth: 4))
@@ -134,7 +139,7 @@ struct Miniplayer: View {
                                 
                                 Image(systemName: "shuffle.circle")
                                     .font(.largeTitle)
-                                    .foregroundColor(isToggled ? .yellow : .primary)
+                                    .foregroundColor(isToggled ? Color.accentColor : .primary)
                                 
                             }.padding(.top, 80)
                       
@@ -158,7 +163,7 @@ struct Miniplayer: View {
             
                     if self.Avplayer.player!.rate > 0 {
                         
-                  
+                      
                    self.val.playValue = Float(CMTimeGetSeconds(self.Avplayer.player!.currentTime()))
                         
                   //audio.nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self.val.playValue
@@ -183,7 +188,7 @@ struct Miniplayer: View {
                        }
             
                                        }
-           .accentColor(.yellow)
+           .accentColor(Color.accentColor)
           .introspectSlider { UISlider in
               
              UISlider.setThumbImage(UIImage(systemName: "circlebadge.fill"), for: .normal)
@@ -349,7 +354,6 @@ struct Miniplayer: View {
                            
                                 
                                // HapticFeedBack.shared.hit(0.3)
-                                
                     Avplayer.player?.rate = 0
                      if isShuffled.toggleShuffle == false {
                                 if playController.position < songList.songs.count - 1   {
@@ -750,7 +754,7 @@ struct VideoControls: View {
                                 
                                 Image(systemName: "play.fill")
                                     .font(.title)
-                                    .foregroundColor(.primary)
+                                    .foregroundColor(playController.isMini ? .primary : .clear)
                                 
                             }
                     

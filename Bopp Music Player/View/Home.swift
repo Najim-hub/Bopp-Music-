@@ -54,73 +54,52 @@ struct Home: View {
     
     //@State private var searchText : String = ""
     
+    @AppStorage("SortSelection") var select = 1
     
+    @State var isToggled : Bool = true
+   
 
     var body: some View {
         
         
         if AccountBalance == ""{
-            
-            NavigationView {
-                    
-                      List(
-                        songList.songs.filter {
-                                     
-                        texting.text.isEmpty
-                          
-                                ||
-                                
-                         $0.trackName.localizedStandardContains(texting.text)
-                          
-                              ||
-                          
-                          $0.trackName.localizedStandardContains(val.searchText)
-                          
-                          ||
-                          
-                          $0.artistName.localizedStandardContains(texting.text)
-                          
-                          ||
-                          
-                          
-                          $0.artistName.localizedStandardContains(val.searchText)
-                                
-                                }){
-                              landmark in
+           NavigationView {
+               //* code to try to sort list
+               //List( isToggled ? songList.songs.reversed().filter {
+           List( isToggled ? songList.songs.filter {
+              texting.text.isEmpty ||
+              $0.trackName.localizedStandardContains(texting.text) ||
+              $0.trackName.localizedStandardContains(val.searchText) ||
+              $0.artistName.localizedStandardContains(texting.text) ||
+               $0.artistName.localizedStandardContains(val.searchText) }
+                 :
+                    songList.songs.sorted().filter {
+               texting.text.isEmpty ||
+               $0.trackName.localizedStandardContains(texting.text) ||
+               $0.trackName.localizedStandardContains(val.searchText) ||
+               $0.artistName.localizedStandardContains(texting.text) ||
+                $0.artistName.localizedStandardContains(val.searchText) }
+           ){
+               
+                   landmark in
                     
                     HStack(spacing: 15){
-                        
-                        LandmarkRow(landmark: landmark)
+                     LandmarkRow(landmark: landmark)
                         //.padding(.horizontal)
-                        .onTapGesture {
-                            withAnimation{
-                                
-                                var flags = SCNetworkReachabilityFlags()
-                                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
-                                
-                                if self.isNetworkReachable(with: flags){
-                                    
-                                gen.balance()
-                                    
-                                playController.showPlayer = true
-                                
-                                
-                                playController.isPlaying = true
-                                
-                                    playController.isMini = true
-                               
-                                
-                                playController.position = landmark.id - 1
-                                
-                                if Avplayer.player!.rate > 0 {
-                                    
-                                    val.playValue = 0
-                                
-                                    Avplayer.player?.rate = 0
-                                    
-                                    
-                                    
-                                    Avplayer.playSong()
+                        .onTapGesture { withAnimation{
+                var flags = SCNetworkReachabilityFlags()
+                            
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+            if self.isNetworkReachable(with: flags){
+                 gen.balance()
+                 playController.showPlayer = true
+                 playController.isPlaying = true
+                 playController.isMini = true
+                 playController.position = landmark.id - 1
+                 if Avplayer.player!.rate > 0 {
+                  val.playValue = 0
+                   Avplayer.player?.rate = 0
+                   Avplayer.playSong()
                                 
                                 }
                                 
@@ -210,7 +189,7 @@ struct Home: View {
                         
                     })
                         //.padding(.bottom, playController.isMini ? 90 : 0)
-                    .listStyle(PlainListStyle())
+                  
                     .alert(isPresented: self.$showAlert){
                         Alert(title: Text("No Internet Connection"), message: Text("Please enable a WiFi or Cellular Data Connection"), dismissButton: .default(Text("Ok")))
                     }
@@ -218,13 +197,54 @@ struct Home: View {
                                     
                         
                     }
-                
+                                .listStyle(.plain)
                 
                   
                    // .frame(width:  UIScreen.main.bounds.width, height: .infinity, alignment: .center)
                    // .offset(y: playController.isMini ? -100 : 0)
                     .navigationBarTitle(Text("Songs"), displayMode: .automatic)
-                    
+                    .navigationBarItems(trailing:
+                                            Menu("Sort") {
+                        Button(action: {
+                            select = 1
+                            
+                            isToggled = true
+                        }) {
+                            
+                            if (select == 1){
+                                
+                                HStack{
+                                Image(systemName: "checkmark")
+                                Text("Normal")
+                                }
+                            }
+                            
+                            else{
+                                Text("Normal")
+                            }
+                        }
+                        Button(action: {
+                            select = 2
+                            
+                            isToggled = false
+                        }) {
+                            
+                            if (select == 2){
+                                
+                                HStack{
+                                Image(systemName: "checkmark")
+                            Text("Alphabetical")
+                                    
+                                }
+                                
+                            }
+                                
+                                else{
+                                    Text("Alphabetical")
+                                }
+                        }
+                                                 }
+                    )
                     .add(self.searchBar)
                 
                     .ignoresSafeArea(.keyboard)
@@ -391,7 +411,7 @@ struct Home: View {
                     
                 })
                     //.padding(.bottom, playController.isMini ? 90 : 0)
-                .listStyle(PlainListStyle())
+                 
                 .alert(isPresented: self.$showAlert){
                     Alert(title: Text("No Internet Connection"), message: Text("Please enable WiFi or Cellular Data"), dismissButton: .default(Text("Ok")))
                 }
@@ -403,38 +423,26 @@ struct Home: View {
             
                   .onAppear(perform: {
                                 
-                    for family: String in UIFont.familyNames
-                          {
-                              print(family)
-                              for names: String in UIFont.fontNames(forFamilyName: family)
-                              {
-                                  print("== \(names)")
-                              }
-                          }
+                 
                   })
                // .frame(width:  UIScreen.main.bounds.width, height: .infinity, alignment: .center)
                // .offset(y: playController.isMini ? -100 : 0)
+                  .listStyle(.plain)
                 .navigationBarTitle(Text("Songs"), displayMode: .automatic)
                   .navigationBarItems(trailing:
                                 HStack{
-                            /*
-                        Image(uiImage: image!)
-                                     .resizable()
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(Color.orange, lineWidth: 1))
-                            .overlay(Circle().stroke(Color.white, lineWidth: 0.5))
-                                  .aspectRatio(contentMode: .fit)
-                            .offset(x:  -UIScreen.main.bounds.width/2.6)
-                            .frame(width: 25, height: 25, alignment: .leading)
-                                    
-                                    */
-                   Image("ethereum")
-                          .resizable()
-                    .frame(width: 19, height: 19, alignment: .trailing)
-                                              
-                          Text(AccountBalance + " ETH")
-                                        .font(.system(size: 15))
-                                        .fontWeight(.light)
+                   
+                      
+                    //Bopp original
+                 //  Image("ethereum")
+                      //    .resizable()
+                      
+                      
+                  
+                      //bopp original
+                        //  Text(AccountBalance + " ETH")
+                                   //     .font(.system(size: 15))
+                                  //      .fontWeight(.light)
                                       
                                           }
                             

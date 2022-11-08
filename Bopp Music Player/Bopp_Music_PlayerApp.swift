@@ -8,20 +8,23 @@
 import SwiftUI
 import UIKit
 import Firebase
+import GoogleSignIn
 
 @main
 struct Bopp_Music_PlayerApp: App {
     
     @ObservedObject var dataList = MarketCap.sharedInstance
     
+    @StateObject var viewModel = AuthenticationViewModel()
+
    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+ 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onAppear(perform: {
-                   // dataList.getData()
-                })
+                .environmentObject(viewModel)
         }
     }
     
@@ -36,3 +39,5 @@ class AppDelegate: NSObject,UIApplicationDelegate{
         return true
     }
 }
+
+

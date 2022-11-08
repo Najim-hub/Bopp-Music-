@@ -5,9 +5,9 @@
         "color-space" : "display-p3",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.316",
-          "green" : "0.704",
-          "red" : "0.717"
+          "blue" : "0xF6",
+          "green" : "0x8A",
+          "red" : "0x96"
         }
       },
       "display-gamut" : "sRGB",
@@ -24,9 +24,9 @@
         "color-space" : "display-p3",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.439",
-          "green" : "0.976",
-          "red" : "0.996"
+          "blue" : "0xF6",
+          "green" : "0x8A",
+          "red" : "0x96"
         }
       },
       "display-gamut" : "sRGB",
@@ -37,9 +37,9 @@
         "color-space" : "display-p3",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.352",
-          "green" : "0.784",
-          "red" : "0.798"
+          "blue" : "0xF6",
+          "green" : "0x8A",
+          "red" : "0x96"
         }
       },
       "display-gamut" : "display-P3",
@@ -56,9 +56,9 @@
         "color-space" : "display-p3",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.439",
-          "green" : "0.976",
-          "red" : "0.996"
+          "blue" : "0xF6",
+          "green" : "0x8A",
+          "red" : "0x96"
         }
       },
       "display-gamut" : "display-P3",
@@ -69,9 +69,9 @@
         "color-space" : "display-p3",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.316",
-          "green" : "0.704",
-          "red" : "0.717"
+          "blue" : "0xF6",
+          "green" : "0x8A",
+          "red" : "0x96"
         }
       },
       "display-gamut" : "sRGB",
@@ -88,9 +88,9 @@
         "color-space" : "display-p3",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.439",
-          "green" : "0.976",
-          "red" : "0.996"
+          "blue" : "0xF6",
+          "green" : "0x8A",
+          "red" : "0x96"
         }
       },
       "display-gamut" : "sRGB",
@@ -101,9 +101,9 @@
         "color-space" : "display-p3",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0x45",
-          "green" : "0xCE",
-          "red" : "0xF7"
+          "blue" : "0xF6",
+          "green" : "0x8A",
+          "red" : "0x96"
         }
       },
       "display-gamut" : "display-P3",
@@ -120,9 +120,9 @@
         "color-space" : "display-p3",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.439",
-          "green" : "0.976",
-          "red" : "0.996"
+          "blue" : "0xF6",
+          "green" : "0x8A",
+          "red" : "0x96"
         }
       },
       "display-gamut" : "display-P3",

@@ -150,28 +150,31 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
            
                 self?.player?.rate = 0
             
-            if (self?.playController.position)! <  (self?.songList.songs.count)! - 1  {
-                
-                self?.playController.position =  (self?.playController.position)! + 1
+           // self?.player?.automaticallyWaitsToMinimizeStalling = true
             
-                self?.playSong()
+            if (self?.playController.position)! < (self?.songList.songs.count)! - 1  {
+                
+   
+                
+                self?.playController.position+=1
+                
+                print("FIRST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", self?.playController.position as Any)
             
                 self?.val.playValue = 0.0
                 
                 self?.playController.isPlaying = true
+                
+                 self?.playSong()
+             
           
             }
             
             else{
                 
+                print(self?.playController.position ?? 1)
                 
                 self?.val.playValue = 0.0
-                
-                self?.player?.rate = 0
-                
-                self?.playController.position = 0
-                
-                self?.playSong()
+             
             }
             
                 return .success
@@ -181,15 +184,19 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         commandCenter.previousTrackCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
            
+            self?.player?.automaticallyWaitsToMinimizeStalling = true
+            
             self?.player?.rate = 0
             
             if (self?.playController.position)! <= (self?.songList.songs.count)! - 1 && self?.playController.position != 0  {
                 
-                self?.playController.position =   (self?.playController.position)! - 1
+                self?.val.playValue = 0.0
+                
+                self?.playController.position-=1
                 
                 self?.playSong()
             
-                self?.val.playValue = 0.0
+              
                 
                 self?.playController.isPlaying = true
           
@@ -201,7 +208,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
                 
                 self?.playController.position = 0
                 
-                self?.playSong()
+                //self?.playSong()
             }
             
                 return .success
@@ -228,10 +235,6 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
     }
 
-    
-  
-    
-    
     
     func playSong(){
         
@@ -289,7 +292,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
                                         
                                       self.player? = AVPlayer(playerItem: item)
                                         
-                                        self.player?.automaticallyWaitsToMinimizeStalling = false;
+                                        self.player?.automaticallyWaitsToMinimizeStalling = true;
                                         
                                         self.player?.playImmediately(atRate: 1.0)
                                         
@@ -312,7 +315,7 @@ class AudioPlayer:  NSObject, ObservableObject, AVAudioPlayerDelegate {
                                         debugPrint("AVAudioSession is Active and Category Playback is set")
                                          UIApplication.shared.beginReceivingRemoteControlEvents()
                                         
-                                           setupCommandCenter()
+                                           //setupCommandCenter()
                                         // self.player?.play()
                                                  }
                                 break

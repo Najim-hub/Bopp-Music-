@@ -83,15 +83,12 @@ struct CardView: View {
        
        
         ZStack {
-            
-         
-           // var image = Identicon().icon(from: AccountNumber, size: CGSize(width: 325, height: 325))
         
             if walletConnected == false{
              
                 VStack{
                     
-                    Image("BOPPMUSIC-5")
+                    Image("Banner")
                         .resizable()
                         .frame(width: width, height: height)
                         .offset(y: -25)
@@ -104,7 +101,7 @@ struct CardView: View {
                     .lineLimit(2)
                     .foregroundColor(.primary)
                    
-                    Text("Bopp Music")
+                    Text("Bopp")
                             .font(.system(size: 35))
                         .fontWeight(.bold)
                             .offset(y: -45)
@@ -121,7 +118,7 @@ struct CardView: View {
                     
                     HStack {
                         
-                        Image("YellowUser")
+                        Image("User")
                             .resizable()
                             .frame(width: 26, height: 26)
                         
@@ -171,6 +168,19 @@ struct CardView: View {
                    
                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
                     
+                    Text("Click here to find out more")
+                        .underline(true, color: Color.accentColor)
+                        .foregroundColor(Color.accentColor)
+                        .onTapGesture(perform: {
+                            let webURL = NSURL(string: "https://ethereum.org/en/wallets/")!
+
+                            let application = UIApplication.shared
+
+                                 application.open(webURL as URL)
+                        })
+                    
+                   
+                        
                 
                 }
                 .animation(.default)
@@ -181,7 +191,7 @@ struct CardView: View {
                     
                         }
                 .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
-                    padding = 265
+                    padding = Int(UIScreen.main.bounds.height/2.5)
                     
                 
                            
@@ -268,7 +278,7 @@ struct CardView: View {
                         }
                         
                         
-                   // .offset(x: -UIScreen.main.bounds.height/8)
+                 
                     }
                     
                     .padding(.bottom, 125)
@@ -286,7 +296,7 @@ struct CardView: View {
                 
                 
         .frame(width: UIScreen.main.bounds.width / 1.1, height: 280)
-                .background(colorScheme == .dark ? Color.orange : Color.yellow)
+        .background(colorScheme == .dark ? Color.accentColor : Color.accentColor)
         .cornerRadius(20)
         .offset(y: offPort)
                 
@@ -325,11 +335,10 @@ struct CardView: View {
                 
                 else{
                     offList = -UIScreen.main.bounds.height/15
-                    
-                    
+                   
                     offPort =  -UIScreen.main.bounds.height/15
                 
-                   offHoldingsY = -UIScreen.main.bounds.height/17
+                    offHoldingsY = -UIScreen.main.bounds.height/17
                 }
             
             

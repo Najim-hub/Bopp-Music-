@@ -64,7 +64,10 @@ extension String {
 
 extension String {
     var roundedWithAbbreviations: String {
+        
+
         let number = Double(self)
+        if(number != nil){
         let thousand = number! / 1000
         let million = number! / 1000000
         let billion = number! / 1000000000
@@ -86,9 +89,14 @@ extension String {
             return "\(round(thousand*10)/10)K"
         }
         
+        
         else {
             return "\(self)"
         }
+            
+        }
+        
+        return ""
     }
 }
 
@@ -211,10 +219,6 @@ class MarketCap: ObservableObject {
                 let ethPrice = (json as NSDictionary).value(forKeyPath: "result.ethusd") as? NSArray
                 
              
-                for (key, value) in json {
-                   // print("\(key) -> \(value)")
-                }
-                
                 let ethPriceString = (json["result"]!["ethusd"]! as! NSString).doubleValue
             
                 DispatchQueue.main.async {
@@ -299,17 +303,13 @@ class MarketCap: ObservableObject {
                     let swiftArray = objCArray as NSArray as? [Double]
                    
                     DispatchQueue.main.async {
-                           
-                       
-                        var amount = swiftArray?[0].avoidNotation
                         
+                        guard let amount = swiftArray?[exist: 0]?.avoidNotation else { return }
                         
-                        var val = Double(amount?.replacingOccurrences(of: ",", with: "") ?? "0")
+                        var val = Double(amount.replacingOccurrences(of: ",", with: "") ?? "0")
                       
                         TokenPrices.append(Price(name: TokenNamed![0] as! String, symbols: TokenSymbol, price: val!))
                         }
-                       
-                
                 }
                     
                 }
@@ -372,7 +372,7 @@ class MarketCap: ObservableObject {
             "Accept": "application/json",
             
             "x-amberdata-blockchain-id": "ethereum-mainnet",
-            "x-api-key": "UAK64419e1e37f9e2caefbd7d8c5bf313bc"
+            "x-api-key": "UAK9f65da8aa1a86fd4d1a91bb932adb4a1"
             
         ]
 
@@ -572,4 +572,10 @@ class MarketCap: ObservableObject {
         
     }
 
+}
+
+extension Collection where Indices.Iterator.Element == Index {
+    subscript (exist index: Index) -> Iterator.Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
 }

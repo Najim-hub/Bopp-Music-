@@ -63,8 +63,6 @@ struct CardViewed: View {
        
         ZStack {
             
-           // var image = Identicon().icon(from: AccountNumber, size: CGSize(width: 325, height: 325))
-            
             if walletConnected == false{
             
                 VStack{
@@ -260,11 +258,8 @@ struct CardViewed: View {
                                  Text("Swap")
                                     .font(.system(size: 55))
                                     .fontWeight(.bold).foregroundColor(colorScheme == .dark ? Color.orange : Color.yellow)
-                                    
-                                          
-                                        }
-                                       
-                                        
+                                      }
+                                     
                                           }
                                   
                                     .frame(width: 170)

@@ -52,16 +52,19 @@ struct SettingsView: View {
     
     @AppStorage("MarketData") var MarketData: [Wallet] = []
     
+    @StateObject var loginData = LoginViewModel()
+    
+    @EnvironmentObject var viewModel: AuthenticationViewModel
+    
+    
     
     var body: some View {
         NavigationView {
           
-            splashImageBackground
-             
-            .overlay(
-                
+            
                 ZStack{
                     
+                    if walletConnected {
                   
                  Form {
                     Section(header: Text("Options")) {
@@ -82,7 +85,7 @@ struct SettingsView: View {
                                             }
                         
                         Button(action: {
-                            let webURL = NSURL(string: "https://boppmusic.io")!
+                            let webURL = NSURL(string: "https://boppmusic.net")!
 
                             let application = UIApplication.shared
 
@@ -177,13 +180,16 @@ struct SettingsView: View {
                                 title: Text("Are you sure you want to log out?"),
                                 message: Text(""),
                                 primaryButton: .destructive(Text("Log out")) {
+                                   
                                    disconnectAlert = false
                                     
+                                    viewModel.signOut()
+                                    
                                     DispatchQueue.global(qos: .background).async {
+                                      
+                                    Avplayer.player?.rate = 0
                                         
-                                        try? Auth.auth().signOut()
                                         
-                                        Avplayer.player?.rate = 0
                                     }
                                     
                                     withAnimation(.easeInOut){
@@ -198,11 +204,58 @@ struct SettingsView: View {
                                             }
                     
                     }
-                    
+                     
+                     
+                     
+                     Section{
+                         
+                         Button(action: {
+                             
+                             disconnectAlert = true
+                             
+                                      }) {
+                             
+                             HStack{
+                            // Image(systemName: "exclamationmark.circle") //.foregroundColor(.gray)
+                                 Image("logout")
+                                     .resizable()
+                                     .frame(width: 26, height: 26)
+                         Text("Delete Account")
+                             .font(Font.custom("HelveticaNeue", size: 17))
+                                 
+                             }
+                                             }
+                         .alert(isPresented:$disconnectAlert) {
+                                 Alert(
+                                 title: Text("Are you sure you want to delete your account?"),
+                                 message: Text(""),
+                                 primaryButton: .destructive(Text("DELETE")) {
+                                    
+                                     disconnectAlert = false
+                                     
+                                     loginData.removeAccount()
+                                     
+                                     DispatchQueue.global(qos: .background).async {
+                                      
+                                         Avplayer.player?.rate = 0
+                                     }
+                                     
+                                     withAnimation(.easeInOut){
+                                         log_Status = false
+                                     }
+                                     
+                                 
+                                    
+                                                     },
+                                 secondaryButton: .cancel()
+                                                 )
+                                             }
+                     
+                     }
                    
                  }
                  
-                    
+                    Spacer()
                     HStack(alignment: .center, spacing: 30){
                         Button(action: {
                           
@@ -267,7 +320,7 @@ struct SettingsView: View {
                         Button(action: {
                         print("Perform an action here...")
                                             }) {
-                        Image("youtubeOutlined")
+                        Image("Youtube")
                             .resizable()
                             .frame(width: 30, height: 30, alignment: .center)
                             
@@ -282,12 +335,230 @@ struct SettingsView: View {
                             
                         }
                     }
-                    .offset(y: UIScreen.main.bounds.height/15)
+                    .offset(y: UIScreen.main.bounds.height/25)
                     //.padding(.top, 70)
                     
+                    }
+                    
+                    else{
+                        Form {
+                           Section(header: Text("Options")) {
+                               Button(action: {
+                                   let webURL = NSURL(string: "https://t.me/joinchat/eEXLQMFF6UFhNjIx")!
+
+                                   let application = UIApplication.shared
+
+                                        application.open(webURL as URL)
+                                                   }) {
+                                   HStack{
+                                Image("support")
+                                   .resizable()
+                                   .frame(width: 26, height: 26)
+                               Text("Support").foregroundColor(Color.primary)
+                                   .font(Font.custom("HelveticaNeue", size: 17))
+                                           }
+                                                   }
+                               
+                               Button(action: {
+                                   let webURL = NSURL(string: "https://boppmusic.io")!
+
+                                   let application = UIApplication.shared
+
+                                        application.open(webURL as URL)
+                                   
+                                
+                                                   }) {
+                                   HStack{
+                               
+                                       Image("exclamation")
+                                           .resizable()
+                                           .frame(width: 26, height: 26)
+                               Text("About us").foregroundColor(Color.primary)
+                                   .font(Font.custom("HelveticaNeue", size: 17))
+                                   }
+                                                   }
+                           }
+                           Section{
+                               
+                               Button(action: {
+                                   
+                                   disconnectAlert = true
+                                   
+                                            }) {
+                                   
+                                   HStack{
+                                  // Image(systemName: "exclamationmark.circle") //.foregroundColor(.gray)
+                                       Image("logout")
+                                           .resizable()
+                                           .frame(width: 26, height: 26)
+                               Text("Log out")
+                                   .font(Font.custom("HelveticaNeue", size: 17))
+                                       
+                                   }
+                                                   }
+                               .alert(isPresented:$disconnectAlert) {
+                                       Alert(
+                                       title: Text("Are you sure you want to log out?"),
+                                       message: Text(""),
+                                       primaryButton: .destructive(Text("Log out")) {
+                            disconnectAlert = false
+                                
+                                DispatchQueue.global(qos: .background).async {
+                                               
+                                try? Auth.auth().signOut()
+                                               
+                             Avplayer.player?.rate = 0
+                                           }
+                                           
+                                           withAnimation(.easeInOut){
+                                               log_Status = false
+                                           }
+                                           
+                                       
+                                          
+                                                           },
+                                       secondaryButton: .cancel()
+                                                       )
+                                                   }
+                           
+                           }
+                           
+                            
+                            Section{
+                                
+                                Button(action: {
+                                    
+                                    disconnectAlert = true
+                                    
+                                             }) {
+                                    
+                                    HStack{
+                                
+                                Text("Delete Account")
+                                    .font(Font.custom("HelveticaNeue", size: 17))
+                                    .foregroundColor(Color.red)
+                                    }
+                                                    }
+                                .alert(isPresented:$disconnectAlert) {
+                                        Alert(
+                                        title: Text("Are you sure you want to delete your account?"),
+                                        message: Text("Your account would be deleted from our database servers in addition to any assiociated user data. Upon deletion you would be redirected to the Apple website to remove Bopp from your assiocated Apple ID in Settings please follow the instructions on the Apple website. \n NOTE: YOUR ACCOUNT CAN NOT BE RECOVERED"),
+                                        primaryButton: .destructive(Text("DELETE")) {
+                                           
+                                            disconnectAlert = false
+                                            
+                                            viewModel.deleteUser()
+                                            
+                                            let webURL = NSURL(string: "https://support.apple.com/en-us/HT210426")!
+
+                                            let application = UIApplication.shared
+
+                                                 application.open(webURL as URL)
+                                            
+                                            
+                                            
+                                            DispatchQueue.global(qos: .background).async {
+                                             
+                                                Avplayer.player?.rate = 0
+                                            }
+                                            
+                                            withAnimation(.easeInOut){
+                                                log_Status = false
+                                            }
+                                            
+                                        
+                                           
+                                                            },
+                                        secondaryButton: .cancel()
+                                                        )
+                                                    }
+                            
+                            }
+                        }
+                        
+                           
+                           HStack(alignment: .center, spacing: 30){
+                               Button(action: {
+                                 
+                                   let Username =  "boppmusicinc" // Your Instagram Username here
+                                   let appURL = URL(string: "instagram://user?username=\(Username)")!
+                                   let application = UIApplication.shared
+
+                                   if application.canOpenURL(appURL) {
+                                       application.open(appURL)
+                                   } else {
+                                       // if Instagram app is not installed, open URL inside Safari
+                                       let webURL = URL(string: "https://instagram.com/\(Username)")!
+                                       application.open(webURL)
+                                   }
+
+                                                   }) {
+                                              Image("InstagramColored")
+                                                   .resizable()
+                                                   .frame(width: 30, height: 30, alignment: .center)
+                               }
+                               Button(action: {
+                                   let screenName =  "Boppmusicinc"
+                                      let appURL = NSURL(string: "twitter://user?screen_name=\(screenName)")!
+                                      let webURL = NSURL(string: "https://twitter.com/\(screenName)")!
+
+                                      let application = UIApplication.shared
+
+                                      if application.canOpenURL(appURL as URL) {
+                                           application.open(appURL as URL)
+                                      } else {
+                                           application.open(webURL as URL)
+                                      }
+                                                   }) {
+                                               Image("TwitterOutlined")
+                                                   .resizable()
+                                                   .frame(width: 30, height: 30, alignment: .center)
+                               }
+                               Button(action: {
+                                   
+                                      let webURL = NSURL(string: "https://t.me/joinchat/eEXLQMFF6UFhNjIx")!
+
+                                      let application = UIApplication.shared
+
+                                           application.open(webURL as URL)
+                                      
+                                   
+                                                   }) {
+                                               Image("TelegramOutlined")
+                                                   .resizable()
+                                                   .frame(width: 30, height: 30, alignment: .center)
+                               }
+                               Button(action: {
+                               print("Perform an action here...")
+                                                   }) {
+                               Image("discordOutlined")
+                                   .resizable()
+                                   .frame(width: 30, height: 30, alignment: .center)
+                               }
+                               
+                               Button(action: {
+                               print("Perform an action here...")
+                                                   }) {
+                               Image("Youtube")
+                                   .resizable()
+                                   .frame(width: 30, height: 30, alignment: .center)
+                                   
+                               }
+                               
+                               Button(action: {
+                               print("Perform an action here...")
+                                                   }) {
+                               Image("redditOutlined")
+                                   .resizable()
+                                   .frame(width: 30, height: 30, alignment: .center)
+                                   
+                               }
+                           }
+                           .offset(y: UIScreen.main.bounds.height/5)
+                    }
                 }
                 
-                 )
+                 
                  .navigationBarTitle("Settings")
              }
         

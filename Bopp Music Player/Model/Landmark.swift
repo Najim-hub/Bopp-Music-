@@ -10,7 +10,11 @@ import SwiftUI
 import CoreLocation
 import SDWebImageSwiftUI
 
-struct Landmark: Hashable, Codable, Identifiable {
+struct Landmark: Hashable, Codable, Identifiable, Comparable {
+    static func < (lhs: Landmark, rhs: Landmark) -> Bool {
+        return lhs.trackName < rhs.trackName
+    }
+    
     
     var id: Int
     var name: String
